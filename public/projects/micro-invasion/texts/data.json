@@ -1,0 +1,15 @@
+{
+  "title": "The Micro_Invasion AR",
+  "role": "Creative Technologist",
+  "tech": [
+    "Snapchat Lens",
+    "Lens Studio",
+    "JavaScript",
+    "AR 3D Modeling"
+  ],
+  "description": "Augmented reality experience using Snapchat Lens Studio",
+  "challenge": "Creating an engaging AR experience accessible through social media",
+  "solution": "Developed an AR lens using Snapchat Lens Studio with 3D modeling and JavaScript",
+  "outcome": "Successfully created an interactive AR experience for social media"
+}
+

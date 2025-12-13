@@ -1,15 +1,27 @@
 import Link from 'next/link';
 
-export default function Footer() {
+interface FooterProps {
+  isDark?: boolean;
+}
+
+export default function Footer({ isDark = false }: FooterProps) {
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <footer className={`border-t ${
+      isDark 
+        ? 'bg-gray-900 border-gray-800' 
+        : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-center space-x-6">
           <Link
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className={`transition-colors ${
+              isDark
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            }`}
             aria-label="GitHub"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -20,7 +32,11 @@ export default function Footer() {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className={`transition-colors ${
+              isDark
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            }`}
             aria-label="LinkedIn"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -31,7 +47,11 @@ export default function Footer() {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className={`transition-colors ${
+              isDark
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            }`}
             aria-label="Twitter"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -43,4 +63,3 @@ export default function Footer() {
     </footer>
   );
 }
-

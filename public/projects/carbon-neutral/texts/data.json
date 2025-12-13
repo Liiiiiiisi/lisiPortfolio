@@ -1,0 +1,15 @@
+{
+  "title": "Personal Carbon Neutral Interactive Installation",
+  "role": "Creative Technologist",
+  "tech": [
+    "Arduino",
+    "Processing",
+    "Sensor",
+    "Physical Computing"
+  ],
+  "description": "Interactive installation exploring personal carbon footprint",
+  "challenge": "Creating an engaging physical installation that raises awareness about carbon footprint",
+  "solution": "Developed an interactive installation using Arduino and sensors with Processing visualization",
+  "outcome": "Successfully created an interactive art installation for environmental awareness"
+}
+

@@ -1,0 +1,15 @@
+{
+  "title": "VR Education Expanding ASD Caregiver Pool",
+  "role": "Creative Technologist",
+  "tech": [
+    "Unity",
+    "C#",
+    "Oculus SDK",
+    "VR Interaction"
+  ],
+  "description": "Virtual reality training system for autism spectrum disorder caregivers",
+  "challenge": "Creating an accessible VR training platform for ASD caregivers",
+  "solution": "Developed an immersive VR experience using Unity and Oculus SDK to train caregivers",
+  "outcome": "Successfully created a VR training system for expanding the caregiver pool"
+}
+

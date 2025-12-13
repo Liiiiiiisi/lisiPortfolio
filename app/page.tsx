@@ -6,13 +6,16 @@ import ProjectCard from '@/components/ProjectCard';
 
 export default async function Home() {
   const projects = await getProjectList();
+  
+  // TODO: Replace with your YouTube URL
+  const youtubeUrl = process.env.NEXT_PUBLIC_YOUTUBE_URL || '';
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
       <Navigation />
       <main className="flex-1 pt-16">
         {/* Showreel Video Section */}
-        <HomeVideoSection />
+        <HomeVideoSection youtubeUrl={youtubeUrl} />
 
         {/* Projects Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

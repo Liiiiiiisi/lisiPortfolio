@@ -78,32 +78,46 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
   };
 
   const getMarkdownComponents = (projectId: string) => ({
-    h1: ({ node, ...props }: any) => (
-      <h1 className="text-3xl md:text-4xl font-bold mt-12 mb-6 text-gray-900 dark:text-white first:mt-0" {...props} />
-    ),
+    h1: ({ node, ...props }: any) => {
+      // Wrap h1 sections in glass container
+      return (
+        <div className="mt-12 mb-8 p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl first:mt-0">
+          <h1 className="text-3xl md:text-4xl font-bold text-white" {...props} />
+        </div>
+      );
+    },
     h2: ({ node, ...props }: any) => (
-      <h2 className="text-2xl md:text-3xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white" {...props} />
+      <h2 className="text-2xl md:text-3xl font-semibold mt-10 mb-4 text-white" {...props} />
     ),
     h3: ({ node, ...props }: any) => (
-      <h3 className="text-xl md:text-2xl font-semibold mt-8 mb-3 text-gray-900 dark:text-white" {...props} />
+      <h3 className="text-xl md:text-2xl font-semibold mt-8 mb-3 text-white" {...props} />
     ),
-    p: ({ node, ...props }: any) => (
-      <p className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed" {...props} />
-    ),
+    p: ({ node, ...props }: any) => {
+      // Wrap paragraphs in glass containers
+      return (
+        <div className="mb-6 p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
+          <p className="text-white leading-relaxed" {...props} />
+        </div>
+      );
+    },
     ul: ({ node, ...props }: any) => (
-      <ul className="list-disc list-inside mb-4 space-y-2 text-gray-700 dark:text-gray-300" {...props} />
+      <div className="mb-6 p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
+        <ul className="list-disc list-inside space-y-2 text-white" {...props} />
+      </div>
     ),
     ol: ({ node, ...props }: any) => (
-      <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-700 dark:text-gray-300" {...props} />
+      <div className="mb-6 p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
+        <ol className="list-decimal list-inside space-y-2 text-white" {...props} />
+      </div>
     ),
     li: ({ node, ...props }: any) => (
       <li className="ml-4" {...props} />
     ),
     strong: ({ node, ...props }: any) => (
-      <strong className="font-semibold text-gray-900 dark:text-white" {...props} />
+      <strong className="font-semibold text-white" {...props} />
     ),
     hr: ({ node, ...props }: any) => (
-      <hr className="my-12 border-t border-gray-300 dark:border-gray-700" {...props} />
+      <hr className="my-12 border-t border-gray-700" {...props} />
     ),
     img: ({ node, src, alt, ...props }: any) => {
       // Handle relative paths from project directory
@@ -112,7 +126,7 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
         : `/projects/${projectId}/images/${src}`;
       
       return (
-        <div className="my-8">
+        <div className="my-8 p-4 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
           <Image
             src={imageSrc}
             alt={alt || ''}
@@ -125,16 +139,20 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
       );
     },
     blockquote: ({ node, ...props }: any) => (
-      <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 my-4 italic text-gray-600 dark:text-gray-400" {...props} />
+      <div className="mb-6 p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border-l-4 border-gray-600 border-t border-r border-b border-gray-700/50 shadow-xl">
+        <blockquote className="pl-4 italic text-gray-300" {...props} />
+      </div>
     ),
     code: ({ node, inline, ...props }: any) => {
       if (inline) {
         return (
-          <code className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono text-gray-800 dark:text-gray-200" {...props} />
+          <code className="px-1.5 py-0.5 bg-gray-700/50 backdrop-blur-sm rounded text-sm font-mono text-white" {...props} />
         );
       }
       return (
-        <code className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-mono text-gray-800 dark:text-gray-200 overflow-x-auto" {...props} />
+        <div className="mb-6 p-4 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
+          <code className="block text-sm font-mono text-white overflow-x-auto" {...props} />
+        </div>
       );
     },
     pre: ({ node, ...props }: any) => (
@@ -148,4 +166,3 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
     </div>
   );
 }
-

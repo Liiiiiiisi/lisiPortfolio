@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ProjectHeader from '@/components/project/ProjectHeader';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import VideoHero from '@/components/project/VideoHero';
 import { getProject, projectExists } from '@/lib/projects';
 
 interface ProjectPageProps {
@@ -25,15 +26,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       <Navigation />
       <main className="flex-1 pt-16">
+        {/* Project Video at the top */}
+        <VideoHero projectId={id} />
+        
         <ProjectHeader metadata={project.metadata} />
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <MarkdownRenderer content={project.content} projectId={id} />
         </article>
       </main>
-      <Footer />
+      <Footer isDark={true} />
     </div>
   );
 }
@@ -59,4 +63,3 @@ export async function generateStaticParams() {
     return [];
   }
 }
-
