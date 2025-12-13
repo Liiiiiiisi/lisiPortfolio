@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Signie ASL Tutor & Translator",
+    "technologies": ["React", "Next.js", "OpenAI API", "TailwindCSS"],
+    "description": "An innovative ASL learning platform with translation capabilities",
+    "href": "/projects/signie"
+  },
+  {
+    "id": 2,
+    "title": "VR Education Expanding ASD Caregiver Pool",
+    "technologies": ["Unity", "C#", "Oculus SDK", "VR Interaction"],
+    "description": "Virtual reality training system for autism spectrum disorder caregivers",
+    "href": "/projects/vr-education"
+  },
+  {
+    "id": 3,
+    "title": "The Micro_Invasion AR",
+    "technologies": ["Snapchat Lens", "Lens Studio", "JavaScript", "AR 3D Modeling"],
+    "description": "Augmented reality experience using Snapchat Lens Studio",
+    "href": "/projects/micro-invasion"
+  },
+  {
+    "id": 4,
+    "title": "Pray for Blessing VR",
+    "technologies": ["Unity", "Shader Graph", "VR Particle System"],
+    "description": "Immersive VR ritual experience with advanced particle effects",
+    "href": "/projects/pray-for-blessing"
+  },
+  {
+    "id": 5,
+    "title": "Personal Carbon Neutral Interactive Installation",
+    "technologies": ["Arduino", "Processing", "Sensor", "Physical Computing"],
+    "description": "Interactive installation exploring personal carbon footprint",
+    "href": "/projects/carbon-neutral"
+  }
+]
+

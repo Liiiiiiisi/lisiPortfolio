@@ -1,0 +1,15 @@
+{
+  "title": "Signie ASL Tutor & Translator",
+  "role": "Creative Technologist",
+  "tech": [
+    "React",
+    "Next.js",
+    "OpenAI API",
+    "TailwindCSS"
+  ],
+  "description": "An innovative ASL learning platform with translation capabilities",
+  "challenge": "Creating an accessible platform for ASL learning and translation",
+  "solution": "Built an interactive web application using React and Next.js with AI-powered translation",
+  "outcome": "Successfully created a functional ASL learning and translation tool"
+}
+
