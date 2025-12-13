@@ -8,6 +8,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const [language, setLanguage] = useState<'EN' | 'CN'>('EN');
   const isProjectPage = pathname?.startsWith('/projects/');
+  const isHomePage = pathname === '/';
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -21,9 +22,11 @@ export default function Navigation() {
     setLanguage(language === 'EN' ? 'CN' : 'EN');
   };
 
+  const isDarkPage = isProjectPage || isHomePage;
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b ${
-      isProjectPage 
+      isDarkPage
         ? 'bg-gray-900/80 border-gray-700/50' 
         : 'bg-white/80 dark:bg-gray-900/80 border-transparent'
     }`}>
@@ -35,7 +38,7 @@ export default function Navigation() {
                 key={item.href}
                 href={item.href}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  isProjectPage
+                  isDarkPage
                     ? pathname === item.href
                       ? 'text-white border-b-2 border-white pb-1'
                       : 'text-gray-400 hover:text-white'
@@ -51,7 +54,7 @@ export default function Navigation() {
           <button
             onClick={toggleLanguage}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
-              isProjectPage
+              isDarkPage
                 ? 'text-gray-300 hover:text-white'
                 : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
             }`}

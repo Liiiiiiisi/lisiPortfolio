@@ -1,0 +1,109 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
+import Image from 'next/image';
+
+interface Project {
+  id: string;
+  title: string;
+  href: string;
+  video?: string;
+  cover?: string;
+  category?: string;
+}
+
+interface ProjectListProps {
+  projects: Project[];
+}
+
+export default function ProjectList({ projects }: ProjectListProps) {
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+
+  return (
+    <section className="relative min-h-screen bg-black">
+      {/* Background Video/Image Container */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {hoveredProject && (
+          <div className="absolute inset-0 transition-opacity duration-500">
+            {(() => {
+              const project = projects.find(p => p.id === hoveredProject);
+              if (project?.video) {
+                return (
+                  <video
+                    key={hoveredProject}
+                    src={project.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover opacity-40"
+                  />
+                );
+              } else if (project?.cover) {
+                return (
+                  <Image
+                    src={project.cover}
+                    alt=""
+                    fill
+                    className="object-cover opacity-20"
+                  />
+                );
+              }
+              return null;
+            })()}
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+        )}
+      </div>
+
+      {/* Project List */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="space-y-1">
+          {projects.map((project, index) => (
+            <Link
+              key={project.id}
+              href={project.href}
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
+              className="block group"
+            >
+              <div className="flex items-center justify-between py-6 px-8 border-b border-gray-900 hover:border-gray-700 transition-all duration-300">
+                <div className="flex items-center gap-12">
+                  <span className="text-xs text-gray-600 font-mono w-8">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h2
+                    className={`text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold transition-all duration-500 ease-out ${
+                      hoveredProject === project.id
+                        ? 'text-white scale-[1.02]'
+                        : 'text-gray-700 group-hover:text-gray-500'
+                    }`}
+                    style={{
+                      textShadow: hoveredProject === project.id 
+                        ? '0 0 30px rgba(255, 255, 255, 0.3)' 
+                        : 'none'
+                    }}
+                  >
+                    {project.title}
+                  </h2>
+                </div>
+                {project.category && (
+                  <span
+                    className={`text-xs uppercase tracking-widest transition-all duration-300 ${
+                      hoveredProject === project.id
+                        ? 'text-white opacity-100 translate-x-0'
+                        : 'text-gray-600 opacity-0 translate-x-4 group-hover:opacity-30'
+                    }`}
+                  >
+                    {project.category}
+                  </span>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
