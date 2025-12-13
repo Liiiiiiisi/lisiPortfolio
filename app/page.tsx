@@ -8,7 +8,7 @@ export default async function Home() {
   const projects = await getProjectList();
   
   // TODO: Replace with your YouTube URL
-  const youtubeUrl = process.env.NEXT_PUBLIC_YOUTUBE_URL || '';
+  const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
   return (
     <div className="min-h-screen flex flex-col bg-black" style={{ backgroundColor: '#000000' }}>
