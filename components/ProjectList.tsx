@@ -21,7 +21,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   return (
-    <section className="relative min-h-screen bg-black">
+    <section className="relative min-h-screen bg-black" style={{ backgroundColor: '#000000' }}>
       {/* Background Video/Image Container */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {hoveredProject && (

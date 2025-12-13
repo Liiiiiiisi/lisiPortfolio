@@ -11,9 +11,9 @@ export default async function Home() {
   const youtubeUrl = process.env.NEXT_PUBLIC_YOUTUBE_URL || '';
 
   return (
-    <div className="min-h-screen flex flex-col bg-black">
+    <div className="min-h-screen flex flex-col bg-black" style={{ backgroundColor: '#000000' }}>
       <Navigation />
-      <main className="flex-1">
+      <main className="flex-1" style={{ backgroundColor: '#000000' }}>
         {/* Showreel Video Section */}
         <HomeVideoSection youtubeUrl={youtubeUrl} />
 
