@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { withBasePath } from '@/lib/paths';
 
 interface VideoHeroProps {
   projectId: string;
@@ -38,7 +39,7 @@ export default function VideoHero({ projectId, videoPath }: VideoHeroProps) {
           muted
           playsInline
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source src={withBasePath(videoSrc)} type="video/mp4" />
         </video>
         {!isPlaying && (
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60 pointer-events-none" />
@@ -47,4 +48,3 @@ export default function VideoHero({ projectId, videoPath }: VideoHeroProps) {
     </section>
   );
 }
-

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
+import { withBasePath } from '@/lib/paths';
 
 interface Project {
   id: string;
@@ -32,7 +33,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                 return (
                   <video
                     key={hoveredProject}
-                    src={project.video}
+                    src={withBasePath(project.video)}
                     autoPlay
                     loop
                     muted
@@ -43,7 +44,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
               } else if (project?.cover) {
                 return (
                   <Image
-                    src={project.cover}
+                    src={withBasePath(project.cover)}
                     alt=""
                     fill
                     className="object-cover opacity-20"

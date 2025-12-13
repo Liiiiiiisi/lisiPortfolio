@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import VideoHero from './project/VideoHero';
 import InteractiveComponent from './project/InteractiveComponent';
 import Image from 'next/image';
+import { withBasePath } from '@/lib/paths';
 
 interface MarkdownRendererProps {
   content: string;
@@ -128,7 +129,7 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
       return (
         <div className="my-8 p-4 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
           <Image
-            src={imageSrc}
+            src={withBasePath(imageSrc)}
             alt={alt || ''}
             width={1200}
             height={675}
