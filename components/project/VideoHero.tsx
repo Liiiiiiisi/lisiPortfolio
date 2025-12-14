@@ -12,10 +12,17 @@ export default function VideoHero({ projectId, videoPath }: VideoHeroProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const videoSrc = videoPath || `/projects/${projectId}/videos/preview.mp4`;
+  
+  // Styling for all projects - larger video size
+  const containerStyle: React.CSSProperties = { width: '1000px', height: '600px', margin: '0 auto' };
+  const videoStyle: React.CSSProperties = { width: '1000px', height: '600px', textAlign: 'center' };
 
   return (
-    <section className="w-full relative bg-black">
-      <div className="aspect-video w-full flex items-center justify-center relative">
+    <section className="w-full relative bg-black flex items-center justify-center">
+      <div 
+        className="aspect-video w-full flex items-center justify-center relative"
+        style={containerStyle}
+      >
         {!isPlaying && (
           <button
             onClick={() => setIsPlaying(true)}
@@ -33,6 +40,7 @@ export default function VideoHero({ projectId, videoPath }: VideoHeroProps) {
         )}
         <video
           className="w-full h-full object-cover"
+          style={videoStyle}
           controls={isPlaying}
           autoPlay={isPlaying}
           loop

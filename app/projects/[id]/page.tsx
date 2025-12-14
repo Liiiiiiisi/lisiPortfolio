@@ -26,7 +26,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-black">
       <Navigation />
       <main className="flex-1 pt-16">
         {/* Project Video at the top */}
