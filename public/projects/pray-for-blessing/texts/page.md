@@ -1,63 +1,95 @@
-# 1. Project Video
-<!-- placeholder: video_hero -->
+# LET’S MAKE A WISH — Immersive Ritual VR Experience
+
+*(project video placeholder)*
 
 ---
 
-# 2. Project Overview
-Pray for Blessing VR is an immersive virtual reality experience that recreates traditional ritual practices in a digital space. The experience uses advanced particle systems and shader effects to create a contemplative, spiritual environment.
+## Technical Stack
+Unity · OpenXR · XR Interaction Toolkit · Shader Graph · VFX Graph · Particle System  
+Cinemachine · C# · Post-Processing · Lighting Design
 
 ---
 
-# 3. My Role
-- Designed and developed the VR experience using Unity
-- Created advanced particle systems for ritual effects
-- Implemented shader graphs for visual effects
-- Designed the immersive ritual environment
+## Team
+**Wenqu Tang — Unity Developer**  
+**Chuyue Yu — Environment Artist**  
+**My Role — Technical Artist & Interaction Designer**
 
 ---
 
-# 4. Core Contributions
-
-## 4.1 VR Ritual Environment
-The platform features a carefully crafted VR space that respects and recreates traditional ritual practices in an immersive digital format.
-
-![VR Ritual](/projects/pray-for-blessing/images/cover.png)
-
-This system solves the challenge of making spiritual practices accessible through VR technology.
+## 01. Project Overview
+An interactive VR experience that transforms traditional Asian wish-making rituals into intuitive, emotionally engaging moments.  
+I developed the interaction system, VFX, shaders, lighting, and UX flow to craft a cohesive immersive experience.
 
 ---
 
-## 4.2 Advanced Visual Effects
-The experience includes sophisticated particle systems and shader effects that enhance the spiritual atmosphere.
+## 02. My Role  
+*(Display as 4 cards with icons)*
 
-- **Particle Systems**: Complex particle effects for ritual elements
-- **Shader Graph**: Custom shaders for atmospheric effects
-- **Immersive Audio**: Spatial audio for complete immersion
+- **XR Interaction Programming**  
+- **Real-Time VFX & Shader Development**  
+- **Lighting & Environmental Design**  
+- **Rapid Prototyping & Technical Problem-Solving**
 
-![Visual Effects](/projects/pray-for-blessing/images/cover.png)
-
----
-
-# 5. Technical Breakdown
-
-## 5.1 System Architecture
-- **Engine**: Unity for VR development
-- **Effects**: Shader Graph for visual effects
-- **Particles**: VR Particle System for dynamic effects
-- **Platform**: VR headsets
-
-## 5.2 Key Features
-The system optimizes for visual impact and spiritual atmosphere while maintaining smooth VR performance.
+I translated rituals—praying, writing blessings, releasing lanterns—into intuitive VR interactions with meaningful feedback.
 
 ---
 
-# 6. Tools Used
-Unity, Shader Graph, VR Particle System, 3D Modeling
+## 03. User Journey  
+*(Left: TASK — Right: FEEDBACK layout)*
+
+### 03.1 Close Eyes and Make Wishes  
+**Task Icon:** icon-wish.png  
+**Feedback GIF:** gif-wish.gif  
+**Feedback:** Buddha’s halo lights up when the player prays.
+
+### 03.2 Shake the Bucket to Make Wishes  
+**Task Icon:** icon-bucket.png  
+**Feedback GIF:** gif-bucket.gif  
+**Feedback:** A bamboo stick is generated with a personalized fortune.
+
+### 03.3 Beat Drums to Start Festival  
+**Task Icon:** icon-drum.png  
+**Feedback GIF:** gif-drum.gif  
+**Feedback:** Drumming triggers festival music and a scene transition.
+
+### 03.4 Copy “Fu” to Pray for Luck  
+**Task Icon:** icon-write.png  
+**Feedback GIF:** gif-write.gif  
+**Feedback:** The player writes the “Fu” symbol to bring luck.
+
+### 03.5 Release the Sky Lantern  
+**Task Icon:** icon-lantern.png  
+**Feedback GIF:** gif-lantern.gif  
+**Feedback:** The lantern ignites, glows, and rises into the sky.
 
 ---
 
-# 7. Outcomes & Learnings
-- **Impact**: Created a meaningful VR ritual experience
-- **Learning**: Gained experience with advanced shader and particle systems
-- **Future**: Would explore more interactive ritual elements and multi-user experiences
+## 04. Core Contributions
 
+### 4.1 Ritual Interaction Design
+- “Fu” handwriting  
+- Lantern ignition & flight  
+
+### 4.2 Custom Shaders & VFX
+- Fire ignition  
+- Lantern glow shader  
+- Buddha orbit light  
+- Festival fireworks  
+*Fixed lantern silhouette issue by redesigning the shader + post-processing pipeline.*
+
+### 4.3 XR Systems & Logic
+- Custom hand poses  
+- Teleport refinement  
+- Object snapping  
+- Haptic feedback  
+- Cinemachine-driven animation
+
+### 4.4 Technical Problem Solving
+- Lantern glow pipeline fix  
+- Git workflow stabilization  
+
+---
+
+## 05. Outcome
+This project highlights my strength in **XR interactions, real-time visuals, and technical problem-solving**, delivering an experience users described as *calming, nostalgic, and emotionally resonant*.

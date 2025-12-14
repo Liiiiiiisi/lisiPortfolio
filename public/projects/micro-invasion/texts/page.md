@@ -1,155 +1,102 @@
-# 00. Project Video
-<!-- placeholder: video_hero -->
+
+**Tools Used:** Lens Studio · Body Tracking · Segmentation · World Mesh · Particle System · Image Tracking  
+**Used for:** Real-time AR interaction, environment mapping, and body-surface visualization
+
+---
+##  Team
+
+**Chuyue Yu** — Interaction Designer
+**Yike Hu** — Visual Designer & Video Editor
+**My Role** — Interaction & AR Developer
+
+## 01. Project Overview
+
+**Micro_Invasion** is an AR experience that visualizes how microplastics enter the body through ordinary routines.
+
+Framed around a dining scene, the project uses real-time tracking, segmentation, and particle simulation to reveal invisible contamination on the user’s hands, face, clothing, and surrounding environment.
 
 ---
 
-**Tools Used:** Unity · Vuforia · Cinema 4D · Illustrator · C# · Animator State Machine  
+## 02. Concept
+
+### Hidden Contamination
+_Layout: 3 Cards Row_
+
+**Skin Contact**  
+Degraded plastics leave micro-sized particles that stick to the skin during daily use.  
+_Placeholder: [Image: Skin Contact Concept]_
+
+**Food Intake**  
+Produce can carry microplastics absorbed from the environment.  
+_Placeholder: [Image: Food Intake Concept]_
+
+**Respiration**  
+Polyester and nylon fabrics release airborne microfibers that can be inhaled.  
+_Placeholder: [Image: Respiration Concept]_
 
 ---
 
-## 1. Overview
+## 03. Interaction Design
 
-**Personal Carbon Neutral** is an AR game prototype that transforms a player’s real-world carbon footprint into interactive digital creatures.  
-The project integrates AR, environmental data, and game mechanics to explore how emerging technology can drive sustainable behavior through play.
+_Layout: Alternating Left-Right_
 
----
+### 1 — Skin Exposure
+**Trigger:** Hand sanitizer interaction  
+**Effect:** Activates hand segmentation and particle attachment
 
-## 2. Problem
+**Interaction Elements:**
+- **Object:** Hand Sanitizer
+- **Segment:** Hand Segmentation Mask
+- _Placeholder: [GIF: Microplastic Spread on Skin]_
 
-Carbon emissions are invisible and abstract, making them difficult for individuals to understand or act on.
+### 2 — Food Exposure
+**Trigger:** Apple proximity  
+**Effect:** Triggers particle accumulation on the face region
 
-Even people who want to behave sustainably often lack:
+**Interaction Elements:**
+- **Object:** Apple
+- **Segment:** Face Segmentation
+- _Placeholder: [GIF: Particles on Face]_
 
-- Real-time feedback  
-- Behavioral insight  
-- An engaging reason to change habits  
+### 3 — Fabric Exposure
+**Trigger:** Napkin wipe  
+**Effect:** Attaches fibers to the clothing segmentation
 
-**Design challenge:**  
-How can technology make personal carbon impact visible, actionable, and emotionally meaningful?
+**Interaction Elements:**
+- **Object:** Napkin
+- **Segment:** Clothing Region
+- _Placeholder: [GIF: Fiber Attachment]_
 
----
+### Final Reveal
+A room-scale particle reveal expands beyond the user’s body and fills the environment.
 
-## 3. Concept
+> “Welcome to the world of microplastics.”
 
-The game visualizes carbon emissions as creatures that players can interact with and transform through sustainable actions.
-
-### SCM – Small Carbon Monsters  
-SCMs are formed from a player’s daily carbon emissions.  
-Players can **purify** SCMs to reduce their footprint and add them to a creature collection for future battles.
-
-![SCM Lifecycle](../images/scm-lifecycle.gif)
-
-### LCM – Large Carbon Monsters  
-LCMs are generated from the **combined emissions of all players in a city**.  
-Defeating an LCM symbolizes achieving **temporary collective carbon neutrality**.
-
-![LCM Formation](../images/lcm-formation.gif)
-
-This system reframes climate responsibility into a **playable loop** where real-world actions create in-game power.
+_Placeholder: [GIF: World Mesh Reveal]_
 
 ---
 
-## 4. System & Mechanics
+## 04. Technical Implementation
 
-### Behavior Tracking  
-The system gathers emission-related actions through two channels.
+I engineered the interaction system, AR logic, image tracking, segmentation, and world-mesh effects. 
 
-#### Auto-detected behaviors (AI pattern recognition)
+### A. Image Tracking System
+- Designed a large QR marker as the central anchor
+- Built three collider boxes as event triggers
+- Developed the interaction flow: skin → food → fabric → environment
+- Created a real-time distance-tracking script to measure hand-to-collider proximity
 
-By analyzing movement rhythm and route patterns, the system can infer transport type:
+### B. Body Tracking & Segmentation
+- Integrated a hand-detection helper image for segmentation debugging
+- Adapted the `example_segmentation` template for particle emission
+- Controlled segmentation masks for targeted particle activation
+- Linked segmentation output to interaction states
 
-- Walking  
-- Biking  
-- Bus routes  
-- Subway travel  
-- Taxi / ride services  
-
-_Concept: public transit follows fixed routes + consistent speeds; other modes have distinct patterns, making classification possible._
-
-![Travel Mode Recognition](../images/behavior-travel-recognition.gif)
-
-#### Manually verified behaviors
-Actions requiring simple proof uploads include:
-
-- Recycling  
-- Energy-saving habits  
-- Conscious or low-impact shopping  
-- Sustainable diet choices  
-
-To motivate these actions, players unlock **mini-games** that reinforce sustainable habits.
-
-![Proof Upload & Mini-game](../images/behavior-proof-and-minigame.gif)
+### C. World Mesh Integration
+- Extended the simple world mesh template for room-scale particle mapping
+- Configured mesh-based particle emission reactive to the environment
+- Optimized performance by limiting unnecessary particles
 
 ---
 
-### Reward Loop
-
-Sustainable behaviors convert into in-game value:
-
-- **Coins** – unlock skins  
-- **Magic power** – used in combat  
-- **EXP** – upgrades and evolves characters  
-- **City progress** – contributes to defeating LCMs  
-
-This creates a **closed feedback system** where physical actions directly affect digital outcomes.
-
----
-
-## 5. Character Design
-
-### Main Character – Whale Willy  
-Inspired by whales as natural **carbon sinks**.  
-Willy’s appearance evolves based on the player's activity and progress.
-
-![Whale Willy Skins](../images/whale-willy-skins.gif)
-
-### SCM Monsters
-
-SCM creatures represent everyday environmental issues.
-
-**Bird Billy in petroleum**  
-**Crab Craddock in a plastic shell**  
-**Fish Fellah tangled in a nest**  
-**Bear Bell with its head in a gasoline can**
-
-![SCM comparison strip](/assets/projects/carbon-neutral/images/scm-comparison-strip.png)
-
-
-
-### LCM Monster – Giant Salamander  
-A boss creature inspired by **extreme flood events** and ecosystem vulnerability.
-
-Each character anchors a real climate issue through playful, approachable visual storytelling.
-
----
-
-## 6. Technical Build
-
-### 6.1 Modeling & Visual Exploration (Cinema 4D)
-
-I initially explored a **voxel-style particle system** using Tool 4D Voxygen to visualize characters as “carbon particles.”  
-Although visually intriguing, this approach created:
-
-- Unstable motion during FBX export  
-- High-frequency visual noise causing AR discomfort  
-- Poor readability in small real-world environments  
-
-To improve usability and performance, I transitioned to **cleaner 3D models** with strong silhouettes, while maintaining carbon-inspired design cues.
-
-_Tools: Cinema 4D, Voxygen plugin_
-
-![C4D Voxel to Final](../images/c4d-voxel-to-final.gif)
-
----
-
-### 6.2 AR Prototype Development
-
-In Unity, I built two AR battle prototypes that integrate animation, interaction logic, and spatial mapping.
-
-- C# battle logic  
-- Animator state machine  
-- Vuforia plane detection  
-- Real-world player movement mapped to combat distance  
-
-![AR prototype demo](/assets/projects/carbon-neutral/images/ar-prototype-demo.gif)
 

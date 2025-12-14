@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Box, Sparkles, Palette, Mountain } from "lucide-react";
+import { ArrowLeft, Code, Sparkles, Palette, Lightbulb } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
 
@@ -83,26 +83,48 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Pray for Blessing VR</h1>
-                            <p className="text-white/60 text-lg">Immersive Ritual Experience</p>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Let's Make a Wish</h1>
+                            <p className="text-white/60 text-lg">Immersive Ritual VR Experience</p>
                         </section>
 
                         {/* Tools Used */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Technical Stack</h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div className="flex items-center justify-center">
                                     <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Unity</span>
                                 </div>
                                 <div className="flex items-center justify-center">
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OpenXR</span>
+                                </div>
+                                <div className="flex items-center justify-center">
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">XR Interaction Toolkit</span>
+                                </div>
+                                <div className="flex items-center justify-center">
                                     <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Shader Graph</span>
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">VR Particle System</span>
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">VFX Graph</span>
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">3D Modeling</span>
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Particle System</span>
                                 </div>
+                                <div className="flex items-center justify-center">
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Cinemachine</span>
+                                </div>
+                                <div className="flex items-center justify-center">
+                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">C#</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Team Section */}
+                        <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Team</h2>
+                            <div className="space-y-3 text-white/90">
+                                <p><strong className="text-white">Wenqu Tang</strong> — Unity Developer</p>
+                                <p><strong className="text-white">Chuyue Yu</strong> — Environment Artist</p>
+                                <p><strong className="text-white">My Role</strong> — Technical Artist & Interaction Designer</p>
                             </div>
                         </section>
 
@@ -110,15 +132,15 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                         <div className="relative z-10 space-y-12">
                             {/* Project Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Project Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">01. Project Overview</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Pray for Blessing VR is an immersive virtual reality experience that recreates traditional ritual practices in a digital space. The experience uses advanced particle systems and shader effects to create a contemplative, spiritual environment.
+                                    An interactive VR experience that transforms traditional Asian wish-making rituals into intuitive, emotionally engaging moments. I developed the interaction system, VFX, shaders, lighting, and UX flow to craft a cohesive immersive experience.
                                 </p>
                             </section>
 
                             {/* My Role */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">2. My Role</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">02. My Role</h2>
 
                                 <div className="relative -mx-4 md:-mx-8">
                                     <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent px-4 md:px-8">
@@ -126,12 +148,12 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                         <div className="min-w-[280px] md:min-w-[320px] snap-start group relative overflow-hidden rounded-3xl bg-white/5 p-8 border border-white/10 backdrop-blur-sm transition-all hover:bg-white/10 min-h-[280px] flex flex-col">
                                             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50" />
                                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-auto relative z-10 border border-white/5">
-                                                <Box className="w-6 h-6 text-white/60" strokeWidth={1.5} />
+                                                <Code className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">VR Development</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">XR Interaction Programming</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed and developed the VR experience using Unity
+                                                    Developed intuitive VR interactions for ritual experiences
                                                 </p>
                                             </div>
                                         </div>
@@ -143,9 +165,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Sparkles className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Particle Systems</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Real-Time VFX & Shader Development</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Created advanced particle systems for ritual effects
+                                                    Created custom shaders and visual effects for ritual atmosphere
                                                 </p>
                                             </div>
                                         </div>
@@ -157,9 +179,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Palette className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Shader Effects</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Lighting & Environmental Design</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Implemented shader graphs for visual effects
+                                                    Designed lighting and environmental atmosphere for immersive experience
                                                 </p>
                                             </div>
                                         </div>
@@ -168,13 +190,143 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                         <div className="min-w-[280px] md:min-w-[320px] snap-start group relative overflow-hidden rounded-3xl bg-white/5 p-8 border border-white/10 backdrop-blur-sm transition-all hover:bg-white/10 min-h-[280px] flex flex-col">
                                             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50" />
                                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-auto relative z-10 border border-white/5">
-                                                <Mountain className="w-6 h-6 text-white/60" strokeWidth={1.5} />
+                                                <Lightbulb className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Environment Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Rapid Prototyping & Problem-Solving</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed the immersive ritual environment
+                                                    Solved technical challenges and iterated on interaction design
                                                 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p className="text-white/80 mt-6 leading-relaxed">
+                                    I translated rituals—praying, writing blessings, releasing lanterns—into intuitive VR interactions with meaningful feedback.
+                                </p>
+                            </section>
+
+                            {/* User Journey */}
+                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">03. User Journey</h2>
+
+                                <div className="space-y-8">
+                                    {/* 03.1 Close Eyes */}
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                        <div className="grid md:grid-cols-2 gap-6 items-center">
+                                            <div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <img
+                                                        src={withBasePath("/projects/pray-for-blessing/images/icon-wish.png")}
+                                                        alt="Wish Icon"
+                                                        className="w-12 h-12"
+                                                    />
+                                                    <h3 className="text-xl font-bold text-white">03.1 Close Eyes and Make Wishes</h3>
+                                                </div>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Buddha's halo lights up when the player prays.</p>
+                                            </div>
+                                            <div className="rounded-xl overflow-hidden border border-white/10">
+                                                <img
+                                                    src={withBasePath("/projects/pray-for-blessing/images/gif-wish.gif")}
+                                                    alt="Wish Interaction"
+                                                    className="w-full h-auto object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* 03.2 Shake Bucket */}
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                        <div className="grid md:grid-cols-2 gap-6 items-center">
+                                            <div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <img
+                                                        src={withBasePath("/projects/pray-for-blessing/images/icon-bucket.png")}
+                                                        alt="Bucket Icon"
+                                                        className="w-12 h-12"
+                                                    />
+                                                    <h3 className="text-xl font-bold text-white">03.2 Shake the Bucket to Make Wishes</h3>
+                                                </div>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> A bamboo stick is generated with a personalized fortune.</p>
+                                            </div>
+                                            <div className="rounded-xl overflow-hidden border border-white/10">
+                                                <img
+                                                    src={withBasePath("/projects/pray-for-blessing/images/gif-bucket.gif")}
+                                                    alt="Bucket Interaction"
+                                                    className="w-full h-auto object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* 03.3 Beat Drums */}
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                        <div className="grid md:grid-cols-2 gap-6 items-center">
+                                            <div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <img
+                                                        src={withBasePath("/projects/pray-for-blessing/images/icon-drum.png")}
+                                                        alt="Drum Icon"
+                                                        className="w-12 h-12"
+                                                    />
+                                                    <h3 className="text-xl font-bold text-white">03.3 Beat Drums to Start Festival</h3>
+                                                </div>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Drumming triggers festival music and a scene transition.</p>
+                                            </div>
+                                            <div className="rounded-xl overflow-hidden border border-white/10">
+                                                <img
+                                                    src={withBasePath("/projects/pray-for-blessing/images/gif-drum.gif")}
+                                                    alt="Drum Interaction"
+                                                    className="w-full h-auto object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* 03.4 Copy Fu */}
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                        <div className="grid md:grid-cols-2 gap-6 items-center">
+                                            <div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <img
+                                                        src={withBasePath("/projects/pray-for-blessing/images/icon-write.png")}
+                                                        alt="Write Icon"
+                                                        className="w-12 h-12"
+                                                    />
+                                                    <h3 className="text-xl font-bold text-white">03.4 Copy "Fu" to Pray for Luck</h3>
+                                                </div>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The player writes the "Fu" symbol to bring luck.</p>
+                                            </div>
+                                            <div className="rounded-xl overflow-hidden border border-white/10">
+                                                <img
+                                                    src={withBasePath("/projects/pray-for-blessing/images/gif-write.gif")}
+                                                    alt="Write Interaction"
+                                                    className="w-full h-auto object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* 03.5 Release Lantern */}
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                        <div className="grid md:grid-cols-2 gap-6 items-center">
+                                            <div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <img
+                                                        src={withBasePath("/projects/pray-for-blessing/images/icon-lantern.png")}
+                                                        alt="Lantern Icon"
+                                                        className="w-12 h-12"
+                                                    />
+                                                    <h3 className="text-xl font-bold text-white">03.5 Release the Sky Lantern</h3>
+                                                </div>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The lantern ignites, glows, and rises into the sky.</p>
+                                            </div>
+                                            <div className="rounded-xl overflow-hidden border border-white/10">
+                                                <img
+                                                    src={withBasePath("/projects/pray-for-blessing/images/gif-lantern.gif")}
+                                                    alt="Lantern Interaction"
+                                                    className="w-full h-auto object-cover"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -184,91 +336,62 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                             {/* Core Contributions */}
                             <section>
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">3. Core Contributions</h2>
-                                    <p className="text-white/70 text-base md:text-lg">
-                                        I contributed across VR development, particle systems, shader effects, and environment design.
-                                    </p>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">04. Core Contributions</h2>
                                 </div>
 
                                 <div className="space-y-8">
-                                    {/* 3.1 VR Ritual Environment */}
+                                    {/* 4.1 Ritual Interaction Design */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.1 VR Ritual Environment</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            The platform features a carefully crafted VR space that respects and recreates traditional ritual practices in an immersive digital format.
-                                        </p>
-                                        <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                                            <img
-                                                src={withBasePath("/projects/pray-for-blessing/images/cover.png")}
-                                                alt="VR Ritual"
-                                                className="w-full h-auto object-cover"
-                                            />
-                                            <div className="bg-black/40 backdrop-blur-sm p-6 border-t border-white/10">
-                                                <p className="text-white/80 text-sm md:text-base">
-                                                    This system solves the challenge of making spiritual practices accessible through VR technology.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* 3.2 Advanced Visual Effects */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.2 Advanced Visual Effects</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            The experience includes sophisticated particle systems and shader effects that enhance the spiritual atmosphere.
-                                        </p>
-                                        <div className="space-y-4 mb-6">
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Particle Systems:</strong> Complex particle effects for ritual elements</p>
-                                            </div>
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Shader Graph:</strong> Custom shaders for atmospheric effects</p>
-                                            </div>
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Immersive Audio:</strong> Spatial audio for complete immersion</p>
-                                            </div>
-                                        </div>
-                                        <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                                            <img
-                                                src={withBasePath("/projects/pray-for-blessing/images/cover.png")}
-                                                alt="Visual Effects"
-                                                className="w-full h-auto object-cover"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Technical Breakdown */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. Technical Breakdown</h2>
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.1 System Architecture</h3>
-                                        <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>Engine: Unity for VR development</li>
-                                            <li>Effects: Shader Graph for visual effects</li>
-                                            <li>Particles: VR Particle System for dynamic effects</li>
-                                            <li>Platform: VR headsets</li>
+                                        <h3 className="text-2xl font-bold text-white">4.1 Ritual Interaction Design</h3>
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                            <li>"Fu" handwriting</li>
+                                            <li>Lantern ignition & flight</li>
                                         </ul>
                                     </div>
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.2 Key Features</h3>
-                                        <p className="text-white/80 leading-relaxed">
-                                            The system optimizes for visual impact and spiritual atmosphere while maintaining smooth VR performance.
+
+                                    {/* 4.2 Custom Shaders & VFX */}
+                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
+                                        <h3 className="text-2xl font-bold text-white">4.2 Custom Shaders & VFX</h3>
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                            <li>Fire ignition</li>
+                                            <li>Lantern glow shader</li>
+                                            <li>Buddha orbit light</li>
+                                            <li>Festival fireworks</li>
+                                        </ul>
+                                        <p className="text-white/70 text-sm italic mt-4">
+                                            Fixed lantern silhouette issue by redesigning the shader + post-processing pipeline.
                                         </p>
+                                    </div>
+
+                                    {/* 4.3 XR Systems & Logic */}
+                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
+                                        <h3 className="text-2xl font-bold text-white">4.3 XR Systems & Logic</h3>
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                            <li>Custom hand poses</li>
+                                            <li>Teleport refinement</li>
+                                            <li>Object snapping</li>
+                                            <li>Haptic feedback</li>
+                                            <li>Cinemachine-driven animation</li>
+                                        </ul>
+                                    </div>
+
+                                    {/* 4.4 Technical Problem Solving */}
+                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
+                                        <h3 className="text-2xl font-bold text-white">4.4 Technical Problem Solving</h3>
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                            <li>Lantern glow pipeline fix</li>
+                                            <li>Git workflow stabilization</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </section>
 
-                            {/* Outcomes & Learnings */}
+                            {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcomes & Learnings</h2>
-                                <ul className="list-disc list-inside space-y-3 text-white/90 text-lg">
-                                    <li><strong className="text-white">Impact:</strong> Created a meaningful VR ritual experience</li>
-                                    <li><strong className="text-white">Learning:</strong> Gained experience with advanced shader and particle systems</li>
-                                    <li><strong className="text-white">Future:</strong> Would explore more interactive ritual elements and multi-user experiences</li>
-                                </ul>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">05. Outcome</h2>
+                                <p className="text-lg text-white/90 leading-relaxed">
+                                    This project highlights my strength in <strong className="text-white">XR interactions, real-time visuals, and technical problem-solving</strong>, delivering an experience users described as <em className="text-white/80">calming, nostalgic, and emotionally resonant</em>.
+                                </p>
                             </section>
                         </div>
 
