@@ -6,7 +6,8 @@
     "category": "Web Application",
     "category_zh": "网页应用",
     "video": "/projects/signie/videos/preview.mp4",
-    "cover": "/projects/signie/images/cover.png"
+    "cover": "/projects/signie/images/cover.png",
+    "features": ["asl", "education", "translation"]
   },
   {
     "id": "vr-education",
@@ -15,7 +16,8 @@
     "category": "VR Experience",
     "category_zh": "VR 体验",
     "video": "/projects/vr-education/videos/preview.mp4",
-    "cover": "/projects/vr-education/images/cover.png"
+    "cover": "/projects/vr-education/images/cover.png",
+    "features": ["xr", "education", "asd"]
   },
   {
     "id": "micro-invasion",
@@ -24,7 +26,8 @@
     "category": "AR Experience",
     "category_zh": "AR 体验",
     "video": "/projects/micro-invasion/videos/preview.mp4",
-    "cover": "/projects/micro-invasion/images/cover.png"
+    "cover": "/projects/micro-invasion/images/cover.png",
+    "features": ["ar", "interactive"]
   },
   {
     "id": "pray-for-blessing",
@@ -33,7 +36,8 @@
     "category": "VR Experience",
     "category_zh": "VR 体验",
     "video": "/projects/pray-for-blessing/videos/preview.mp4",
-    "cover": "/projects/pray-for-blessing/images/cover.png"
+    "cover": "/projects/pray-for-blessing/images/cover.png",
+    "features": ["vr", "cultural"]
   },
   {
     "id": "carbon-neutral",
@@ -42,7 +46,8 @@
     "category": "Interactive Installation",
     "category_zh": "互动装置",
     "video": "/projects/carbon-neutral/videos/preview.mp4",
-    "cover": "/projects/carbon-neutral/images/cover.png"
+    "cover": "/projects/carbon-neutral/images/cover.png",
+    "features": ["interactive", "sustainability", "installation"]
   }
 ]
 

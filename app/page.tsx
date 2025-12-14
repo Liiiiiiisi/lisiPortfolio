@@ -17,15 +17,19 @@ export default async function Home() {
         {/* Showreel Video Section */}
         <HomeVideoSection youtubeUrl={youtubeUrl} />
 
-        {/* Projects Section with Hover Video Effect */}
-        <ProjectList projects={projects.map(project => ({
-          id: project.id,
-          title: project.title,
-          href: `/projects/${project.id}`,
-          video: project.video,
-          cover: project.cover,
-          category: project.category,
-        }))} />
+        {/* Projects Section */}
+        <ProjectList 
+          enableHoverVideo={false}
+          projects={projects.map(project => ({
+            id: project.id,
+            title: project.title,
+            href: `/projects/${project.id}`,
+            video: project.video,
+            cover: project.cover,
+            category: project.category,
+            features: (project as any).features,
+          }))} 
+        />
       </main>
       <Footer isDark={true} />
     </div>

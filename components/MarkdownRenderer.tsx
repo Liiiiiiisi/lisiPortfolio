@@ -126,14 +126,18 @@ export default function MarkdownRenderer({ content, projectId }: MarkdownRendere
         ? src 
         : `/projects/${projectId}/images/${src}`;
       
+      // Check if image is a GIF to ensure proper handling
+      const isGif = imageSrc.toLowerCase().endsWith('.gif');
+      
       return (
-        <div className="my-8 p-4 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
+        <div className="my-6 p-4 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl">
           <Image
             src={withBasePath(imageSrc)}
             alt={alt || ''}
             width={1200}
             height={675}
             className="w-full h-auto rounded-lg"
+            unoptimized={isGif}
             {...props}
           />
         </div>

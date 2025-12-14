@@ -13,14 +13,14 @@ export default function VideoHero({ projectId, videoPath }: VideoHeroProps) {
 
   const videoSrc = videoPath || `/projects/${projectId}/videos/preview.mp4`;
   
-  // Styling for all projects - larger video size
+  // Fixed-size video container (700px × 400px)
   const containerStyle: React.CSSProperties = { width: '700px', height: '400px', margin: '0 auto' };
-  const videoStyle: React.CSSProperties = { width: '700px', height: '400px', textAlign: 'center' };
+  const videoStyle: React.CSSProperties = { textAlign: 'center' };
 
   return (
     <section className="w-full relative bg-black flex items-center justify-center">
       <div 
-        className="aspect-video w-full flex items-center justify-center relative"
+        className="flex items-center justify-center relative"
         style={containerStyle}
       >
         {!isPlaying && (

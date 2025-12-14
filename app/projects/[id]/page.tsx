@@ -25,14 +25,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  // For VR Education project, hide VideoHero and ProjectHeader
+  const hideHeaderAndVideo = id === 'vr-education';
+
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <Navigation />
       <main className="flex-1 pt-16">
         {/* Project Video at the top */}
-        <VideoHero projectId={id} />
+        {!hideHeaderAndVideo && <VideoHero projectId={id} />}
         
-        <ProjectHeader metadata={project.metadata} />
+        {!hideHeaderAndVideo && <ProjectHeader metadata={project.metadata} />}
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <MarkdownRenderer content={project.content} projectId={id} />
         </article>

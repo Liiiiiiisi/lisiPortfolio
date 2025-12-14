@@ -1,62 +1,97 @@
-# 1. Project Video
 <!-- placeholder: video_hero -->
 
----
-
-# 2. Project Overview
-VR Education is an innovative virtual reality training platform designed to expand the pool of qualified caregivers for individuals with Autism Spectrum Disorder (ASD). The system provides immersive, hands-on training experiences that help caregivers develop essential skills in a safe, controlled environment.
+# VR Education Expanding ASD Caregiver Pool
 
 ---
 
-# 3. My Role
-- Designed and developed the VR experience using Unity and C#
-- Integrated Oculus SDK for VR interaction and tracking
-- Created immersive training scenarios
-- Implemented user interaction systems
+## 1. Overview
+
+**Guardian's Guide** is a VR learning experience designed to help new caregivers understand and support a non-verbal autistic child. The experience focuses on approachable, practice-based learning and teaches essential caregiving skills through realistic sensory and communication challenges.
 
 ---
 
-# 4. Core Contributions
+## 2. My Role
 
-## 4.1 VR Training Environment
-The platform features a fully immersive VR environment that simulates real-world caregiving scenarios, allowing trainees to practice in a safe space.
-
-![VR Environment](/projects/vr-education/images/cover.png)
-
-This system solves the challenge of training caregivers by providing realistic, repeatable practice scenarios.
-
----
-
-## 4.2 Interactive Learning System
-The training system includes interactive elements that respond to user actions, providing immediate feedback and guidance.
-
-- **Real-time Feedback**: Instant responses to caregiver actions
-- **Scenario-based Learning**: Multiple training scenarios for different situations
-
-![Training Demo](/projects/vr-education/images/cover.png)
+- Designed VR interaction and onboarding systems  
+- Implemented scoring logic, triggers, and task flow in Unity  
+- Built anti-cheating and progression mechanics  
+- Structured scene flow and overall user experience architecture  
+- Designed interactions aligned with autistic sensory needs  
 
 ---
 
-# 5. Technical Breakdown
+## 3. Core Contributions
 
-## 5.1 System Architecture
-- **Engine**: Unity for VR development
-- **Platform**: Oculus VR headsets
-- **Interaction**: C# scripting for VR interactions
-- **Tracking**: Oculus SDK for hand and head tracking
+### 3.1 Interaction System Design
 
-## 5.2 Key Features
-The system optimizes for VR performance and user comfort, ensuring smooth experiences without motion sickness.
+Inspired by *The Escape Artist* controller tutorial, I designed an onboarding flow that makes VR controls intuitive even for first-time users.
 
----
+![Contrast Adjustment](/projects/vr-education/images/contrast.gif)
 
-# 6. Tools Used
-Unity, C#, Oculus SDK, VR Interaction, 3D Modeling
+This system reduces onboarding friction by providing an interactive, visual understanding of core VR controls.
 
 ---
 
-# 7. Outcomes & Learnings
-- **Impact**: Created a functional VR training system for ASD caregivers
-- **Learning**: Gained experience with VR development and immersive design
-- **Future**: Would explore more advanced AI-driven scenarios and multi-user training
+### 3.2 System Logic & Gameplay Mechanics
 
+I designed the underlying logic that drives tasks, feedback, and progression throughout the experience.
+
+- Implemented visual state changes (red → yellow) to mark completed interactions  
+  ![Visual State Change](/projects/vr-education/images/change-color.gif)
+
+- Built a collision-based scoring system to detect and validate object placement  
+  ![Unity Screen](/projects/vr-education/images/unity-screen.gif)
+
+- Created a two-option choice mechanic that teaches correct caregiving decisions through paired item comparisons  
+  ![Choice Demo](/projects/vr-education/images/choice-demo.gif)
+
+These mechanics structure the learning process and support clear, consistent feedback.
+
+---
+
+### 3.3 Anti-Cheating Mechanics
+
+To ensure meaningful learning rather than trial-and-error, I implemented:
+
+- Automatic removal of unselected options when a choice is made  
+  ![Option Removal](/projects/vr-education/images/removal.gif)
+
+- Deactivation of UI trigger sockets after interaction to prevent repeated scoring  
+  ![Socket Deactivation](/projects/vr-education/images/socket.gif)
+
+These systems preserve learning integrity and maintain authentic decision-making.
+
+---
+
+### 3.4 Scene Architecture & Flow
+
+The experience progresses through four core scenes:
+
+- **Tutorial** — Users learn VR controls  
+- **White Room** — Users review Kid X's profile through object-based interactions  
+- **Kitchen (Guided Task)** — Users complete caregiving tasks with hints and instant UI feedback  
+- **Living Room (Independent Task)** — Users apply their learning without hints  
+
+---
+
+## 4. Technical Breakdown
+
+### 4.1 Interaction Systems
+
+- VR controller mapping using OpenXR  
+- Dynamic UI feedback  
+- Object state switching via scripted events  
+
+### 4.2 Gameplay Logic
+
+- Collision-based scoring  
+- Trigger activation/deactivation  
+- TextMesh-linked scoring events  
+
+---
+
+## 5. Outcomes & Learnings
+
+- **Impact**: Improved usability for first-time VR users through simplified VR onboarding  
+- **Learning**: Validated behavior-based training design for neurodivergent learning  
+- **Future**: Built a scalable framework for rule-based VR learning systems with opportunities for adaptive difficulty and richer behavioral states  

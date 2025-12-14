@@ -12,18 +12,22 @@ interface Project {
   video?: string;
   cover?: string;
   category?: string;
+  features?: string[];
 }
 
 interface ProjectListProps {
   projects: Project[];
+  enableHoverVideo?: boolean;
+  showThumbnail?: boolean;
 }
 
-export default function ProjectList({ projects }: ProjectListProps) {
+export default function ProjectList({ projects, enableHoverVideo = true, showThumbnail = true }: ProjectListProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   return (
     <section className="relative min-h-screen bg-black" style={{ backgroundColor: '#000000' }}>
       {/* Background Video/Image Container */}
+      {enableHoverVideo && (
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {hoveredProject && (
           <div className="absolute inset-0 transition-opacity duration-500">
@@ -57,6 +61,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
           </div>
         )}
       </div>
+      )}
 
       {/* Project List */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
@@ -65,34 +70,69 @@ export default function ProjectList({ projects }: ProjectListProps) {
             <Link
               key={project.id}
               href={project.href}
-              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseEnter={() => enableHoverVideo && setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
               className="block group"
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 sm:py-6 px-4 sm:px-8 border-b border-gray-900 hover:border-gray-700 transition-all duration-300">
-                <div className="flex items-center gap-4 sm:gap-12">
+                <div className="flex items-center gap-4 sm:gap-12 flex-1">
                   <span className="text-xs text-gray-600 font-mono w-6 sm:w-8 flex-shrink-0">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h2
-                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold transition-all duration-500 ease-out ${
-                      hoveredProject === project.id
-                        ? 'text-white scale-[1.02]'
-                        : 'text-gray-700 group-hover:text-gray-500'
-                    }`}
-                    style={{
-                      textShadow: hoveredProject === project.id 
-                        ? '0 0 30px rgba(255, 255, 255, 0.3)' 
-                        : 'none'
-                    }}
-                  >
-                    {project.title}
-                  </h2>
+                  
+                  {/* Thumbnail placeholder */}
+                  {showThumbnail && (
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-gray-800 border border-gray-700 rounded overflow-hidden">
+                      {project.cover ? (
+                        <Image
+                          src={withBasePath(project.cover)}
+                          alt={project.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-600 text-xs">
+                          No Image
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="flex flex-col gap-1 flex-1">
+                    <h2
+                      className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold transition-all duration-500 ease-out ${
+                        enableHoverVideo && hoveredProject === project.id
+                          ? 'text-white scale-[1.02]'
+                          : 'text-gray-700 group-hover:text-gray-500'
+                      }`}
+                      style={{
+                        textShadow: enableHoverVideo && hoveredProject === project.id 
+                          ? '0 0 30px rgba(255, 255, 255, 0.3)' 
+                          : 'none'
+                      }}
+                    >
+                      {project.title}
+                    </h2>
+                    
+                    {/* Features tags */}
+                    {project.features && project.features.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {project.features.map((feature, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs sm:text-sm text-gray-500 font-mono"
+                          >
+                            #{feature}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {project.category && (
                   <span
                     className={`text-xs uppercase tracking-widest transition-all duration-300 mt-2 sm:mt-0 ${
-                      hoveredProject === project.id
+                      enableHoverVideo && hoveredProject === project.id
                         ? 'text-white opacity-100 translate-x-0'
                         : 'text-gray-600 opacity-0 sm:opacity-0 translate-x-4 group-hover:opacity-30'
                     }`}

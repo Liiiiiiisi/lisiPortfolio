@@ -20,6 +20,7 @@ export interface ProjectIndexItem {
   category_zh?: string;
   video?: string;
   cover?: string;
+  features?: string[];
 }
 
 export interface ProjectData {
