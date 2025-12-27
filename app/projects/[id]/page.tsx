@@ -10,6 +10,8 @@ import SignieProjectPage from '@/components/project/SignieProjectPage';
 import MicroInvasionProjectPage from '@/components/project/MicroInvasionProjectPage';
 import PrayForBlessingProjectPage from '@/components/project/PrayForBlessingProjectPage';
 import CarbonNeutralProjectPage from '@/components/project/CarbonNeutralProjectPage';
+import CanopyOfEchoProjectPage from '@/components/project/CanopyOfEchoProjectPage';
+import DatnieProjectPage from '@/components/project/DatnieProjectPage';
 import { getProject, projectExists } from '@/lib/projects';
 
 interface ProjectPageProps {
@@ -38,6 +40,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     'micro-invasion': MicroInvasionProjectPage,
     'pray-for-blessing': PrayForBlessingProjectPage,
     'carbon-neutral': CarbonNeutralProjectPage,
+    'canopy-of-echo': CanopyOfEchoProjectPage,
+    'datnie': DatnieProjectPage,
   };
 
   const CustomComponent = CustomProjectComponents[id];

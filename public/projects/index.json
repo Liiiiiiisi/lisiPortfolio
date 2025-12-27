@@ -48,6 +48,26 @@
     "video": "/projects/carbon-neutral/videos/preview.mp4",
     "cover": "/projects/carbon-neutral/images/cover.png",
     "features": ["interactive", "sustainability", "installation"]
+  },
+  {
+    "id": "canopy-of-echo",
+    "title": "Canopy of Echo",
+    "title_zh": "",
+    "category": "",
+    "category_zh": "",
+    "video": "/projects/canopy-of-echo/videos/preview.mp4",
+    "cover": "/projects/canopy-of-echo/images/cover.png",
+    "features": []
+  },
+  {
+    "id": "datnie",
+    "title": "Datnie",
+    "title_zh": "",
+    "category": "",
+    "category_zh": "",
+    "video": "/projects/datnie/videos/preview.mp4",
+    "cover": "/projects/datnie/images/cover.png",
+    "features": []
   }
 ]
 
