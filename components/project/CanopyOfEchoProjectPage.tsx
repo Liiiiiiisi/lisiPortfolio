@@ -146,7 +146,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     <li>Full-scale physical installation</li>
                                     <li>Miniature model</li>
                                     <li>Unreal Engine interaction prototype</li>
-                                    <li>VR prototype</li>
+                                    <li>Rendered video</li>
                                 </ul>
                                 
                                 {/* 4 Media Items in a Row */}
@@ -168,7 +168,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
                                         <div className="aspect-video bg-white/5 flex items-center justify-center">
-                                            <p className="text-white/40 text-xs">VR Prototype</p>
+                                            <p className="text-white/40 text-xs">Rendered Video</p>
                                         </div>
                                     </div>
                                 </div>
