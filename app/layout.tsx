@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased" style={{ backgroundColor: '#000000' }}>
+      <body className="antialiased" style={{ backgroundColor: '#000000' }} suppressHydrationWarning>
         {children}
       </body>
     </html>

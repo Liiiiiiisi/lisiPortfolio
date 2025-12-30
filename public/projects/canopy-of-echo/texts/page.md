@@ -100,5 +100,4 @@ I wrote the script, built animation beats, set up scenes and lighting, and rende
 
 7. Outcome
 
-🏆 Winner — Best Heritage Narrative Prize
-2025 Digital Heritage Competition
+Winner — Best Heritage Narrative Prize 2025 Digital Heritage Competition

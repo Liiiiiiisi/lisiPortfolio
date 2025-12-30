@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowLeft, Box, Layers, Code, Video } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import StorytellingUnitDesignSection from './StorytellingUnitDesignSection';
 
 interface CanopyOfEchoProjectPageProps {
   metadata?: any;
@@ -126,20 +127,9 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                 </p>
                             </section>
 
-                            {/* Context */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">2. Context</h2>
-                                <p className="text-lg text-white/90 leading-relaxed mb-4">
-                                    Historic narratives often feel distant because they're locked inside sites, objects, and text.
-                                </p>
-                                <p className="text-white/90 leading-relaxed">
-                                    <strong className="text-white">Design challenge:</strong> How can a heritage installation make history spatial, observable, and emotionally engaging—so visitors don't just read stories, but encounter them?
-                                </p>
-                            </section>
-
                             {/* Deliverables */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">3. Deliverables</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">2. Deliverables</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
                                     Our team delivered a complete pipeline from concept to physical + digital prototyping:
                                 </p>
@@ -207,7 +197,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                             {/* Team */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">4. Team</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">3. Team</h2>
                                 <div className="space-y-3 text-white/90">
                                     <p><strong className="text-white">Saurabhkumar Ramanbhai Parmar</strong> — Developer, Physical Prototype, Project Management</p>
                                     <p><strong className="text-white">Findlay Cumming</strong> — VR Developer</p>
@@ -218,10 +208,10 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                             {/* User Journey */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">5. User Journey</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. User Journey</h2>
 
                                 <div className="space-y-8">
-                                    {/* 5.1 */}
+                                    {/* 4.1 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -237,7 +227,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                5.1 Connection with the River — Flow of Memory
+                                                4.1 Connection with the River — Flow of Memory
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
@@ -245,7 +235,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 5.2 */}
+                                    {/* 4.2 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -261,7 +251,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                5.2 Connection with the Wall — Reconstructing What Once Stood
+                                                4.2 Connection with the Wall — Reconstructing What Once Stood
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 Facing the ancient city wall, the roofline references the lost tower. Visitors can visually "restore" the historic architecture through perspective.
@@ -269,7 +259,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 5.3 */}
+                                    {/* 4.3 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -285,7 +275,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                5.3 Connection with the Tower — Approaching Stories
+                                                4.3 Connection with the Tower — Approaching Stories
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
@@ -293,7 +283,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 5.4 */}
+                                    {/* 4.4 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -309,7 +299,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                5.4 Connection with the Audience — Participatory Heritage
+                                                4.4 Connection with the Audience — Participatory Heritage
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
@@ -322,65 +312,57 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             {/* Core Contributions */}
                             <section>
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">6. Core Contributions</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">5. Core Contributions</h2>
                                 </div>
 
                                 <div className="space-y-8">
-                                    {/* 6.1 Storytelling & Unit Design */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">6.1 Storytelling & Unit Design</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            In collaboration with Jingru, I distilled 18 historical and contemporary stories into narrative modules embedded in each kinetic unit. Examples:
-                                        </p>
-                                        
-                                        <div className="space-y-4">
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                                                <h4 className="text-lg font-semibold text-white mb-2">The Returning Relics</h4>
-                                                <p className="text-white/80 text-sm">
-                                                    A family donated 30+ treasured artefacts: "These are our roots — they cannot be sold." A quiet act of public heritage protection.
-                                                </p>
-                                            </div>
-                                            
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                                                <h4 className="text-lg font-semibold text-white mb-2">History Beneath Our Feet</h4>
-                                                <p className="text-white/80 text-sm">
-                                                    A brick used to prop up an elderly woman's stool was found to be a 600-year-old Ming city wall brick—history hidden in daily life.
-                                                </p>
-                                            </div>
-                                            
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                                                <h4 className="text-lg font-semibold text-white mb-2">From Shield to Foundation</h4>
-                                                <p className="text-white/80 text-sm">
-                                                    A former defensive brick now supports Nanjing University's architecture—shifting from protecting the city to supporting generations.
-                                                </p>
-                                            </div>
-                                        </div>
+                                    {/* 5.1 Storytelling & Unit Design */}
+                                    <StorytellingUnitDesignSection />
 
-                                        <p className="text-white/90 leading-relaxed mt-6">
-                                            Together, these stories form a flowing narrative landscape linking wall, tower, river, and citizens into one evolving memory.
-                                        </p>
-                                    </div>
-
-                                    {/* 6.2 Unreal Interactive Prototype */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">6.2 Unreal Interactive Prototype — Interactive Winch System</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
+                                    {/* 5.2 Unreal Interactive Prototype */}
+                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-6">
+                                        <h3 className="text-2xl font-bold text-white">5.2 Unreal Interactive Prototype — Interactive Winch System</h3>
+                                        <p className="text-white/90 leading-relaxed">
                                             I built a real-time pipeline connecting:
                                         </p>
-                                        <div className="bg-white/5 rounded-2xl p-4 border border-white/10 mb-4">
-                                            <p className="text-white/80 font-mono text-center">
-                                                Unreal Engine ↔ TouchDesigner ↔ OSC
+                                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                            <p className="text-white/80 text-center mb-4">
+                                                Real-time communication between Unreal Engine and TouchDesigner via OSC.
                                             </p>
-                                        </div>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            Two motion states:
-                                        </p>
-                                        <div className="grid md:grid-cols-2 gap-4 mb-4">
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                                                <p className="text-white/80"><strong className="text-white">Sinewave Mode</strong> — smooth continuous motion</p>
+                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                                                <Image
+                                                    src={withBasePath("/projects/canopy-of-echo/images/OSC.gif")}
+                                                    alt="OSC Pipeline"
+                                                    fill
+                                                    className="object-cover"
+                                                    unoptimized={true}
+                                                />
                                             </div>
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                                                <p className="text-white/80"><strong className="text-white">Freeze Mode</strong> — pauses when visitors approach</p>
+                                        </div>
+                                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                                            <h4 className="text-lg font-semibold text-white mb-4">Two motion states</h4>
+                                            {/* Text Content */}
+                                            <div className="mb-6">
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div>
+                                                        <p className="text-white font-semibold mb-1">Sinewave Mode</p>
+                                                        <p className="text-white/80 text-sm">smooth continuous motion (idle loop)</p>
+                                                    </div>
+                                                    <div className="border-l border-white/20 pl-4">
+                                                        <p className="text-white font-semibold mb-1">Freeze Mode</p>
+                                                        <p className="text-white/80 text-sm">pauses when a visitor approaches</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* GIF Below Text */}
+                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                                                <Image
+                                                    src={withBasePath("/projects/canopy-of-echo/images/TD.gif")}
+                                                    alt="TouchDesigner Motion States"
+                                                    fill
+                                                    className="object-cover"
+                                                    unoptimized={true}
+                                                />
                                             </div>
                                         </div>
                                         <p className="text-white/90 leading-relaxed">
@@ -388,22 +370,40 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </p>
                                     </div>
 
-                                    {/* 6.3 Video Production */}
+                                    {/* 5.3 Video Production */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">6.3 Video Production</h3>
-                                        <p className="text-white/90 leading-relaxed">
+                                        <h3 className="text-2xl font-bold text-white">5.3 Video Production</h3>
+                                        <p className="text-white/90 leading-relaxed mb-6">
                                             I wrote the script, built animation beats, set up scenes and lighting, and rendered the narrative video to communicate the concept, interaction logic, and heritage value.
                                         </p>
+                                        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                                            <iframe
+                                                src="https://www.youtube.com/embed/HB7Pn_7LZ4o"
+                                                title="Video Production"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                                className="absolute inset-0 w-full h-full"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </section>
 
                             {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">7. Outcome</h2>
-                                <p className="text-lg text-white/90 leading-relaxed">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">6. Outcome</h2>
+                                <p className="text-lg text-white/90 leading-relaxed mb-6">
                                     <strong className="text-white">Winner</strong> — Best Heritage Narrative Prize 2025 Digital Heritage Competition
                                 </p>
+                                <div className="relative w-full rounded-xl overflow-hidden">
+                                    <Image
+                                        src={withBasePath("/projects/canopy-of-echo/images/Outcome.JPG")}
+                                        alt="Outcome"
+                                        width={1200}
+                                        height={800}
+                                        className="w-full h-auto object-cover"
+                                    />
+                                </div>
                             </section>
                         </div>
 
