@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Box, Layers, Code, Video } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
@@ -142,33 +143,63 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
                                     Our team delivered a complete pipeline from concept to physical + digital prototyping:
                                 </p>
-                                <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-8">
-                                    <li>Full-scale physical installation</li>
-                                    <li>Miniature model</li>
-                                    <li>Unreal Engine interaction prototype</li>
-                                    <li>Rendered video</li>
-                                </ul>
                                 
-                                {/* 4 Media Items in a Row */}
-                                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                {/* 4 Media Items in 2x2 Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="aspect-video bg-white/5 flex items-center justify-center">
-                                            <p className="text-white/40 text-xs">Small Scale Model</p>
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/small-scale-model.gif")}
+                                                alt="Small Scale Model"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
+                                            <p className="text-white/70 text-xs text-center">Small Scale Model</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="aspect-video bg-white/5 flex items-center justify-center">
-                                            <p className="text-white/40 text-xs">Physical Model</p>
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/physical-model.gif")}
+                                                alt="Physical Model"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
+                                            <p className="text-white/70 text-xs text-center">Physical Model</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="aspect-video bg-white/5 flex items-center justify-center">
-                                            <p className="text-white/40 text-xs">Unreal Prototype</p>
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/unreal-prototype.gif")}
+                                                alt="Unreal Prototype"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
+                                            <p className="text-white/70 text-xs text-center">Unreal Prototype</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="aspect-video bg-white/5 flex items-center justify-center">
-                                            <p className="text-white/40 text-xs">Rendered Video</p>
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/rendered.gif")}
+                                                alt="Rendered Video"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
+                                            <p className="text-white/70 text-xs text-center">Rendered Video</p>
                                         </div>
                                     </div>
                                 </div>
@@ -191,35 +222,99 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                                 <div className="space-y-8">
                                     {/* 5.1 */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-2xl font-bold text-white mb-4">5.1 Connection with the River — Flow of Memory</h3>
-                                        <p className="text-white/90 leading-relaxed">
-                                            The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
-                                        </p>
+                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                        {/* GIF Background */}
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-1.gif")}
+                                                alt="Connection with the River — Flow of Memory"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        
+                                        {/* Bottom Caption Bar */}
+                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
+                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
+                                                5.1 Connection with the River — Flow of Memory
+                                            </h3>
+                                            <p className="text-sm md:text-base text-white/90">
+                                                The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
+                                            </p>
+                                        </div>
                                     </div>
 
                                     {/* 5.2 */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-2xl font-bold text-white mb-4">5.2 Connection with the Wall — Reconstructing What Once Stood</h3>
-                                        <p className="text-white/90 leading-relaxed">
-                                            Facing the ancient city wall, the roofline references the lost tower. Visitors can visually "restore" the historic architecture through perspective.
-                                        </p>
+                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                        {/* GIF Background */}
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-2.gif")}
+                                                alt="Connection with the Wall — Reconstructing What Once Stood"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        
+                                        {/* Bottom Caption Bar */}
+                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
+                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
+                                                5.2 Connection with the Wall — Reconstructing What Once Stood
+                                            </h3>
+                                            <p className="text-sm md:text-base text-white/90">
+                                                Facing the ancient city wall, the roofline references the lost tower. Visitors can visually "restore" the historic architecture through perspective.
+                                            </p>
+                                        </div>
                                     </div>
 
                                     {/* 5.3 */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-2xl font-bold text-white mb-4">5.3 Connection with the Tower — Approaching Stories</h3>
-                                        <p className="text-white/90 leading-relaxed">
-                                            When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
-                                        </p>
+                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                        {/* GIF Background */}
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-3.gif")}
+                                                alt="Connection with the Tower — Approaching Stories"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        
+                                        {/* Bottom Caption Bar */}
+                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
+                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
+                                                5.3 Connection with the Tower — Approaching Stories
+                                            </h3>
+                                            <p className="text-sm md:text-base text-white/90">
+                                                When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
+                                            </p>
+                                        </div>
                                     </div>
 
                                     {/* 5.4 */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-2xl font-bold text-white mb-4">5.4 Connection with the Audience — Participatory Heritage</h3>
-                                        <p className="text-white/90 leading-relaxed">
-                                            Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
-                                        </p>
+                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                        {/* GIF Background */}
+                                        <div className="relative w-full aspect-video">
+                                            <Image
+                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-4.gif")}
+                                                alt="Connection with the Audience — Participatory Heritage"
+                                                fill
+                                                className="object-cover"
+                                                unoptimized={true}
+                                            />
+                                        </div>
+                                        
+                                        {/* Bottom Caption Bar */}
+                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
+                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
+                                                5.4 Connection with the Audience — Participatory Heritage
+                                            </h3>
+                                            <p className="text-sm md:text-base text-white/90">
+                                                Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </section>

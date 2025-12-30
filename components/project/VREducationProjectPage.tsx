@@ -292,7 +292,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                         </div>
 
                                         {/* Grid for GIFs */}
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-1 gap-6">
                                             {/* GIF 1 */}
                                             <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl h-[480px] flex flex-col group">
                                                 <img
