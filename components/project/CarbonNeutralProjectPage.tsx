@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Zap, Layers, Box, Sparkles, Code } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface CarbonNeutralProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface CarbonNeutralProjectPageProps {
 }
 
 export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNeutralProjectPageProps) {
+    const projectId = 'carbon-neutral';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -19,8 +21,6 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'carbon-neutral';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -83,8 +83,8 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Personal Carbon Neutral</h1>
-                            <p className="text-white/60 text-lg">Interactive Installation</p>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Personal carbonNeutral</h1>
+                            <p className="text-white/60 text-lg">AR mobile game</p>
                         </section>
 
                         {/* Tools Used */}
@@ -374,6 +374,9 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                     </div>
                                 </div>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

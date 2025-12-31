@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, MousePointer2, Workflow, Shield, Layers, Heart } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface VREducationProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface VREducationProjectPageProps {
 }
 
 export default function VREducationProjectPage({ metadata, content }: VREducationProjectPageProps) {
+    const projectId = 'vr-education';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -95,8 +97,8 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">VR Education</h1>
-                            <p className="text-white/60 text-lg">Immersive Learning Experience</p>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Guardian's Guide</h1>
+                            <p className="text-white/60 text-lg">VR Training Experience for Caregivers of Autistic Children</p>
                         </section>
 
                         {/* Tools Used (Static) */}
@@ -432,6 +434,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                     <li>Identified future opportunities: adaptive difficulty, richer behavioral states</li>
                                 </ul>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

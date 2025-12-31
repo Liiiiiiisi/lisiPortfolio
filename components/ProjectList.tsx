@@ -35,6 +35,28 @@ const projectTechData: Record<string, string[]> = {
   "datnie": ["React", "Next.js", "TypeScript", "Design System"]
 };
 
+// Tools mapping for each project (software with logos)
+const projectToolsData: Record<string, string[]> = {
+  "signie": ["React", "Next.js"],
+  "vr-education": ["Unity"],
+  "micro-invasion": ["Lens Studio"],
+  "pray-for-blessing": ["Unity"],
+  "carbon-neutral": ["Arduino", "Processing"],
+  "canopy-of-echo": ["TouchDesigner", "Unreal Engine", "Blender", "Illustrator"],
+  "datnie": ["React", "Next.js", "TypeScript"]
+};
+
+// Features mapping for each project
+const projectFeaturesData: Record<string, string[]> = {
+  "signie": ["ASL", "Education", "Translation"],
+  "vr-education": ["XR", "Education", "ASD"],
+  "micro-invasion": ["AR", "Interactive"],
+  "pray-for-blessing": ["VR", "Cultural"],
+  "carbon-neutral": ["Interactive", "Sustainability", "Installation"],
+  "canopy-of-echo": ["OSC Communication", "Computer Vision", "Laser Cutting", "Kinetic Control"],
+  "datnie": []
+};
+
 export default function ProjectList({ projects, enableHoverVideo = true }: ProjectListProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -148,6 +170,8 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                   {/* Tech Stack Dropdown */}
                   <ProjectTechMenu
                     techStack={projectTechData[project.id] || []}
+                    tools={projectToolsData[project.id]}
+                    features={project.features && project.features.length > 0 ? project.features.map(f => f.charAt(0).toUpperCase() + f.slice(1)) : projectFeaturesData[project.id]}
                     isVisible={hoveredIndex === index}
                   />
                 </motion.div>

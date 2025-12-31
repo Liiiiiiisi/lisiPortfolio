@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Code, Sparkles, Palette, Lightbulb } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface PrayForBlessingProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface PrayForBlessingProjectPageProps {
 }
 
 export default function PrayForBlessingProjectPage({ metadata, content }: PrayForBlessingProjectPageProps) {
+    const projectId = 'pray-for-blessing';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -19,8 +21,6 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'pray-for-blessing';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -83,7 +83,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Let's Make a Wish</h1>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">LET'S MAKE A WISH</h1>
                             <p className="text-white/60 text-lg">Immersive Ritual VR Experience</p>
                         </section>
 
@@ -393,6 +393,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                     This project highlights my strength in <strong className="text-white">XR interactions, real-time visuals, and technical problem-solving</strong>, delivering an experience users described as <em className="text-white/80">calming, nostalgic, and emotionally resonant</em>.
                                 </p>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

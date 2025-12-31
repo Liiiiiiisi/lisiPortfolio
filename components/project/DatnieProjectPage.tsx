@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Palette, Sparkles, Layers, Zap } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface DatnieProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface DatnieProjectPageProps {
 }
 
 export default function DatnieProjectPage({ metadata, content }: DatnieProjectPageProps) {
+    const projectId = 'datnie';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -19,8 +21,6 @@ export default function DatnieProjectPage({ metadata, content }: DatnieProjectPa
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'datnie';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -252,6 +252,9 @@ export default function DatnieProjectPage({ metadata, content }: DatnieProjectPa
                                     By prototyping directly in the engine, I translate interaction concepts into tangible, experiential prototypes.
                                 </p>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

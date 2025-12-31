@@ -48,7 +48,7 @@ export default function StorytellingUnitDesignSection() {
                 {/* Header Content */}
                 <div className="relative z-10 pr-0 md:pr-[45%]">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                        5.1 Storytelling & Unit Design
+                        4.1 Storytelling & Unit Design
                     </h2>
                     <p className="text-lg text-white/90 leading-relaxed">
                         In collaboration with Jingru, I distilled 18 historical and contemporary stories into narrative modules embedded in each kinetic unit. Examples:

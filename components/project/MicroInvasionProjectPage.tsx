@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Code, Layers, Zap, Users } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface MicroInvasionProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface MicroInvasionProjectPageProps {
 }
 
 export default function MicroInvasionProjectPage({ metadata, content }: MicroInvasionProjectPageProps) {
+    const projectId = 'micro-invasion';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -19,8 +21,6 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'micro-invasion';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -83,8 +83,8 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Micro_Invasion</h1>
-                            <p className="text-white/60 text-lg">AR Experience</p>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Micro_invasion</h1>
+                            <p className="text-white/60 text-lg">AR Snapchat</p>
                         </section>
 
                         {/* Tools Used */}
@@ -321,6 +321,9 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
                                 </div>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

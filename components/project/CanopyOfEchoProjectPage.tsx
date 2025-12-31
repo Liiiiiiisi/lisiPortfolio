@@ -7,6 +7,33 @@ import { ArrowLeft, Box, Layers, Code, Video } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
 import StorytellingUnitDesignSection from './StorytellingUnitDesignSection';
+import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = React.useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = React.useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface CanopyOfEchoProjectPageProps {
   metadata?: any;
@@ -14,6 +41,8 @@ interface CanopyOfEchoProjectPageProps {
 }
 
 export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfEchoProjectPageProps) {
+    const projectId = 'canopy-of-echo';
+
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -21,8 +50,6 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'canopy-of-echo';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -86,39 +113,66 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Canopy of Echo</h1>
-                            <p className="text-white/60 text-lg">Kinetic Installation</p>
-                        </section>
-
-                        {/* Tools Used */}
-                        <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">TouchDesigner</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Unreal Engine</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Blender</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Illustrator</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">MediaPipe</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Physical Winches</span>
-                                </div>
-                            </div>
+                            <p className="text-white/60 text-lg">Digital Heritage Kinetic Installation</p>
                         </section>
 
                         {/* Content Wrapper */}
                         <div className="relative z-10 space-y-12">
+                            {/* Team */}
+                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
+                                <div className="flex flex-col md:flex-row gap-8 md:gap-6">
+                                    {/* Left Column: Team */}
+                                    <div className="flex-1">
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Team</h2>
+                                        <div className="space-y-3 text-white/90">
+                                            <p><strong className="text-white">Saurabhkumar Ramanbhai Parmar</strong> — Systems Development, Physical Prototyping</p>
+                                            <p><strong className="text-white">Findlay Cumming</strong> — VR Systems Development</p>
+                                            <p><strong className="text-white">Jingru Feng</strong> — Architectural Narrative Design</p>
+                                            <p><strong className="text-white">My Role</strong> — Interactive Prototyping (Unreal), Narrative Design, Production Coordination</p>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Right Column: Technical Stack */}
+                                    <div className="flex-1">
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                                        <div className="space-y-6">
+                                            {/* Group 1 — Tools */}
+                                            <div>
+                                                <h4 className="text-sm font-semibold text-white/70 mb-3">Tools</h4>
+                                                <div className="flex flex-wrap gap-3">
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                                        <ToolLogo name="touchdesigner" alt="TouchDesigner" />
+                                                        TouchDesigner
+                                                    </span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                                        <ToolLogo name="unreal-engine" alt="Unreal Engine" />
+                                                        Unreal Engine
+                                                    </span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                                        <ToolLogo name="blender" alt="Blender" />
+                                                        Blender
+                                                    </span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                                        <ToolLogo name="illustrator" alt="Illustrator" />
+                                                        Illustrator
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {/* Group 2 — Features */}
+                                            <div>
+                                                <h4 className="text-sm font-semibold text-white/70 mb-3">Features</h4>
+                                                <div className="flex flex-wrap gap-3">
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC Communication</span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Computer Vision</span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Laser Cutting</span>
+                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Kinetic Control</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
                             {/* Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>
@@ -195,23 +249,12 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                 </div>
                             </section>
 
-                            {/* Team */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">3. Team</h2>
-                                <div className="space-y-3 text-white/90">
-                                    <p><strong className="text-white">Saurabhkumar Ramanbhai Parmar</strong> — Developer, Physical Prototype, Project Management</p>
-                                    <p><strong className="text-white">Findlay Cumming</strong> — VR Developer</p>
-                                    <p><strong className="text-white">Jingru Feng</strong> — Architecture & Storytelling Designer</p>
-                                    <p><strong className="text-white">My Role</strong> — 3D Modelling · Unreal Prototype · Storytelling Design · Production Coordination & Budgeting · Video Editing</p>
-                                </div>
-                            </section>
-
                             {/* User Journey */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. User Journey</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">3. User Journey</h2>
 
                                 <div className="space-y-8">
-                                    {/* 4.1 */}
+                                    {/* 3.1 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -227,7 +270,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                4.1 Connection with the River — Flow of Memory
+                                                3.1 Connection with the River — Flow of Memory
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
@@ -235,7 +278,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 4.2 */}
+                                    {/* 3.2 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -251,7 +294,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                4.2 Connection with the Wall — Reconstructing What Once Stood
+                                                3.2 Connection with the Wall — Reconstructing What Once Stood
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 Facing the ancient city wall, the roofline references the lost tower. Visitors can visually "restore" the historic architecture through perspective.
@@ -259,7 +302,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 4.3 */}
+                                    {/* 3.3 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -275,7 +318,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                4.3 Connection with the Tower — Approaching Stories
+                                                3.3 Connection with the Tower — Approaching Stories
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
@@ -283,7 +326,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </div>
                                     </div>
 
-                                    {/* 4.4 */}
+                                    {/* 3.4 */}
                                     <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         {/* GIF Background */}
                                         <div className="relative w-full aspect-video">
@@ -299,7 +342,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                4.4 Connection with the Audience — Participatory Heritage
+                                                3.4 Connection with the Audience — Participatory Heritage
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
                                                 Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
@@ -312,16 +355,16 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             {/* Core Contributions */}
                             <section>
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">5. Core Contributions</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">4. Core Contributions</h2>
                                 </div>
 
                                 <div className="space-y-8">
-                                    {/* 5.1 Storytelling & Unit Design */}
+                                    {/* 4.1 Storytelling & Unit Design */}
                                     <StorytellingUnitDesignSection />
 
-                                    {/* 5.2 Unreal Interactive Prototype */}
+                                    {/* 4.2 Unreal Interactive Prototype */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-6">
-                                        <h3 className="text-2xl font-bold text-white">5.2 Unreal Interactive Prototype — Interactive Winch System</h3>
+                                        <h3 className="text-2xl font-bold text-white">4.2 Unreal Interactive Prototype — Interactive Winch System</h3>
                                         <p className="text-white/90 leading-relaxed">
                                             I built a real-time pipeline connecting:
                                         </p>
@@ -370,9 +413,9 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         </p>
                                     </div>
 
-                                    {/* 5.3 Video Production */}
+                                    {/* 4.3 Video Production */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">5.3 Video Production</h3>
+                                        <h3 className="text-2xl font-bold text-white">4.3 Video Production</h3>
                                         <p className="text-white/90 leading-relaxed mb-6">
                                             I wrote the script, built animation beats, set up scenes and lighting, and rendered the narrative video to communicate the concept, interaction logic, and heritage value.
                                         </p>
@@ -391,7 +434,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                             {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">6. Outcome</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcome</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
                                     <strong className="text-white">Winner</strong> — Best Heritage Narrative Prize 2025 Digital Heritage Competition
                                 </p>
@@ -405,6 +448,9 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     />
                                 </div>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

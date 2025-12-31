@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Palette, Code, Smartphone, Sparkles } from "lucide-react";
 import React from "react";
 import { withBasePath } from '@/lib/paths';
+import YouMayAlsoLike from './YouMayAlsoLike';
 
 interface SignieProjectPageProps {
   metadata?: any;
@@ -12,6 +13,7 @@ interface SignieProjectPageProps {
 }
 
 export default function SignieProjectPage({ metadata, content }: SignieProjectPageProps) {
+    const projectId = 'signie';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -19,8 +21,6 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
         document.documentElement.style.setProperty("--mouse-x", `${x}%`);
         document.documentElement.style.setProperty("--mouse-y", `${y}%`);
     };
-
-    const projectId = 'signie';
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
@@ -84,7 +84,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Signie</h1>
-                            <p className="text-white/60 text-lg">ASL Tutor & Translator</p>
+                            <p className="text-white/60 text-lg">XR ASL Tutor & Real-Time Translation System</p>
                         </section>
 
                         {/* Tools Used */}
@@ -269,6 +269,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                     <li><strong className="text-white">Future:</strong> Would explore more advanced gesture recognition and video-based learning features</li>
                                 </ul>
                             </section>
+
+                            {/* You May Also Like */}
+                            <YouMayAlsoLike currentProjectId={projectId} />
                         </div>
 
                     </motion.div>

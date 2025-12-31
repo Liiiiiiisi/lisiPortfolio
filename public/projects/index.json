@@ -1,59 +1,19 @@
 [
   {
     "id": "signie",
-    "title": "Signie ASL Tutor & Translator",
-    "title_zh": "Signie ASL 导师与翻译器",
-    "category": "Web Application",
-    "category_zh": "网页应用",
+    "title": "Signie",
+    "title_zh": "Signie",
+    "category": "XR ASL Tutor & Real-Time Translation System",
+    "category_zh": "XR ASL 导师与实时翻译系统",
     "video": "/projects/signie/videos/preview.mp4",
     "cover": "/projects/signie/images/cover.png",
     "features": ["asl", "education", "translation"]
   },
   {
-    "id": "vr-education",
-    "title": "VR Education Expanding ASD Caregiver Pool",
-    "title_zh": "VR 教育扩展 ASD 护理人员池",
-    "category": "VR Experience",
-    "category_zh": "VR 体验",
-    "video": "/projects/vr-education/videos/preview.mp4",
-    "cover": "/projects/vr-education/images/cover.png",
-    "features": ["xr", "education", "asd"]
-  },
-  {
-    "id": "micro-invasion",
-    "title": "The Micro_Invasion AR",
-    "title_zh": "微观入侵 AR",
-    "category": "AR Experience",
-    "category_zh": "AR 体验",
-    "video": "/projects/micro-invasion/videos/preview.mp4",
-    "cover": "/projects/micro-invasion/images/cover.png",
-    "features": ["ar", "interactive"]
-  },
-  {
-    "id": "pray-for-blessing",
-    "title": "Pray for Blessing VR",
-    "title_zh": "祈福 VR",
-    "category": "VR Experience",
-    "category_zh": "VR 体验",
-    "video": "/projects/pray-for-blessing/videos/preview.mp4",
-    "cover": "/projects/pray-for-blessing/images/cover.png",
-    "features": ["vr", "cultural"]
-  },
-  {
-    "id": "carbon-neutral",
-    "title": "Personal Carbon Neutral Interactive Installation",
-    "title_zh": "个人碳中和互动装置",
-    "category": "Interactive Installation",
-    "category_zh": "互动装置",
-    "video": "/projects/carbon-neutral/videos/preview.mp4",
-    "cover": "/projects/carbon-neutral/images/cover.png",
-    "features": ["interactive", "sustainability", "installation"]
-  },
-  {
     "id": "canopy-of-echo",
     "title": "Canopy of Echo",
     "title_zh": "",
-    "category": "",
+    "category": "Digital Heritage Kinetic Installation",
     "category_zh": "",
     "video": "/projects/canopy-of-echo/videos/preview.mp4",
     "cover": "/projects/canopy-of-echo/images/cover.png",
@@ -63,11 +23,50 @@
     "id": "datnie",
     "title": "Datnie",
     "title_zh": "",
-    "category": "",
+    "category": "Mixed Reality Dating App",
     "category_zh": "",
     "video": "/projects/datnie/videos/preview.mp4",
     "cover": "/projects/datnie/images/cover.png",
     "features": []
+  },
+  {
+    "id": "vr-education",
+    "title": "Guardian's Guide",
+    "title_zh": "守护者指南",
+    "category": "VR Training Experience for Caregivers of Autistic Children",
+    "category_zh": "自闭症儿童护理人员 VR 培训体验",
+    "video": "/projects/vr-education/videos/preview.mp4",
+    "cover": "/projects/vr-education/images/cover.png",
+    "features": ["xr", "education", "asd"]
+  },
+  {
+    "id": "pray-for-blessing",
+    "title": "LET'S MAKE A WISH",
+    "title_zh": "祈福",
+    "category": "Immersive Ritual VR Experience",
+    "category_zh": "沉浸式仪式 VR 体验",
+    "video": "/projects/pray-for-blessing/videos/preview.mp4",
+    "cover": "/projects/pray-for-blessing/images/cover.png",
+    "features": ["vr", "cultural"]
+  },
+  {
+    "id": "micro-invasion",
+    "title": "Micro_invasion",
+    "title_zh": "微观入侵",
+    "category": "AR Snapchat",
+    "category_zh": "AR Snapchat",
+    "video": "/projects/micro-invasion/videos/preview.mp4",
+    "cover": "/projects/micro-invasion/images/cover.png",
+    "features": ["ar", "interactive"]
+  },
+  {
+    "id": "carbon-neutral",
+    "title": "Personal carbonNeutral",
+    "title_zh": "个人碳中和",
+    "category": "AR mobile game",
+    "category_zh": "AR 手机游戏",
+    "video": "/projects/carbon-neutral/videos/preview.mp4",
+    "cover": "/projects/carbon-neutral/images/cover.png",
+    "features": ["interactive", "sustainability", "installation"]
   }
 ]
-
