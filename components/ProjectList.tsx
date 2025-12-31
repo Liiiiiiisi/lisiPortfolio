@@ -170,8 +170,8 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                   {/* Tech Stack Dropdown */}
                   <ProjectTechMenu
                     techStack={projectTechData[project.id] || []}
-                    tools={projectToolsData[project.id]}
-                    features={project.features && project.features.length > 0 ? project.features.map(f => f.charAt(0).toUpperCase() + f.slice(1)) : projectFeaturesData[project.id]}
+                    tools={projectToolsData[project.id] || []}
+                    features={project.features && project.features.length > 0 ? project.features.map(f => f.charAt(0).toUpperCase() + f.slice(1)) : (projectFeaturesData[project.id] || [])}
                     isVisible={hoveredIndex === index}
                   />
                 </motion.div>
