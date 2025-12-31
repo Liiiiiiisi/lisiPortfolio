@@ -67,7 +67,7 @@ export default function StorytellingUnitDesignSection() {
                                 The Returning Relics
                             </h3>
                             <p className="text-white/90 leading-relaxed mb-2">
-                                A family donated 30+ treasured artefacts: "These are our roots — they cannot be sold." A quiet act of public heritage protection.
+                                A family donated 30+ treasured artefacts: &quot;These are our roots — they cannot be sold.&quot; A quiet act of public heritage protection.
                             </p>
                             <p className="text-xs text-white/50 italic">
                                 Reference photos used for narrative grounding.
@@ -105,7 +105,7 @@ export default function StorytellingUnitDesignSection() {
                                 History Beneath Our Feet
                             </h3>
                             <p className="text-white/90 leading-relaxed mb-2">
-                                A brick used to prop up an elderly woman's stool was found to be a 600-year-old Ming city wall brick—history hidden in daily life.
+                                A brick used to prop up an elderly woman&apos;s stool was found to be a 600-year-old Ming city wall brick—history hidden in daily life.
                             </p>
                             <p className="text-xs text-white/50 italic">
                                 Reference photos used for narrative grounding.
@@ -143,7 +143,7 @@ export default function StorytellingUnitDesignSection() {
                                 From Shield to Foundation
                             </h3>
                             <p className="text-white/90 leading-relaxed mb-2">
-                                A former defensive brick now supports Nanjing University's architecture—shifting from protecting the city to supporting generations.
+                                A former defensive brick now supports Nanjing University&apos;s architecture—shifting from protecting the city to supporting generations.
                             </p>
                             <p className="text-xs text-white/50 italic">
                                 Reference photos used for narrative grounding.

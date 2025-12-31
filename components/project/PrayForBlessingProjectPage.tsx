@@ -83,7 +83,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">LET'S MAKE A WISH</h1>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">LET&apos;S MAKE A WISH</h1>
                             <p className="text-white/60 text-lg">Immersive Ritual VR Experience</p>
                         </section>
 
@@ -223,7 +223,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.1 Close Eyes and Make Wishes</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Buddha's halo lights up when the player prays.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Buddha&apos;s halo lights up when the player prays.</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -293,9 +293,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Write Icon"
                                                         className="w-12 h-12"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.4 Copy "Fu" to Pray for Luck</h3>
+                                                    <h3 className="text-xl font-bold text-white">03.4 Copy &quot;Fu&quot; to Pray for Luck</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The player writes the "Fu" symbol to bring luck.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The player writes the &quot;Fu&quot; symbol to bring luck.</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -344,7 +344,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
                                         <h3 className="text-2xl font-bold text-white">4.1 Ritual Interaction Design</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>"Fu" handwriting</li>
+                                            <li>&quot;Fu&quot; handwriting</li>
                                             <li>Lantern ignition & flight</li>
                                         </ul>
                                     </div>

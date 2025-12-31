@@ -118,7 +118,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Personal Carbon Neutral is an AR game prototype that transforms a player's real-world carbon footprint into interactive digital creatures. The project integrates AR, environmental data, and game mechanics to explore how emerging technology can drive sustainable behavior through play.
+                                    Personal Carbon Neutral is an AR game prototype that transforms a player&apos;s real-world carbon footprint into interactive digital creatures. The project integrates AR, environmental data, and game mechanics to explore how emerging technology can drive sustainable behavior through play.
                                 </p>
                             </section>
 
@@ -153,7 +153,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                     <div>
                                         <h3 className="text-2xl font-bold text-white mb-4">SCM – Small Carbon Monsters</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            SCMs are formed from a player's daily carbon emissions. Players can <strong className="text-white">purify</strong> SCMs to reduce their footprint and add them to a creature collection for future battles.
+                                            SCMs are formed from a player&apos;s daily carbon emissions. Players can <strong className="text-white">purify</strong> SCMs to reduce their footprint and add them to a creature collection for future battles.
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -269,7 +269,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                     <div>
                                         <h3 className="text-2xl font-bold text-white mb-4">Main Character – Whale Willy</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            Inspired by whales as natural <strong className="text-white">carbon sinks</strong>. Willy's appearance evolves based on the player's activity and progress.
+                                            Inspired by whales as natural <strong className="text-white">carbon sinks</strong>. Willy&apos;s appearance evolves based on the player&apos;s activity and progress.
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -330,7 +330,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
                                         <h3 className="text-2xl font-bold text-white mb-4">6.1 Modeling & Visual Exploration (Cinema 4D)</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            I initially explored a <strong className="text-white">voxel-style particle system</strong> using Tool 4D Voxygen to visualize characters as "carbon particles." Although visually intriguing, this approach created:
+                                            I initially explored a <strong className="text-white">voxel-style particle system</strong> using Tool 4D Voxygen to visualize characters as &quot;carbon particles.&quot; Although visually intriguing, this approach created:
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
                                             <li>Unstable motion during FBX export</li>

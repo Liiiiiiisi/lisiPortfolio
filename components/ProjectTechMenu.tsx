@@ -25,6 +25,7 @@ function ToolLogo({ name, alt }: { name: string; alt: string }) {
             width={20}
             height={20}
             className="object-contain"
+            unoptimized={true}
             onError={() => {
                 if (imgSrc.includes('.svg')) {
                     // Try PNG if SVG fails
@@ -81,7 +82,7 @@ export default function ProjectTechMenu({ techStack, isVisible, tools, features 
                         <h4 className="text-xs font-semibold text-white/70 mb-2 uppercase tracking-wider">Tools</h4>
                         <div className="flex flex-wrap gap-2">
                             {tools.map((tool, index) => {
-                                const logoName = toolLogoMap[tool];
+                                const logoName: string | undefined = toolLogoMap[tool];
                                 return (
                                     <span
                                         key={index}

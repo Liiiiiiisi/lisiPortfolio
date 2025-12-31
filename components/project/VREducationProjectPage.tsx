@@ -97,7 +97,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                     >
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Guardian's Guide</h1>
+                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Guardian&apos;s Guide</h1>
                             <p className="text-white/60 text-lg">VR Training Experience for Caregivers of Autistic Children</p>
                         </section>
 
@@ -160,7 +160,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Project Overview</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Guardian's Guide is a VR learning experience designed to help new caregivers understand and support a non-verbal autistic child. The experience focuses on approachable, practice-based learning and teaches essential caregiving skills through realistic sensory and communication challenges.
+                                    Guardian&apos;s Guide is a VR learning experience designed to help new caregivers understand and support a non-verbal autistic child. The experience focuses on approachable, practice-based learning and teaches essential caregiving skills through realistic sensory and communication challenges.
                                 </p>
                             </section>
 
@@ -393,7 +393,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
                                             <li><strong className="text-white">Tutorial</strong> — Users learn VR controls</li>
-                                            <li><strong className="text-white">White Room</strong> — Users review Kid X's profile through object-based interactions</li>
+                                            <li><strong className="text-white">White Room</strong> — Users review Kid X&apos;s profile through object-based interactions</li>
                                             <li><strong className="text-white">Kitchen (Guided Task)</strong> — Users complete caregiving tasks with hints and instant UI feedback</li>
                                             <li><strong className="text-white">Living Room (Independent Task)</strong> — Users apply their learning without hints</li>
                                         </ul>

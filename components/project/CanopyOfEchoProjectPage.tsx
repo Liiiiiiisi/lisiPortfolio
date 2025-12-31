@@ -177,7 +177,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Canopy of Echo is a real-scale kinetic installation that turns heritage memory into motion, rhythm, and light. Designed for the Great Bao'en Temple under the competition theme "One Wall, One Tower, One River," the work connects Nanjing's artefacts and citizens through an interactive "river of stories."
+                                    Canopy of Echo is a real-scale kinetic installation that turns heritage memory into motion, rhythm, and light. Designed for the Great Bao&apos;en Temple under the competition theme &quot;One Wall, One Tower, One River,&quot; the work connects Nanjing&apos;s artefacts and citizens through an interactive &quot;river of stories.&quot;
                                 </p>
                             </section>
 
@@ -297,7 +297,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                                 3.2 Connection with the Wall — Reconstructing What Once Stood
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
-                                                Facing the ancient city wall, the roofline references the lost tower. Visitors can visually "restore" the historic architecture through perspective.
+                                                Facing the ancient city wall, the roofline references the lost tower. Visitors can visually &quot;restore&quot; the historic architecture through perspective.
                                             </p>
                                         </div>
                                     </div>

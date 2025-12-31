@@ -132,7 +132,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     <strong className="text-white">Micro_Invasion</strong> is an AR experience that visualizes how microplastics enter the body through ordinary routines.
                                 </p>
                                 <p className="text-lg text-white/90 leading-relaxed mt-4">
-                                    Framed around a dining scene, the project uses real-time tracking, segmentation, and particle simulation to reveal invisible contamination on the user's hands, face, clothing, and surrounding environment.
+                                    Framed around a dining scene, the project uses real-time tracking, segmentation, and particle simulation to reveal invisible contamination on the user&apos;s hands, face, clothing, and surrounding environment.
                                 </p>
                             </section>
 
@@ -264,10 +264,10 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                                         <h3 className="text-xl font-bold text-white mb-4">Final Reveal</h3>
                                         <p className="text-white/90 mb-4">
-                                            A room-scale particle reveal expands beyond the user's body and fills the environment.
+                                            A room-scale particle reveal expands beyond the user&apos;s body and fills the environment.
                                         </p>
                                         <p className="text-white/80 italic mb-4 text-lg">
-                                            "Welcome to the world of microplastics."
+                                            &quot;Welcome to the world of microplastics.&quot;
                                         </p>
                                         <div className="rounded-xl overflow-hidden border border-white/10">
                                             <img

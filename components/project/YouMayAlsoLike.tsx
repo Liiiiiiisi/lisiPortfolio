@@ -64,6 +64,7 @@ export default function YouMayAlsoLike({ currentProjectId }: YouMayAlsoLikeProps
                                     alt={project.title}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    unoptimized={true}
                                 />
                             ) : null}
                         </div>

@@ -225,7 +225,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <p className="text-white/80"><strong className="text-white">Real-time Processing:</strong> Instant translation between text and ASL</p>
                                             </div>
                                             <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Accuracy:</strong> High-quality translation using OpenAI's language models</p>
+                                                <p className="text-white/80"><strong className="text-white">Accuracy:</strong> High-quality translation using OpenAI&apos;s language models</p>
                                             </div>
                                         </div>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
