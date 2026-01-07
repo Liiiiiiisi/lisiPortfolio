@@ -3,9 +3,37 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Code, Sparkles, Palette, Lightbulb } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            unoptimized={true}
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface PrayForBlessingProjectPageProps {
   metadata?: any;
@@ -87,33 +115,52 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                             <p className="text-white/60 text-lg">Immersive Ritual VR Experience</p>
                         </section>
 
-                        {/* Tools Used */}
+                        {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Technical Stack</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Unity</span>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* Unity */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unity" alt="Unity" />
+                                            Unity
+                                        </span>
+
+                                        {/* Photoshop */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="photoshop" alt="Photoshop" />
+                                            Photoshop
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OpenXR</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">XR Interaction Toolkit</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Shader Graph</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">VFX Graph</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Particle System</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Cinemachine</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">C#</span>
+
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            OpenXR
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            XR Interaction Toolkit
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Shader Graph
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            VFX Graph
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Cinemachine
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            C#
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -121,10 +168,45 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                         {/* Team Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Team</h2>
-                            <div className="space-y-3 text-white/90">
-                                <p><strong className="text-white">Wenqu Tang</strong> — Unity Developer</p>
-                                <p><strong className="text-white">Chuyue Yu</strong> — Environment Artist</p>
-                                <p><strong className="text-white">My Role</strong> — Technical Artist & Interaction Designer</p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {/* Wenqu Tang Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Wenqu Tang</h3>
+                                        <p className="text-white/80 text-xs">Unity Developer</p>
+                                    </div>
+                                </div>
+
+                                {/* Chuyue Yu Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Chuyue Yu</h3>
+                                        <p className="text-white/80 text-xs">Environment Artist</p>
+                                    </div>
+                                </div>
+
+                                {/* My Role Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                        <p className="text-white/80 text-xs">Technical Artist &amp; Interaction Designer</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 

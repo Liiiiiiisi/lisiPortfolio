@@ -37,7 +37,7 @@
     "category_zh": "自闭症儿童护理人员 VR 培训体验",
     "video": "/projects/vr-education/videos/preview.mp4",
     "cover": "/projects/vr-education/images/cover.png",
-    "features": ["xr", "education", "asd"]
+    "features": ["C#", "OpenXR", "Collision & UI-Based Scoring", "Practice-Based Learning"]
   },
   {
     "id": "pray-for-blessing",
@@ -47,7 +47,7 @@
     "category_zh": "沉浸式仪式 VR 体验",
     "video": "/projects/pray-for-blessing/videos/preview.mp4",
     "cover": "/projects/pray-for-blessing/images/cover.png",
-    "features": ["vr", "cultural"]
+    "features": ["OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"]
   },
   {
     "id": "micro-invasion",
@@ -57,7 +57,7 @@
     "category_zh": "AR Snapchat",
     "video": "/projects/micro-invasion/videos/preview.mp4",
     "cover": "/projects/micro-invasion/images/cover.png",
-    "features": ["ar", "interactive"]
+    "features": ["Body Tracking", "Segmentation", "World Mesh", "Particle System", "Image Tracking"]
   },
   {
     "id": "carbon-neutral",
@@ -67,6 +67,6 @@
     "category_zh": "AR 手机游戏",
     "video": "/projects/carbon-neutral/videos/preview.mp4",
     "cover": "/projects/carbon-neutral/images/cover.png",
-    "features": ["interactive", "sustainability", "installation"]
+    "features": ["Plane Tracking", "State-Driven Interaction", "Animator State Machine", "C#"]
   }
 ]

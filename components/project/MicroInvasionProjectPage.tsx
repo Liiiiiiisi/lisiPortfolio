@@ -3,9 +3,37 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Code, Layers, Zap, Users } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            unoptimized={true}
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface MicroInvasionProjectPageProps {
   metadata?: any;
@@ -87,39 +115,89 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                             <p className="text-white/60 text-lg">AR Snapchat</p>
                         </section>
 
-                        {/* Tools Used */}
+                        {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Lens Studio</span>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* Lens Studio */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="lens-studio" alt="Lens Studio" />
+                                            Lens Studio
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Body Tracking</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Segmentation</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">World Mesh</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Particle System</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Image Tracking</span>
+
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Body Tracking
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Segmentation
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            World Mesh
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Particle System
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Image Tracking
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <p className="text-white/60 text-sm mt-4 text-center">Used for: Real-time AR interaction, environment mapping, and body-surface visualization</p>
                         </section>
 
                         {/* Team Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Team</h2>
-                            <div className="space-y-3 text-white/90">
-                                <p><strong className="text-white">Chuyue Yu</strong> — Interaction Designer</p>
-                                <p><strong className="text-white">Yike Hu</strong> — Visual Designer & Video Editor</p>
-                                <p><strong className="text-white">My Role</strong> — Interaction & AR Developer</p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {/* Chuyue Yu Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Chuyue Yu</h3>
+                                        <p className="text-white/80 text-xs">Interaction Designer</p>
+                                    </div>
+                                </div>
+
+                                {/* Yike Hu Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Yike Hu</h3>
+                                        <p className="text-white/80 text-xs">Visual Designer & Video Editor</p>
+                                    </div>
+                                </div>
+
+                                {/* My Role Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                        <p className="text-white/80 text-xs">Interaction & AR Developer</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
@@ -143,12 +221,12 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {/* Card 1: Skin Contact */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
-                                        <div className="w-full mb-4 rounded-xl overflow-hidden">
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm flex flex-col">
+                                        <div className="w-full mb-4 rounded-xl overflow-hidden h-48 flex-shrink-0">
                                             <img
                                                 src={withBasePath("/projects/micro-invasion/images/skin-contact.png")}
                                                 alt="Skin Contact"
-                                                className="w-full h-auto object-cover"
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
                                         <h4 className="text-lg font-semibold text-white mb-2">Skin Contact</h4>
@@ -158,12 +236,12 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
 
                                     {/* Card 2: Food Intake */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
-                                        <div className="w-full mb-4 rounded-xl overflow-hidden">
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm flex flex-col">
+                                        <div className="w-full mb-4 rounded-xl overflow-hidden h-48 flex-shrink-0">
                                             <img
                                                 src={withBasePath("/projects/micro-invasion/images/food-intake.png")}
                                                 alt="Food Intake"
-                                                className="w-full h-auto object-cover"
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
                                         <h4 className="text-lg font-semibold text-white mb-2">Food Intake</h4>
@@ -173,12 +251,12 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
 
                                     {/* Card 3: Respiration */}
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
-                                        <div className="w-full mb-4 rounded-xl overflow-hidden">
+                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm flex flex-col">
+                                        <div className="w-full mb-4 rounded-xl overflow-hidden h-48 flex-shrink-0">
                                             <img
                                                 src={withBasePath("/projects/micro-invasion/images/respiration.png")}
                                                 alt="Respiration"
-                                                className="w-full h-auto object-cover"
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
                                         <h4 className="text-lg font-semibold text-white mb-2">Respiration</h4>
@@ -291,23 +369,37 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     {/* A. Image Tracking System */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                                         <h3 className="text-xl font-bold text-white mb-4">A. Image Tracking System</h3>
-                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
                                             <li>Designed a large QR marker as the central anchor</li>
                                             <li>Built three collider boxes as event triggers</li>
                                             <li>Developed the interaction flow: skin → food → fabric → environment</li>
                                             <li>Created a real-time distance-tracking script to measure hand-to-collider proximity</li>
                                         </ul>
+                                        <div className="rounded-xl overflow-hidden border border-white/10">
+                                            <img
+                                                src={withBasePath("/projects/micro-invasion/images/trimMark.gif")}
+                                                alt="Image Tracking System"
+                                                className="w-full h-auto object-cover"
+                                            />
+                                        </div>
                                     </div>
 
                                     {/* B. Body Tracking & Segmentation */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                                         <h3 className="text-xl font-bold text-white mb-4">B. Body Tracking & Segmentation</h3>
-                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
+                                        <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
                                             <li>Integrated a hand-detection helper image for segmentation debugging</li>
                                             <li>Adapted the <code className="text-white/60 bg-white/5 px-1 rounded">example_segmentation</code> template for particle emission</li>
                                             <li>Controlled segmentation masks for targeted particle activation</li>
                                             <li>Linked segmentation output to interaction states</li>
                                         </ul>
+                                        <div className="rounded-xl overflow-hidden border border-white/10">
+                                            <img
+                                                src={withBasePath("/projects/micro-invasion/images/segmentation.gif")}
+                                                alt="Body Tracking & Segmentation"
+                                                className="w-full h-auto object-cover"
+                                            />
+                                        </div>
                                     </div>
 
                                     {/* C. World Mesh Integration */}

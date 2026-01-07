@@ -24,12 +24,12 @@ interface ProjectListProps {
   showThumbnail?: boolean;
 }
 
-// Technology stack mapping for each project
+// Technology stack mapping for each project (legacy - only used if tools/features are not provided)
 const projectTechData: Record<string, string[]> = {
   "signie": ["React", "Next.js", "OpenAI API", "TailwindCSS"],
   "vr-education": ["Unity", "C#", "Oculus SDK", "VR Interaction"],
   "micro-invasion": ["Lens Studio", "JavaScript", "AR", "3D Modeling"],
-  "pray-for-blessing": ["Unity", "Shader Graph", "VR", "Particle Systems"],
+  "pray-for-blessing": ["Unity", "Photoshop", "OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"],
   "carbon-neutral": ["Arduino", "Processing", "Sensors", "Physical Computing"],
   "canopy-of-echo": ["TouchDesigner", "Unreal Engine", "Blender", "OSC"],
   "datnie": ["React", "Next.js", "TypeScript", "Design System"]
@@ -38,10 +38,10 @@ const projectTechData: Record<string, string[]> = {
 // Tools mapping for each project (software with logos)
 const projectToolsData: Record<string, string[]> = {
   "signie": ["React", "Next.js"],
-  "vr-education": ["Unity"],
+  "vr-education": ["Unity", "Unity Version Control", "Blender", "Illustrator"],
   "micro-invasion": ["Lens Studio"],
-  "pray-for-blessing": ["Unity"],
-  "carbon-neutral": ["Arduino", "Processing"],
+  "pray-for-blessing": ["Unity", "Photoshop"],
+  "carbon-neutral": ["Unity", "Vuforia", "Cinema 4D", "Adobe Illustrator"],
   "canopy-of-echo": ["TouchDesigner", "Unreal Engine", "Blender", "Illustrator"],
   "datnie": ["React", "Next.js", "TypeScript"]
 };
@@ -49,10 +49,10 @@ const projectToolsData: Record<string, string[]> = {
 // Features mapping for each project
 const projectFeaturesData: Record<string, string[]> = {
   "signie": ["ASL", "Education", "Translation"],
-  "vr-education": ["XR", "Education", "ASD"],
-  "micro-invasion": ["AR", "Interactive"],
-  "pray-for-blessing": ["VR", "Cultural"],
-  "carbon-neutral": ["Interactive", "Sustainability", "Installation"],
+  "vr-education": ["C#", "OpenXR", "Collision & UI-Based Scoring", "Practice-Based Learning"],
+  "micro-invasion": ["Body Tracking", "Segmentation", "World Mesh", "Particle System", "Image Tracking"],
+  "pray-for-blessing": ["OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"],
+  "carbon-neutral": ["Plane Tracking", "State-Driven Interaction", "Animator State Machine", "C#"],
   "canopy-of-echo": ["OSC Communication", "Computer Vision", "Laser Cutting", "Kinetic Control"],
   "datnie": []
 };
@@ -118,7 +118,7 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-32 perspective-[1000px]">
         <div className="space-y-12">
           {projects.map((project, index) => (
-            <div key={project.id} id={project.id} className="relative">
+            <div key={project.id} id={project.id} className="relative overflow-visible">
               <Link href={project.href}>
                 <motion.div
                   onMouseEnter={() => {
@@ -135,13 +135,13 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                     transition: "opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), scale 0.25s ease-out"
                   }}
                   className={cn(
-                    "group relative p-8 border-b border-white/10 cursor-pointer will-change-transform",
+                    "group relative p-4 md:p-8 border-b border-white/10 cursor-pointer will-change-transform overflow-visible",
                     // Default state (no hover)
                     hoveredIndex === null && "opacity-100 scale-100 translate-y-0 translate-z-0",
-                    // Hovered state (Primary)
-                    hoveredIndex === index && "opacity-100 scale-125 z-20 translate-z-0 border-white/40",
-                    // Non-hovered state (dimmed & pushed back)
-                    hoveredIndex !== null && hoveredIndex !== index && "opacity-30 scale-85 grayscale -translate-z-[10px]",
+                    // Hovered state (Primary) - reduced scale on mobile
+                    hoveredIndex === index && "opacity-100 md:scale-125 scale-105 z-20 translate-z-0 border-white/40",
+                    // Non-hovered state (dimmed & pushed back) - reduced scale on mobile
+                    hoveredIndex !== null && hoveredIndex !== index && "opacity-30 md:scale-85 scale-95 grayscale -translate-z-[10px]",
                     // Above hovered
                     hoveredIndex !== null && index < hoveredIndex && "-translate-y-4",
                     // Below hovered

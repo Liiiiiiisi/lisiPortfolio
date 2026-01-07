@@ -3,9 +3,37 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Zap, Layers, Box, Sparkles, Code } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            unoptimized={true}
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface CarbonNeutralProjectPageProps {
   metadata?: any;
@@ -87,27 +115,58 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                             <p className="text-white/60 text-lg">AR mobile game</p>
                         </section>
 
-                        {/* Tools Used */}
+                        {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Unity</span>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* Unity */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unity" alt="Unity" />
+                                            Unity
+                                        </span>
+
+                                        {/* Vuforia */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="vuforia" alt="Vuforia" />
+                                            Vuforia
+                                        </span>
+
+                                        {/* Cinema 4D */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="cinema_4D" alt="Cinema 4D" />
+                                            Cinema 4D
+                                        </span>
+
+                                        {/* Adobe Illustrator */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="illustrator" alt="Adobe Illustrator" />
+                                            Adobe Illustrator
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Vuforia</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Cinema 4D</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Illustrator</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">C#</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Animator State Machine</span>
+
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Plane Tracking
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            State-Driven Interaction
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Animator State Machine
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            C#
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -237,6 +296,14 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                                 <p className="text-white/80 mt-3">
                                                     To motivate these actions, players unlock <strong className="text-white">mini-games</strong> that reinforce sustainable habits.
                                                 </p>
+                                            </div>
+
+                                            <div className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                                                <img
+                                                    src={withBasePath("/projects/carbon-neutral/images/manual-verification.png")}
+                                                    alt="Manually Verified Behaviors"
+                                                    className="w-full h-auto object-cover"
+                                                />
                                             </div>
                                         </div>
                                     </div>

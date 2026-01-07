@@ -3,9 +3,37 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, MousePointer2, Workflow, Shield, Layers, Heart } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            unoptimized={true}
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface VREducationProjectPageProps {
   metadata?: any;
@@ -101,55 +129,58 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                             <p className="text-white/60 text-lg">VR Training Experience for Caregivers of Autistic Children</p>
                         </section>
 
-                        {/* Tools Used (Static) */}
+                        {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
 
-                            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-                                {/* Unity */}
-                                <div className="flex flex-col items-center gap-2">
-                                    <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-                                        <span className="text-xs text-white/80 font-semibold">U</span>
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* Unity */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unity" alt="Unity" />
+                                            Unity
+                                        </span>
+
+                                        {/* Unity Version Control */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unity-version-control" alt="Unity Version Control" />
+                                            Unity Version Control
+                                        </span>
+
+                                        {/* Blender */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="blender" alt="Blender" />
+                                            Blender
+                                        </span>
+
+                                        {/* Illustrator */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="illustrator" alt="Illustrator" />
+                                            Illustrator
+                                        </span>
                                     </div>
-                                    <span className="text-xs text-white/80">Unity</span>
                                 </div>
 
-                                {/* Unity Version Control */}
-                                <div className="flex flex-col items-center gap-2">
-                                    <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-                                        <span className="text-xs text-white/80 font-semibold">UVC</span>
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            C#
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            OpenXR
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Collision & UI-Based Scoring
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Practice-Based Learning
+                                        </span>
                                     </div>
-                                    <span className="text-xs text-white/80 text-center">Unity Version Control</span>
-                                </div>
-
-                                {/* Blender */}
-                                <div className="flex flex-col items-center gap-2">
-                                    <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-                                        <span className="text-xs text-white/80 font-semibold">B</span>
-                                    </div>
-                                    <span className="text-xs text-white/80">Blender</span>
-                                </div>
-
-                                {/* Illustrator */}
-                                <div className="flex flex-col items-center gap-2">
-                                    <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-                                        <span className="text-xs text-white/80 font-semibold">AI</span>
-                                    </div>
-                                    <span className="text-xs text-white/80">Illustrator</span>
-                                </div>
-
-                                {/* C# */}
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
-                                        C#
-                                    </span>
-                                </div>
-
-                                {/* OpenXR */}
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
-                                        OpenXR
-                                    </span>
                                 </div>
                             </div>
                         </section>
@@ -274,9 +305,12 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 </div>
                                             </div>
 
-                                            <div id="interactive_controller_panel" className="w-full h-64 bg-white/5 rounded-xl border border-white/10 my-6 flex items-center justify-center text-white/30">
-                                                {/* Placeholder for interactive component */}
-                                                Interactive Controller Panel
+                                            <div className="w-full my-6 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                                                <img
+                                                    src={withBasePath("/projects/vr-education/images/Tutorialfullgif.gif")}
+                                                    alt="Interactive Controller Panel Tutorial"
+                                                    className="w-full h-auto object-cover"
+                                                />
                                             </div>
                                             <p className="text-white/90 leading-relaxed mb-4">
                                                 This system reduces onboarding friction by providing an interactive, visual understanding of core VR controls.
@@ -296,42 +330,42 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                         {/* Grid for GIFs */}
                                         <div className="grid grid-cols-1 gap-6">
                                             {/* GIF 1 */}
-                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl h-[480px] flex flex-col group">
+                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                 <img
                                                     src={withBasePath("/projects/vr-education/images/change-color.gif")}
                                                     alt="Color Change Logic"
-                                                    className="w-full h-[75%] object-cover"
+                                                    className="w-full h-auto object-cover"
                                                 />
-                                                <div className="h-[25%] flex items-center p-4 bg-black/40 backdrop-blur-md border-t border-white/10">
-                                                    <p className="text-white text-sm leading-relaxed">
+                                                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
+                                                    <p className="text-sm md:text-base text-white/90">
                                                         Implemented visual state changes (red → yellow) to mark completed interactions.
                                                     </p>
                                                 </div>
                                             </div>
 
                                             {/* GIF 2 */}
-                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl h-[480px] flex flex-col group">
+                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                 <img
                                                     src={withBasePath("/projects/vr-education/images/unity-screen.gif")}
                                                     alt="Unity Scoring System"
-                                                    className="w-full h-[75%] object-cover"
+                                                    className="w-full h-auto object-cover"
                                                 />
-                                                <div className="h-[25%] flex items-center p-4 bg-black/40 backdrop-blur-md border-t border-white/10">
-                                                    <p className="text-white text-sm leading-relaxed">
+                                                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
+                                                    <p className="text-sm md:text-base text-white/90">
                                                         Built a collision-based scoring system to validate object placement.
                                                     </p>
                                                 </div>
                                             </div>
 
                                             {/* GIF 3 */}
-                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl h-[480px] flex flex-col group">
+                                            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                 <img
                                                     src={withBasePath("/projects/vr-education/images/choice-demo.gif")}
                                                     alt="Choice Mechanic"
-                                                    className="w-full h-[75%] object-cover"
+                                                    className="w-full h-auto object-cover"
                                                 />
-                                                <div className="h-[25%] flex items-center p-4 bg-black/40 backdrop-blur-md border-t border-white/10">
-                                                    <p className="text-white text-sm leading-relaxed">
+                                                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
+                                                    <p className="text-sm md:text-base text-white/90">
                                                         Implemented TextMesh-linked scoring for real-time interaction feedback.
                                                     </p>
                                                 </div>
@@ -408,30 +442,30 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
                                         <h3 className="text-2xl font-bold mb-4 text-white">4.1 Interaction Systems</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>VR controller mapping using OpenXR</li>
-                                            <li>Dynamic UI feedback</li>
-                                            <li>Object state switching via scripted events</li>
+                                            <li>OpenXR-based input abstraction</li>
+                                            <li>State-driven interaction feedback</li>
+                                            <li>Modular, event-based interaction design</li>
                                         </ul>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
                                         <h3 className="text-2xl font-bold mb-4 text-white">4.2 Gameplay Logic</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>Collision-based scoring</li>
-                                            <li>Trigger activation/deactivation</li>
-                                            <li>TextMesh-linked scoring events</li>
+                                            <li>Rule-based scoring system</li>
+                                            <li>Trigger lifecycle control</li>
+                                            <li>Decoupled logic and UI feedback</li>
                                         </ul>
                                     </div>
                                 </div>
                             </section>
 
-                            {/* 7. Outcomes & Learnings */}
+                            {/* 5. Outcomes & Learnings */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">6. Outcomes & Learnings</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcomes & Learnings</h2>
                                 <ul className="list-disc list-inside space-y-3 text-white/90 text-lg">
-                                    <li>Improved usability for first-time VR users through simplified VR onboarding</li>
-                                    <li>Validated behavior-based training design for neurodivergent learning</li>
-                                    <li>Built a scalable framework for rule-based VR learning systems</li>
-                                    <li>Identified future opportunities: adaptive difficulty, richer behavioral states</li>
+                                    <li>Improved usability for first-time VR users through simplified onboarding</li>
+                                    <li>Validated behavior-based training approaches for neurodivergent learning</li>
+                                    <li>Established a scalable, rule-based framework for VR learning systems</li>
+                                    <li>Identified future directions, including adaptive difficulty and richer behavioral states</li>
                                 </ul>
                             </section>
 
