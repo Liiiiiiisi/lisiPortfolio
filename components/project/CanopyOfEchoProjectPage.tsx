@@ -116,63 +116,114 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             <p className="text-white/60 text-lg">Digital Heritage Kinetic Installation</p>
                         </section>
 
-                        {/* Content Wrapper */}
-                        <div className="relative z-10 space-y-12">
-                            {/* Team */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <div className="flex flex-col md:flex-row gap-8 md:gap-6">
-                                    {/* Left Column: Team */}
-                                    <div className="flex-1">
-                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Team</h2>
-                                        <div className="space-y-3 text-white/90">
-                                            <p><strong className="text-white">Saurabhkumar Ramanbhai Parmar</strong> — Systems Development, Physical Prototyping</p>
-                                            <p><strong className="text-white">Findlay Cumming</strong> — VR Systems Development</p>
-                                            <p><strong className="text-white">Jingru Feng</strong> — Architectural Narrative Design</p>
-                                            <p><strong className="text-white">My Role</strong> — Interactive Prototyping (Unreal), Narrative Design, Production Coordination</p>
-                                        </div>
-                                    </div>
-                                    
-                                    {/* Right Column: Technical Stack */}
-                                    <div className="flex-1">
-                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
-                                        <div className="space-y-6">
-                                            {/* Group 1 — Tools */}
-                                            <div>
-                                                <h4 className="text-sm font-semibold text-white/70 mb-3">Tools</h4>
-                                                <div className="flex flex-wrap gap-3">
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                                        <ToolLogo name="touchdesigner" alt="TouchDesigner" />
-                                                        TouchDesigner
-                                                    </span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                                        <ToolLogo name="unreal-engine" alt="Unreal Engine" />
-                                                        Unreal Engine
-                                                    </span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                                        <ToolLogo name="blender" alt="Blender" />
-                                                        Blender
-                                                    </span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                                        <ToolLogo name="illustrator" alt="Illustrator" />
-                                                        Illustrator
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            {/* Group 2 — Features */}
-                                            <div>
-                                                <h4 className="text-sm font-semibold text-white/70 mb-3">Features</h4>
-                                                <div className="flex flex-wrap gap-3">
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC Communication</span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Computer Vision</span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Laser Cutting</span>
-                                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Kinetic Control</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                        {/* Technical Stack */}
+                        <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* TouchDesigner */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="touchdesigner" alt="TouchDesigner" />
+                                            TouchDesigner
+                                        </span>
+
+                                        {/* Unreal Engine */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unreal-engine" alt="Unreal Engine" />
+                                            Unreal Engine
+                                        </span>
+
+                                        {/* Blender */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="blender" alt="Blender" />
+                                            Blender
+                                        </span>
+
+                                        {/* Illustrator */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="illustrator" alt="Illustrator" />
+                                            Illustrator
+                                        </span>
                                     </div>
                                 </div>
-                            </section>
 
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC Communication</span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Computer Vision</span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Laser Cutting</span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Kinetic Control</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Team Section */}
+                        <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Team</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Saurabhkumar Ramanbhai Parmar Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Saurabhkumar Ramanbhai Parmar</h3>
+                                        <p className="text-white/80 text-xs">Systems Development, Physical Prototyping</p>
+                                    </div>
+                                </div>
+
+                                {/* Findlay Cumming Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Findlay Cumming</h3>
+                                        <p className="text-white/80 text-xs">VR Systems Development</p>
+                                    </div>
+                                </div>
+
+                                {/* Jingru Feng Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">Jingru Feng</h3>
+                                        <p className="text-white/80 text-xs">Architectural Narrative Design</p>
+                                    </div>
+                                </div>
+
+                                {/* My Role Card */}
+                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                        <p className="text-white/80 text-xs">Interactive Prototyping (Unreal), Narrative Design, Production Coordination</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Content Wrapper */}
+                        <div className="relative z-10 space-y-12">
                             {/* Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>

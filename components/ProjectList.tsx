@@ -26,7 +26,7 @@ interface ProjectListProps {
 
 // Technology stack mapping for each project (legacy - only used if tools/features are not provided)
 const projectTechData: Record<string, string[]> = {
-  "signie": ["React", "Next.js", "OpenAI API", "TailwindCSS"],
+  "signie": ["Unity", "Blender", "Dollars Mocap", "Wit.ai", "Eleven Labs"],
   "vr-education": ["Unity", "C#", "Oculus SDK", "VR Interaction"],
   "micro-invasion": ["Lens Studio", "JavaScript", "AR", "3D Modeling"],
   "pray-for-blessing": ["Unity", "Photoshop", "OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"],
@@ -37,24 +37,24 @@ const projectTechData: Record<string, string[]> = {
 
 // Tools mapping for each project (software with logos)
 const projectToolsData: Record<string, string[]> = {
-  "signie": ["React", "Next.js"],
+  "signie": ["Unity", "Blender", "Dollars Mocap", "Wit.ai", "Eleven Labs"],
   "vr-education": ["Unity", "Unity Version Control", "Blender", "Illustrator"],
   "micro-invasion": ["Lens Studio"],
   "pray-for-blessing": ["Unity", "Photoshop"],
   "carbon-neutral": ["Unity", "Vuforia", "Cinema 4D", "Adobe Illustrator"],
   "canopy-of-echo": ["TouchDesigner", "Unreal Engine", "Blender", "Illustrator"],
-  "datnie": ["React", "Next.js", "TypeScript"]
+  "datnie": ["Unreal Engine", "Unity", "Blender", "Figma", "Suno AI", "Eleven Lab"]
 };
 
 // Features mapping for each project
 const projectFeaturesData: Record<string, string[]> = {
-  "signie": ["ASL", "Education", "Translation"],
+  "signie": ["Hand Tracking", "Gesture Recognition", "Micro-Gestures", "Voice-to-Text", "Virtual Guide", "Animation State Machine"],
   "vr-education": ["C#", "OpenXR", "Collision & UI-Based Scoring", "Practice-Based Learning"],
   "micro-invasion": ["Body Tracking", "Segmentation", "World Mesh", "Particle System", "Image Tracking"],
   "pray-for-blessing": ["OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"],
   "carbon-neutral": ["Plane Tracking", "State-Driven Interaction", "Animator State Machine", "C#"],
   "canopy-of-echo": ["OSC Communication", "Computer Vision", "Laser Cutting", "Kinetic Control"],
-  "datnie": []
+  "datnie": ["Microgesture", "Character Groom & Animation", "Control Rig Motion", "Spatial UI / UX"]
 };
 
 export default function ProjectList({ projects, enableHoverVideo = true }: ProjectListProps) {

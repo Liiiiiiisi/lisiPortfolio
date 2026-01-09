@@ -7,7 +7,7 @@
     "category_zh": "XR ASL 导师与实时翻译系统",
     "video": "/projects/signie/videos/preview.mp4",
     "cover": "/projects/signie/images/cover.png",
-    "features": ["asl", "education", "translation"]
+    "features": ["Hand Tracking", "Gesture Recognition", "Micro-Gestures", "Voice-to-Text", "Virtual Guide", "Animation State Machine"]
   },
   {
     "id": "canopy-of-echo",

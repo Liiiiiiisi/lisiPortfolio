@@ -301,7 +301,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     <img
                                                         src={withBasePath("/projects/pray-for-blessing/images/icon-wish.png")}
                                                         alt="Wish Icon"
-                                                        className="w-12 h-12"
+                                                        className="w-20 h-20 md:w-24 md:h-24"
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.1 Close Eyes and Make Wishes</h3>
                                                 </div>
@@ -325,7 +325,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     <img
                                                         src={withBasePath("/projects/pray-for-blessing/images/icon-bucket.png")}
                                                         alt="Bucket Icon"
-                                                        className="w-12 h-12"
+                                                        className="w-20 h-20 md:w-24 md:h-24"
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.2 Shake the Bucket to Make Wishes</h3>
                                                 </div>
@@ -349,7 +349,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     <img
                                                         src={withBasePath("/projects/pray-for-blessing/images/icon-drum.png")}
                                                         alt="Drum Icon"
-                                                        className="w-12 h-12"
+                                                        className="w-20 h-20 md:w-24 md:h-24"
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.3 Beat Drums to Start Festival</h3>
                                                 </div>
@@ -373,7 +373,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     <img
                                                         src={withBasePath("/projects/pray-for-blessing/images/icon-write.png")}
                                                         alt="Write Icon"
-                                                        className="w-12 h-12"
+                                                        className="w-20 h-20 md:w-24 md:h-24"
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.4 Copy &quot;Fu&quot; to Pray for Luck</h3>
                                                 </div>
@@ -397,7 +397,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                     <img
                                                         src={withBasePath("/projects/pray-for-blessing/images/icon-lantern.png")}
                                                         alt="Lantern Icon"
-                                                        className="w-12 h-12"
+                                                        className="w-20 h-20 md:w-24 md:h-24"
                                                     />
                                                     <h3 className="text-xl font-bold text-white">03.5 Release the Sky Lantern</h3>
                                                 </div>

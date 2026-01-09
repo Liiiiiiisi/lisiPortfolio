@@ -59,6 +59,12 @@ const toolLogoMap: Record<string, string> = {
     "Arduino": "arduino",
     "Processing": "processing",
     "TypeScript": "typescript",
+    "Figma": "figma",
+    "Suno AI": "suno",
+    "Eleven Lab": "eleven_labs",
+    "Eleven Labs": "eleven_labs",
+    "Dollars Mocap": "dollars_mocap",
+    "Wit.ai": "wit.ai",
 };
 
 export default function ProjectTechMenu({ techStack, isVisible, tools, features }: ProjectTechMenuProps) {

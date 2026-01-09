@@ -3,9 +3,37 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Palette, Code, Smartphone, Sparkles } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// Helper component for tool logos that handles both PNG and SVG
+function ToolLogo({ name, alt }: { name: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(withBasePath(`/assets/logos/${name}.svg`));
+    const [hasError, setHasError] = useState(false);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={20}
+            height={20}
+            className="object-contain"
+            unoptimized={true}
+            onError={() => {
+                if (imgSrc.includes('.svg')) {
+                    // Try PNG if SVG fails
+                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
+                } else {
+                    // Hide if both fail
+                    setHasError(true);
+                }
+            }}
+            style={{ display: hasError ? 'none' : 'block' }}
+        />
+    );
+}
 
 interface SignieProjectPageProps {
   metadata?: any;
@@ -87,24 +115,70 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                             <p className="text-white/60 text-lg">XR ASL Tutor & Real-Time Translation System</p>
                         </section>
 
-                        {/* Tools Used */}
+                        {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-4">Tools Used</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">React</span>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+
+                            <div className="space-y-6">
+                                {/* Tools Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {/* Unity */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="unity" alt="Unity" />
+                                            Unity
+                                        </span>
+
+                                        {/* Blender */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="blender" alt="Blender" />
+                                            Blender
+                                        </span>
+
+                                        {/* Dollars Mocap */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="dollars_mocap" alt="Dollars Mocap" />
+                                            Dollars Mocap
+                                        </span>
+
+                                        {/* Wit.ai */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="wit.ai" alt="Wit.ai" />
+                                            Wit.ai
+                                        </span>
+
+                                        {/* Eleven Labs */}
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
+                                            <ToolLogo name="eleven_labs" alt="Eleven Labs" />
+                                            Eleven Labs
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Next.js</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OpenAI API</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">TailwindCSS</span>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                    <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">TypeScript</span>
+
+                                {/* Features Section */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Hand Tracking
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Gesture Recognition
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Micro-Gestures
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Voice-to-Text
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Virtual Guide
+                                        </span>
+                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
+                                            Animation State Machine
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </section>
