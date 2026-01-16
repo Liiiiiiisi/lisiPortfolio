@@ -18,6 +18,9 @@ export default function Navigation() {
     { href: '/contact', label: 'Contact' },
   ];
 
+  // Debug: log pathname to console (remove in production)
+  // console.log('Current pathname:', pathname);
+
   const toggleLanguage = () => {
     setLanguage(language === 'EN' ? 'CN' : 'EN');
   };
@@ -31,7 +34,25 @@ export default function Navigation() {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 md:space-x-4">
               {navItems.map((item) => {
-                const isActive = pathname === item.href;
+                // Check if current path matches the nav item
+                // Normalize pathname: remove trailing slash and query params
+                const normalizedPath = (pathname || '').split('?')[0].replace(/\/$/, '') || '/';
+                const normalizedHref = item.href.replace(/\/$/, '') || '/';
+                let isActive = false;
+                
+                // Home page: exact match only
+                if (normalizedHref === '/') {
+                  isActive = normalizedPath === '/';
+                }
+                // Project page: match /project or /projects/*
+                else if (normalizedHref === '/project') {
+                  isActive = normalizedPath === '/project' || normalizedPath.startsWith('/projects/');
+                }
+                // Other pages: exact match (About, Resume, Contact)
+                else {
+                  isActive = normalizedPath === normalizedHref;
+                }
+                
                 return (
               <Link
                 key={item.href}
