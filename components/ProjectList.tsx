@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -60,6 +60,60 @@ const projectFeaturesData: Record<string, string[]> = {
 export default function ProjectList({ projects, enableHoverVideo = true }: ProjectListProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Detect mobile on client side only
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Debounced hover handlers to prevent rapid state changes
+  const handleMouseEnter = useCallback((projectId: string, index: number) => {
+    // Clear any pending leave timeout
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
+    }
+    
+    // Clear any existing hover timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    // Set hover state after a small delay to debounce rapid movements
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (enableHoverVideo) {
+        setHoveredProject(projectId);
+        setHoveredIndex(index);
+      }
+    }, 50);
+  }, [enableHoverVideo]);
+
+  const handleMouseLeave = useCallback(() => {
+    // Clear any pending hover timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    
+    // Clear any existing leave timeout
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+    }
+    
+    // Reset hover state after a small delay to prevent flickering
+    leaveTimeoutRef.current = setTimeout(() => {
+      setHoveredProject(null);
+      setHoveredIndex(null);
+    }, 100);
+  }, []);
 
   return (
     <section 
@@ -117,35 +171,56 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
       {/* Project List */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-32 perspective-[1000px]">
         <div className="space-y-12">
-          {projects.map((project, index) => (
-            <div key={project.id} id={project.id} className="relative overflow-visible">
+          {projects.map((project, index) => {
+            // Calculate transform values for GPU acceleration
+            const isHovered = hoveredIndex === index;
+            const isNotHovered = hoveredIndex !== null && hoveredIndex !== index;
+            const isAbove = hoveredIndex !== null && index < hoveredIndex;
+            const isBelow = hoveredIndex !== null && index > hoveredIndex;
+            
+            // Calculate scale values based on screen size
+            const scale = isHovered 
+              ? (isMobile ? 1.05 : 1.25)
+              : isNotHovered
+              ? (isMobile ? 0.95 : 0.85)
+              : 1;
+            
+            // Calculate translate Y values (in pixels)
+            const translateY = isAbove ? -16 : isBelow ? 16 : 0;
+            
+            // Calculate translate Z values (for 3D perspective)
+            const translateZ = isNotHovered ? -10 : 0;
+            
+            // Calculate opacity
+            const opacity = isHovered ? 1 : isNotHovered ? 0.3 : 1;
+            
+            return (
+            <div key={project.id} id={project.id} className="relative" style={{ overflow: 'visible' }}>
               <Link href={project.href}>
                 <motion.div
-                  onMouseEnter={() => {
-                    if (enableHoverVideo) {
-                      setHoveredProject(project.id);
-                      setHoveredIndex(index);
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredProject(null);
-                    setHoveredIndex(null);
+                  layoutId={`project-${project.id}`}
+                  layout
+                  onMouseEnter={() => handleMouseEnter(project.id, index)}
+                  onMouseLeave={handleMouseLeave}
+                  transition={{
+                    duration: 0.35,
+                    ease: [0.16, 1, 0.3, 1],
+                    opacity: { duration: 0.3 },
+                    scale: { duration: 0.25, ease: "easeOut" }
                   }}
                   style={{
-                    transition: "opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), scale 0.25s ease-out"
+                    transform: `translate3d(0, ${translateY}px, ${translateZ}px) scale(${scale})`,
+                    opacity,
+                    willChange: 'transform, opacity',
                   }}
                   className={cn(
-                    "group relative p-4 md:p-8 border-b border-white/10 cursor-pointer will-change-transform overflow-visible",
-                    // Default state (no hover)
-                    hoveredIndex === null && "opacity-100 scale-100 translate-y-0 translate-z-0",
-                    // Hovered state (Primary) - reduced scale on mobile
-                    hoveredIndex === index && "opacity-100 md:scale-125 scale-105 z-20 translate-z-0 border-white/40",
-                    // Non-hovered state (dimmed & pushed back) - reduced scale on mobile
-                    hoveredIndex !== null && hoveredIndex !== index && "opacity-30 md:scale-85 scale-95 grayscale -translate-z-[10px]",
-                    // Above hovered
-                    hoveredIndex !== null && index < hoveredIndex && "-translate-y-4",
-                    // Below hovered
-                    hoveredIndex !== null && index > hoveredIndex && "translate-y-4"
+                    "group relative p-4 md:p-8 border-b cursor-pointer transform-gpu",
+                    // Border color based on hover state
+                    isHovered ? "border-white/40" : "border-white/10",
+                    // Z-index for hovered item
+                    isHovered && "z-20",
+                    // Grayscale for non-hovered items
+                    isNotHovered && "grayscale"
                   )}
                 >
                   <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 pointer-events-none">
@@ -177,7 +252,8 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                 </motion.div>
               </Link>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

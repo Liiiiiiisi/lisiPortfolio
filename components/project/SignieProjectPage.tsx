@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Palette, Code, Smartphone, Sparkles } from "lucide-react";
+import { ArrowLeft, Palette, Code, Smartphone, Sparkles, Zap } from "lucide-react";
 import React, { useState } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
@@ -189,13 +189,515 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
                                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Project Overview</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Signie is an innovative American Sign Language (ASL) learning and translation platform designed to bridge communication gaps. The platform combines interactive learning tools with AI-powered translation capabilities, making ASL more accessible to learners and enabling real-time communication support.
+                                    Signie is an immersive ASL (American Sign Language) learning and translation system built around real-time hand tracking, micro-gestures, and AI-driven feedback. It evolved from concept validation into playable learning experiences, and ultimately into AI-glasses-based live translation.
                                 </p>
+                            </section>
+
+                            {/* System Evolution */}
+                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">2. System Evolution</h2>
+
+                                <div className="space-y-12">
+                                    {/* Stage 01 */}
+                                    <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 01 — Concept & Interaction Prototype</h3>
+                                        <p className="text-white/70 text-sm mb-4">XRCC Hackathon Winner</p>
+                                        
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <p className="text-white/90 leading-relaxed">
+                                                Establish the core concept: teaching ASL through real-time hand-tracked interaction rather than passive observation.
+                                            </p>
+                                        </div>
+
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-3">What We Built</h4>
+                                            <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl my-4">
+                                                {/* Media Area */}
+                                                <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                    <Image
+                                                        src={withBasePath("/projects/signie/images/xrdc_miro.gif")}
+                                                        alt="ASL Tutor Interaction Concept"
+                                                        fill
+                                                        className="object-cover"
+                                                        unoptimized={true}
+                                                    />
+                                                </div>
+                                                
+                                                {/* Text Area */}
+                                                <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                    <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                        ASL tutor interaction concept
+                                                    </h3>
+                                                    <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                        Miro board mapping UI/UX design, learning flow, and demo narrative
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mt-4">
+                                                <li>Motion capture pipeline
+                                                    <ul className="list-disc list-inside ml-6 mt-1 space-y-1">
+                                                        <li>Captured selected ASL sentences using Dollars MoCap</li>
+                                                        <li>Cleaned and refined motion data in Blender</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <div className="w-full my-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                                                <img
+                                                    src={withBasePath("/projects/signie/images/mocap_blender_workflow.gif")}
+                                                    alt="Motion Capture Pipeline"
+                                                    className="w-full h-auto object-cover"
+                                                />
+                                            </div>
+                                            <div className="mt-4">
+                                                <div className="space-y-4">
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/xrdc_unity.gif")}
+                                                                alt="Unity Hand Tracking"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                XR prototype_Unity
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Prototyped hand-tracked interaction in Unity to demonstrate core interaction concepts
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/xrdc_shapexr.gif")}
+                                                                alt="ShapeXR Prototyping"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                XR prototype_ShapeXR
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Spatial interaction testing using ShapeXR
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-6">
+                                            <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                {/* Media Area */}
+                                                <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                    <Image
+                                                        src={withBasePath("/projects/signie/images/xrdc_win.gif")}
+                                                        alt="XRCC Hackathon Winner"
+                                                        fill
+                                                        className="object-cover"
+                                                        unoptimized={true}
+                                                    />
+                                                </div>
+                                                
+                                                {/* Text Area */}
+                                                <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                    <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                        Outcome
+                                                    </h3>
+                                                    <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                        🏆 Winner of XRCC Hackathon (Contextual AI: Utility with camera access & Community Prize)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {/* Brian Mira Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">Brian Mira</h3>
+                                                        <p className="text-white/80 text-xs">Motion capture, video editing</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Mohammad Asim Khan Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">Mohammad Asim Khan</h3>
+                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Manikant Mudgil Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">Manikant Mudgil</h3>
+                                                        <p className="text-white/80 text-xs">ShapeXR prototyping, UI design</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* My Role Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                                        <p className="text-white/80 text-xs">Project management, UX design, animator, XR Developer</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Stage 02 */}
+                                    <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 02 — Playable Learning Experience</h3>
+                                        <p className="text-white/70 text-sm mb-4">AWE Presentation</p>
+                                        
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <p className="text-white/90 leading-relaxed">
+                                                Transform the prototype into a fully playable ASL learning system with structured progression and feedback.
+                                            </p>
+                                        </div>
+
+                                        <div className="mb-6">
+                                            <h4 className="text-xl font-semibold text-white mb-4">Key Learning Experiences</h4>
+                                            
+                                            {/* Experience 1 */}
+                                            <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
+                                                <h5 className="text-lg font-semibold text-white mb-3">1. Virtual Guide — Gesture Learning</h5>
+                                                <p className="text-white/90 mb-4">Guided practice with real-time feedback and review.</p>
+                                                <div className="space-y-4 mb-4">
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/awe_learn.gif")}
+                                                                alt="Learn"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                Learn
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Copy a static pose to unlock the full motion, visualized with movement bubbles.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/awe_review.gif")}
+                                                                alt="Review"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                Review
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Replay the virtual guide via on-screen buttons to practice before continuing.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Experience 2 */}
+                                            <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
+                                                <h5 className="text-lg font-semibold text-white mb-3">2. Rhythm-Based ASL Game</h5>
+                                                <p className="text-white/90 mb-4">Learn ASL letters through music-driven interaction.</p>
+                                                <div className="mb-4">
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/awe_musicgame.gif")}
+                                                                alt="Rhythm-Based ASL Game"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                Music Game
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Sign correctly to grow the basket, then catch falling fruits in rhythm.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Experience 3 */}
+                                            <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
+                                                <h5 className="text-lg font-semibold text-white mb-3">3. Word & Gesture Practice</h5>
+                                                <p className="text-white/90 mb-4">Test comprehension and recall.</p>
+                                                <div className="space-y-4">
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/awe_word.gif")}
+                                                                alt="Word Picking"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                Word Picking
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Identify and select the correct word from a signed sentence.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                        {/* Media Area */}
+                                                        <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                            <Image
+                                                                src={withBasePath("/projects/signie/images/awe_practice.gif")}
+                                                                alt="Gesture Matching"
+                                                                fill
+                                                                className="object-cover"
+                                                                unoptimized={true}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Text Area */}
+                                                        <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                            <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                                Gesture Matching
+                                                            </h3>
+                                                            <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                                Sign a displayed sentence to complete the task.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-3">Supporting Tools & Systems</h4>
+                                            <ul className="list-disc list-inside space-y-3 text-white/80 ml-4">
+                                                <li><strong className="text-white">Virtual Guide Tool:</strong> custom tool to record gestures directly in-headset.
+                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
+                                                        <img
+                                                            src={withBasePath("/projects/signie/images/record_playback.gif")}
+                                                            alt="Virtual Guide Tool"
+                                                            className="w-full h-auto object-cover"
+                                                        />
+                                                    </div>
+                                                </li>
+                                                <li><strong className="text-white">Gesture Recognition System:</strong> real-time gesture detection and validation in Unity.
+                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
+                                                        <img
+                                                            src={withBasePath("/projects/signie/images/unity_recognition_workflow.gif")}
+                                                            alt="Gesture Recognition System"
+                                                            className="w-full h-auto object-cover"
+                                                        />
+                                                    </div>
+                                                </li>
+                                                <li><strong className="text-white">Procedural Animation State Switcher:</strong> controls sign animation playback and transitions.
+                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
+                                                        <img
+                                                            src={withBasePath("/projects/signie/images/unity_animation_state_machine.gif")}
+                                                            alt="Animation State Machine"
+                                                            className="w-full h-auto object-cover"
+                                                        />
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                                {/* Siming Wang Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">Siming Wang</h3>
+                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* My Role Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="mt-4">
+                                                <a
+                                                    href="#"
+                                                    className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-white/5 border border-white/20 px-4 py-2 rounded-full transition-all hover:bg-white/10"
+                                                >
+                                                    AWE Presentation
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Stage 03 */}
+                                    <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 03 — AI Glasses: Live ASL Translation</h3>
+                                        
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <p className="text-white/90 leading-relaxed">
+                                                Extend Signie from learning into real-world communication using wearable XR.
+                                            </p>
+                                        </div>
+
+                                        <div className="mb-6">
+                                            <h4 className="text-lg font-semibold text-white mb-4">What We Built</h4>
+                                            <div className="space-y-4">
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                    {/* Media Area */}
+                                                    <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                        <Image
+                                                            src={withBasePath("/projects/signie/images/AIglass_microgesture.gif")}
+                                                            alt="Micro-gesture Input"
+                                                            fill
+                                                            className="object-cover"
+                                                            unoptimized={true}
+                                                        />
+                                                    </div>
+                                                    
+                                                    {/* Text Area */}
+                                                    <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                        <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                            Micro-gesture input for hands-free system control
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                    {/* Media Area */}
+                                                    <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                        <Image
+                                                            src={withBasePath("/projects/signie/images/AIglass_wit.gif")}
+                                                            alt="Live Translation Pipeline"
+                                                            fill
+                                                            className="object-cover"
+                                                            unoptimized={true}
+                                                        />
+                                                    </div>
+                                                    
+                                                    {/* Text Area */}
+                                                    <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                        <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                            Live translation converts voice to text via Wit.ai, then drives sign animation through an animation state machine.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {/* Siming Wang Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">Siming Wang</h3>
+                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* My Role Card */}
+                                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
+                                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
+                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
 
                             {/* My Role */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">2. My Role</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">3. My Role</h2>
 
                                 <div className="relative -mx-4 md:-mx-8">
                                     <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent px-4 md:px-8">
@@ -206,9 +708,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Palette className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">UI Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Interaction & UX Design</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed and implemented the user interface using React and Next.js
+                                                    Interaction & UX design for hand-tracked XR systems
                                                 </p>
                                             </div>
                                         </div>
@@ -220,9 +722,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Code className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">API Integration</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Gesture Recognition</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Integrated OpenAI API for ASL translation functionality
+                                                    Gesture recognition and micro-gesture mapping
                                                 </p>
                                             </div>
                                         </div>
@@ -234,9 +736,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Smartphone className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Responsive Layouts</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Learning Experience Design</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Developed responsive layouts with TailwindCSS
+                                                    Learning experience and progression design
                                                 </p>
                                             </div>
                                         </div>
@@ -248,9 +750,23 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Sparkles className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Interactive Components</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">Animation Systems</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Created interactive learning components
+                                                    Animation state machines for sign language output
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Card 5 */}
+                                        <div className="min-w-[280px] md:min-w-[320px] snap-start group relative overflow-hidden rounded-3xl bg-white/5 p-8 border border-white/10 backdrop-blur-sm transition-all hover:bg-white/10 min-h-[280px] flex flex-col">
+                                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50" />
+                                            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-auto relative z-10 border border-white/5">
+                                                <Zap className="w-6 h-6 text-white/60" strokeWidth={1.5} />
+                                            </div>
+                                            <div className="relative z-10 mt-12">
+                                                <h3 className="text-lg font-semibold text-white mb-2">Rapid Prototyping</h3>
+                                                <p className="text-white/60 text-sm leading-relaxed">
+                                                    Rapid prototyping across XR, games, and AI wearables
                                                 </p>
                                             </div>
                                         </div>
@@ -258,90 +774,12 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                 </div>
                             </section>
 
-                            {/* Core Contributions */}
-                            <section>
-                                <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">3. Core Contributions</h2>
-                                    <p className="text-white/70 text-base md:text-lg">
-                                        I contributed across UI design, API integration, responsive development, and interactive component creation.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-8">
-                                    {/* 3.1 Interactive Learning Interface */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.1 Interactive Learning Interface</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            The platform features an intuitive interface that guides users through ASL learning. The design focuses on clarity and accessibility, ensuring users can easily navigate and learn.
-                                        </p>
-                                        <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                                            <img
-                                                src={withBasePath("/projects/signie/images/cover.png")}
-                                                alt="Learning Interface"
-                                                className="w-full h-auto object-cover"
-                                            />
-                                            <div className="bg-black/40 backdrop-blur-sm p-6 border-t border-white/10">
-                                                <p className="text-white/80 text-sm md:text-base">
-                                                    This system solves the challenge of making ASL learning accessible by providing a structured, interactive experience.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* 3.2 AI-Powered Translation */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.2 AI-Powered Translation</h3>
-                                        <p className="text-white/90 leading-relaxed mb-4">
-                                            The translation feature uses advanced AI to convert between spoken language and ASL, enabling real-time communication support.
-                                        </p>
-                                        <div className="space-y-4 mb-6">
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Real-time Processing:</strong> Instant translation between text and ASL</p>
-                                            </div>
-                                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                                <p className="text-white/80"><strong className="text-white">Accuracy:</strong> High-quality translation using OpenAI&apos;s language models</p>
-                                            </div>
-                                        </div>
-                                        <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                                            <img
-                                                src={withBasePath("/projects/signie/images/cover.png")}
-                                                alt="Translation Demo"
-                                                className="w-full h-auto object-cover"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Technical Breakdown */}
+                            {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. Technical Breakdown</h2>
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.1 System Architecture</h3>
-                                        <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>Frontend: React with Next.js for server-side rendering</li>
-                                            <li>API Integration: OpenAI API for translation services</li>
-                                            <li>Styling: TailwindCSS for responsive design</li>
-                                        </ul>
-                                    </div>
-                                    <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.2 Key Features</h3>
-                                        <p className="text-white/80 leading-relaxed">
-                                            The platform optimizes for real-time interaction and accessibility, ensuring smooth performance across devices.
-                                        </p>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Outcomes & Learnings */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcomes & Learnings</h2>
-                                <ul className="list-disc list-inside space-y-3 text-white/90 text-lg">
-                                    <li><strong className="text-white">Impact:</strong> Created a functional prototype for ASL learning and translation</li>
-                                    <li><strong className="text-white">Learning:</strong> Gained experience with AI API integration and accessible design</li>
-                                    <li><strong className="text-white">Future:</strong> Would explore more advanced gesture recognition and video-based learning features</li>
-                                </ul>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">4. Outcome</h2>
+                                <p className="text-lg text-white/90 leading-relaxed">
+                                    Signie evolved from a conceptual ASL tutor into a scalable system supporting learning, practice, and live translation—demonstrating how embodied interaction and AI-driven systems can expand accessibility and communication.
+                                </p>
                             </section>
 
                             {/* You May Also Like */}
