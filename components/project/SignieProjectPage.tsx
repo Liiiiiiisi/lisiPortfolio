@@ -121,7 +121,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Signie</h1>
-                            <p className="text-white/60 text-lg">XR ASL Tutor & Real-Time Translation System</p>
+                            <p className="text-white/60 text-lg">Mixed Reality ASL Learning & Live Translation System</p>
                         </section>
 
                         {/* Technical Stack */}

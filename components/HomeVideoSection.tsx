@@ -18,11 +18,9 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
   if (!videoId && !youtubeUrl) {
     // Fallback to placeholder if no YouTube URL provided
     return (
-      <section className="w-full relative bg-black py-12 md:py-16" style={{ backgroundColor: '#000000' }}>
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="aspect-video w-full flex items-center justify-center relative rounded-lg overflow-hidden bg-gray-900">
-            <div className="text-white">Video placeholder - Add YouTube URL</div>
-          </div>
+      <section className="w-full h-screen relative bg-black" style={{ backgroundColor: '#000000' }}>
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="text-white">Video placeholder - Add YouTube URL</div>
         </div>
       </section>
     );
@@ -32,18 +30,16 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
 
   return (
-    <section className="w-full relative bg-black py-12 md:py-16" style={{ backgroundColor: '#000000' }}>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="aspect-video w-full relative rounded-lg overflow-hidden shadow-2xl">
-          <iframe
-            src={embedUrl}
-            className="w-full h-full"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            style={{ border: 'none' }}
-            title="Portfolio Showreel"
-          />
-        </div>
+    <section className="w-full h-screen relative bg-black" style={{ backgroundColor: '#000000' }}>
+      <div className="w-full h-full relative">
+        <iframe
+          src={embedUrl}
+          className="w-full h-full"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          style={{ border: 'none' }}
+          title="Portfolio Showreel"
+        />
       </div>
     </section>
   );

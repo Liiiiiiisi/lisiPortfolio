@@ -107,11 +107,6 @@ Willy’s appearance evolves based on the player's activity and progress.
 
 SCM creatures represent everyday environmental issues.
 
-**Bird Billy in petroleum**  
-**Crab Craddock in a plastic shell**  
-**Fish Fellah tangled in a nest**  
-**Bear Bell with its head in a gasoline can**
-
 ![SCM comparison strip](/assets/projects/carbon-neutral/images/scm-comparison-strip.png)
 
 

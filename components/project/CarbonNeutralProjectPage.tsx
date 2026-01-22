@@ -371,12 +371,6 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                         <p className="text-white/90 leading-relaxed mb-4">
                                             SCM creatures represent everyday environmental issues.
                                         </p>
-                                        <div className="space-y-2 text-white/80 mb-4">
-                                            <p><strong className="text-white">Bird Billy</strong> in petroleum</p>
-                                            <p><strong className="text-white">Crab Craddock</strong> in a plastic shell</p>
-                                            <p><strong className="text-white">Fish Fellah</strong> tangled in a nest</p>
-                                            <p><strong className="text-white">Bear Bell</strong> with its head in a gasoline can</p>
-                                        </div>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
                                                 src={withBasePath("/projects/carbon-neutral/images/scm-comparison-strip.png")}
