@@ -163,7 +163,7 @@ export default function Resume() {
       <main className="flex-1 pt-16 bg-black relative z-10 lg:pl-[300px]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 md:py-20">
           {/* Mobile: Horizontal scrollable nav */}
-          <div className="lg:hidden mb-12 overflow-x-auto scrollbar-hide -mx-6 sm:-mx-8 px-6 sm:px-8">
+          <div className="lg:hidden sticky top-[80px] z-40 mb-12 overflow-x-auto scrollbar-hide -mx-6 sm:-mx-8 px-6 sm:px-8 bg-black/80 backdrop-blur-md py-4 -mt-4">
             <nav 
               ref={navRef}
               className="flex gap-4 pb-2"

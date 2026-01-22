@@ -57,6 +57,11 @@ const projectFeaturesData: Record<string, string[]> = {
   "datnie": ["Microgesture", "Character Groom & Animation", "Control Rig Motion", "Spatial UI / UX"]
 };
 
+// GitHub URLs mapping for each project
+const projectGithubUrls: Record<string, string> = {
+  "signie": "https://github.com/yourusername/signie",
+};
+
 export default function ProjectList({ projects, enableHoverVideo = true }: ProjectListProps) {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -248,6 +253,7 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                     tools={projectToolsData[project.id] || []}
                     features={project.features && project.features.length > 0 ? project.features.map(f => f.charAt(0).toUpperCase() + f.slice(1)) : (projectFeaturesData[project.id] || [])}
                     isVisible={hoveredIndex === index}
+                    githubUrl={projectGithubUrls[project.id]}
                   />
                 </motion.div>
               </Link>

@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Palette, Code, Smartphone, Sparkles, Zap } from "lucide-react";
+
+// GitHub icon component
+function GitHubIcon({ className }: { className?: string }) {
+    return (
+        <svg className={className || "w-5 h-5"} fill="currentColor" viewBox="0 0 24 24">
+            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.197 22 16.425 22 12.017 22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+        </svg>
+    );
+}
 import React, { useState } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
@@ -153,6 +162,17 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                             <ToolLogo name="eleven_labs" alt="Eleven Labs" />
                                             Eleven Labs
                                         </span>
+
+                                        {/* GitHub */}
+                                        <a
+                                            href="https://github.com/yourusername/signie"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2"
+                                        >
+                                            <GitHubIcon className="w-4 h-4" />
+                                            GitHub
+                                        </a>
                                     </div>
                                 </div>
 
@@ -234,20 +254,29 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </p>
                                                 </div>
                                             </div>
-                                            <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mt-4">
-                                                <li>Motion capture pipeline
-                                                    <ul className="list-disc list-inside ml-6 mt-1 space-y-1">
-                                                        <li>Captured selected ASL sentences using Dollars MoCap</li>
-                                                        <li>Cleaned and refined motion data in Blender</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            <div className="w-full my-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                                                <img
-                                                    src={withBasePath("/projects/signie/images/mocap_blender_workflow.gif")}
-                                                    alt="Motion Capture Pipeline"
-                                                    className="w-full h-auto object-cover"
-                                                />
+                                            <div className="mt-4">
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                    {/* Media Area */}
+                                                    <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                        <Image
+                                                            src={withBasePath("/projects/signie/images/xrdc_mocap.gif")}
+                                                            alt="Motion capture pipeline"
+                                                            fill
+                                                            className="object-cover"
+                                                            unoptimized={true}
+                                                        />
+                                                    </div>
+                                                    
+                                                    {/* Text Area */}
+                                                    <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                        <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                            Motion capture pipeline
+                                                        </h3>
+                                                        <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                            Captured selected ASL sentences with Dollars MoCap, then cleaned and refined the motion data in Blender.
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div className="mt-4">
                                                 <div className="space-y-4">
@@ -533,36 +562,54 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                         </div>
 
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-3">Supporting Tools & Systems</h4>
-                                            <ul className="list-disc list-inside space-y-3 text-white/80 ml-4">
-                                                <li><strong className="text-white">Virtual Guide Tool:</strong> custom tool to record gestures directly in-headset.
-                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
-                                                        <img
-                                                            src={withBasePath("/projects/signie/images/record_playback.gif")}
+                                            <h4 className="text-lg font-semibold text-white mb-4">Supporting Tools & Systems</h4>
+                                            <div className="space-y-4">
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                    {/* Media Area */}
+                                                    <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                        <Image
+                                                            src={withBasePath("/projects/signie/images/awe_virtualguide.gif")}
                                                             alt="Virtual Guide Tool"
-                                                            className="w-full h-auto object-cover"
+                                                            fill
+                                                            className="object-cover"
+                                                            unoptimized={true}
                                                         />
                                                     </div>
-                                                </li>
-                                                <li><strong className="text-white">Gesture Recognition System:</strong> real-time gesture detection and validation in Unity.
-                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
-                                                        <img
-                                                            src={withBasePath("/projects/signie/images/unity_recognition_workflow.gif")}
+                                                    
+                                                    {/* Text Area */}
+                                                    <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                        <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                            Virtual Guide Tool
+                                                        </h3>
+                                                        <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                            A custom in-headset tool for recording tutor and two-hand gestures to drive guided learning.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
+                                                    {/* Media Area */}
+                                                    <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
+                                                        <Image
+                                                            src={withBasePath("/projects/signie/images/awe_geturerecongnition.gif")}
                                                             alt="Gesture Recognition System"
-                                                            className="w-full h-auto object-cover"
+                                                            fill
+                                                            className="object-cover"
+                                                            unoptimized={true}
                                                         />
                                                     </div>
-                                                </li>
-                                                <li><strong className="text-white">Procedural Animation State Switcher:</strong> controls sign animation playback and transitions.
-                                                    <div className="w-full my-3 rounded-xl overflow-hidden border border-white/10">
-                                                        <img
-                                                            src={withBasePath("/projects/signie/images/unity_animation_state_machine.gif")}
-                                                            alt="Animation State Machine"
-                                                            className="w-full h-auto object-cover"
-                                                        />
+                                                    
+                                                    {/* Text Area */}
+                                                    <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
+                                                        <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                                            Gesture Recognition System
+                                                        </h3>
+                                                        <p className="text-sm md:text-base text-white/90 line-clamp-2">
+                                                            Real-time gesture detection and correctness validation implemented in Unity.
+                                                        </p>
                                                     </div>
-                                                </li>
-                                            </ul>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div>
