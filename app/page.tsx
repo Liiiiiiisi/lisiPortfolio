@@ -3,8 +3,7 @@ import Footer from '@/components/Footer';
 import HomeVideoSection from '@/components/HomeVideoSection';
 
 export default async function Home() {
-  // TODO: Replace with your YouTube URL
-  const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  const youtubeUrl = 'https://youtu.be/Jku-8eOu57I';
 
   return (
     <div className="min-h-screen flex flex-col bg-black" style={{ backgroundColor: '#000000' }}>
