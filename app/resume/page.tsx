@@ -532,7 +532,7 @@ export default function Resume() {
                     Email: lxie082@outlook.com
                   </p>
                   <p className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90">
-                    Location: London, UK
+                    Based at London, UK
                   </p>
             </div>
               </motion.section>
