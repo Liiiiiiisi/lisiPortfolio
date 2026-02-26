@@ -140,6 +140,31 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
             >
               {(() => {
                 const project = projects.find(p => p.id === hoveredProject);
+                const isYoutube = project?.video?.includes('youtube.com');
+                const embedUrl = isYoutube && project?.video
+                  ? (() => {
+                      const m = project.video.match(/(?:v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
+                      const vid = m ? m[1] : '';
+                      return vid ? `https://www.youtube.com/embed/${vid}?autoplay=1&mute=1&loop=1&playlist=${vid}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1` : null;
+                    })()
+                  : null;
+                if (embedUrl) {
+                  return (
+                    <iframe
+                      src={embedUrl}
+                      title=""
+                      className="absolute pointer-events-none border-0"
+                      style={{
+                        width: '120%',
+                        height: '120%',
+                        top: '-10%',
+                        left: '-10%',
+                      }}
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                    />
+                  );
+                }
                 if (project?.video) {
                   return (
                     <video

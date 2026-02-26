@@ -2,11 +2,29 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, MousePointer2, Workflow, Shield, Layers, Heart } from "lucide-react";
-import React, { useState } from "react";
+import { ArrowLeft, MousePointer2, Workflow, Shield, Layers, Heart, VolumeX, Volume2 } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+
+// YouTube IFrame API types
+declare global {
+  interface Window {
+    YT: {
+      ready: (fn: () => void) => void;
+      Player: new (el: string | HTMLElement, opts: Record<string, unknown>) => YTPlayer;
+    };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
+interface YTPlayer {
+  mute: () => void;
+  unMute: () => void;
+}
+
+const VR_VIDEO_ID = "r_HNZQTRDno";
 
 // Helper component for tool logos that handles both PNG and SVG
 function ToolLogo({ name, alt }: { name: string; alt: string }) {
@@ -42,6 +60,65 @@ interface VREducationProjectPageProps {
 
 export default function VREducationProjectPage({ metadata, content }: VREducationProjectPageProps) {
     const projectId = 'vr-education';
+    const [isMuted, setIsMuted] = useState(true);
+    const playerRef = useRef<YTPlayer | null>(null);
+
+    useEffect(() => {
+        const initPlayer = () => {
+            const el = document.getElementById('vr-hero-yt-player');
+            if (!el || el.querySelector('iframe')) return;
+
+            new window.YT.Player('vr-hero-yt-player', {
+                videoId: VR_VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                    loop: 1,
+                    playlist: VR_VIDEO_ID,
+                    controls: 0,
+                    modestbranding: 1,
+                    rel: 0,
+                    iv_load_policy: 3,
+                    playsinline: 1,
+                },
+                events: {
+                    onReady: (event: { target: YTPlayer }) => {
+                        playerRef.current = event.target;
+                    },
+                },
+            });
+        };
+
+        if (window.YT?.Player) {
+            window.YT.ready(initPlayer);
+        } else {
+            const prev = window.onYouTubeIframeAPIReady;
+            window.onYouTubeIframeAPIReady = () => {
+                prev?.();
+                initPlayer();
+            };
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScript = document.getElementsByTagName('script')[0];
+            firstScript?.parentNode?.insertBefore(tag, firstScript);
+        }
+
+        return () => {
+            playerRef.current = null;
+        };
+    }, []);
+
+    const toggleMute = () => {
+        const p = playerRef.current;
+        if (!p) return;
+        if (isMuted) {
+            p.unMute();
+            setIsMuted(false);
+        } else {
+            p.mute();
+            setIsMuted(true);
+        }
+    };
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
         const x = (e.clientX / innerWidth) * 100;
@@ -52,17 +129,17 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
 
     return (
         <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
-            {/* 3. Background Video (Fixed Full-screen Flashlight Effect) */}
-            {/* Note: bg-flashlight.mp4 should be added to /public/projects/vr-education/videos/ for the intended effect */}
-            {/* Currently using preview.mp4 as fallback */}
-            <video
-                src={withBasePath("/projects/vr-education/videos/preview.mp4")}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover grayscale opacity-[0.22]"
-            />
+            {/* Background Video (YouTube) - 120% crop to hide YT UI */}
+            <div className="absolute inset-0 overflow-hidden">
+                <iframe
+                    src={`https://www.youtube.com/embed/${VR_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VR_VIDEO_ID}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`}
+                    title="Guardian's Guide background"
+                    className="absolute pointer-events-none border-0 grayscale opacity-[0.22]"
+                    style={{ width: '120%', height: '120%', top: '-10%', left: '-10%' }}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                />
+            </div>
 
             {/* Flashlight Overlay (Fixed Full-screen) */}
             <div
@@ -80,16 +157,15 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
 
             {/* Content Wrapper for all page content to sit above background video */}
             <div className="relative z-10">
-                {/* 1. Full-screen Hero Video */}
+                {/* 1. Full-screen Hero Video (YouTube) with mute toggle */}
                 <div id="video_hero" className="w-full h-[80vh] md:h-[100vh] overflow-hidden relative">
-                    <video
-                        src={withBasePath("/projects/vr-education/videos/preview.mp4")}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                    />
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div
+                            id="vr-hero-yt-player"
+                            className="absolute border-0"
+                            style={{ width: '120%', height: '120%', top: '-10%', left: '-10%' }}
+                        />
+                    </div>
 
                     {/* Back Button Overlay */}
                     <div className="absolute top-8 left-8 z-20">
@@ -113,6 +189,16 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                             Watch Full Walkthrough
                         </a>
                     </div>
+
+                    {/* Mute / Unmute button - bottom left */}
+                    <button
+                        type="button"
+                        onClick={toggleMute}
+                        className="absolute bottom-8 left-8 z-20 inline-flex items-center justify-center w-12 h-12 rounded-full bg-black/40 backdrop-blur-md text-white/90 hover:text-white hover:bg-black/60 border border-white/10 transition-all"
+                        aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                    >
+                        {isMuted ? <VolumeX size={22} /> : <Volume2 size={22} />}
+                    </button>
                 </div>
 
                 {/* Content Container */}
