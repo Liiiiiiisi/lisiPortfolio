@@ -139,10 +139,10 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
             <h1
               className="m-0 font-semibold hero-headline-glass"
               style={{
-                fontSize: 'clamp(44px, 5.6vw, 96px)',
+                fontSize: 'clamp(36px, 4.6vw, 78px)',
                 fontWeight: 650,
-                lineHeight: 0.95,
-                letterSpacing: '-0.03em',
+                lineHeight: 1.0,
+                letterSpacing: '-0.025em',
                 color: 'rgba(255,255,255,0.55)',
                 textShadow: '0 2px 20px rgba(255,255,255,0.15), 0 4px 40px rgba(255,255,255,0.08)',
                 opacity: isVisible ? 1 : 0,
@@ -150,24 +150,42 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
                 transition: 'opacity 600ms ease-out, transform 600ms ease-out',
               }}
             >
-              Embodied XR interaction systems
+              Creative Designer for Interactive & Immersive Experiences
             </h1>
 
+            {/* Subtitle */}
+            <p
+              className="m-0 font-normal"
+              style={{
+                fontSize: 'clamp(14px, 1.5vw, 20px)',
+                fontWeight: 400,
+                letterSpacing: '0.02em',
+                color: 'rgba(255,255,255,0.5)',
+                marginTop: '14px',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
+                transition: 'opacity 600ms ease-out 80ms, transform 600ms ease-out 80ms',
+              }}
+            >
+              Crafting concept-driven visual and interactive experiences
+            </p>
+
             {/* Byline Row - with CTA aligned on right */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-3">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-5">
               <p
                 className="m-0 font-medium"
                 style={{
-                  fontSize: 'clamp(14px, 1.3vw, 18px)',
+                  fontSize: 'clamp(12px, 1.1vw, 15px)',
                   fontWeight: 500,
-                  letterSpacing: '0.01em',
-                  color: 'rgba(255,255,255,0.7)',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase' as const,
+                  color: 'rgba(255,255,255,0.55)',
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
                   transition: 'opacity 600ms ease-out 100ms, transform 600ms ease-out 100ms',
                 }}
               >
-                Designed and built by Lisi Xie
+                Lisi Xie — Creative Designer
               </p>
 
               {/* CTA Button - aligned with byline */}
