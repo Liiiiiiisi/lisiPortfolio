@@ -10,11 +10,13 @@ export default function Navigation() {
   const isProjectPage = pathname?.startsWith('/projects/');
   const isHomePage = pathname === '/';
 
+  const showResume = process.env.NEXT_PUBLIC_SHOW_RESUME === 'true';
+
   const navItems = [
     { href: '/', label: t('nav.home') },
     { href: '/project', label: t('nav.project') },
     { href: '/about', label: t('nav.about') },
-    { href: '/resume', label: t('nav.resume') },
+    ...(showResume ? [{ href: '/resume', label: t('nav.resume') }] : []),
     { href: '/contact', label: t('nav.contact') },
   ];
 

@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { withBasePath } from '@/lib/paths';
 import { motion } from 'framer-motion';
@@ -86,6 +87,18 @@ function GoldsmithsLogo({ name, alt }: { name: string; alt: string }) {
 
 export default function Resume() {
   const { t } = useLanguage();
+  const router = useRouter();
+
+  // Redirect to home if resume is hidden via env flag
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_SHOW_RESUME !== 'true') {
+      router.replace('/');
+    }
+  }, [router]);
+
+  if (process.env.NEXT_PUBLIC_SHOW_RESUME !== 'true') {
+    return null;
+  }
 
   const sections = [
     { id: 'awards', label: t('resume.nav.awards') },
