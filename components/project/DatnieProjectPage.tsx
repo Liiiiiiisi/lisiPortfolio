@@ -7,6 +7,7 @@ import { ArrowLeft, Palette, Sparkles, Layers, Zap, VolumeX, Volume2 } from "luc
 import React, { useState, useEffect, useRef } from "react";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+import { useLanguage } from '@/context/LanguageContext';
 
 // YouTube IFrame API types
 declare global {
@@ -59,6 +60,7 @@ interface DatnieProjectPageProps {
 }
 
 export default function DatnieProjectPage({ metadata, content }: DatnieProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'datnie';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);

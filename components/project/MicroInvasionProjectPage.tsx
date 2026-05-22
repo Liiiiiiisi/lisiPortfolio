@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Helper component for tool logos that handles both PNG and SVG
 function ToolLogo({ name, alt }: { name: string; alt: string }) {
@@ -41,6 +42,7 @@ interface MicroInvasionProjectPageProps {
 }
 
 export default function MicroInvasionProjectPage({ metadata, content }: MicroInvasionProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'micro-invasion';
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { innerWidth, innerHeight } = window;
@@ -96,7 +98,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
                 </div>
@@ -112,17 +114,17 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Micro_invasion</h1>
-                            <p className="text-white/60 text-lg">AR Snapchat</p>
+                            <p className="text-white/60 text-lg">{t('micro.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* Lens Studio */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -134,7 +136,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-2">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
                                             Body Tracking
@@ -169,7 +171,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Chuyue Yu</h3>
-                                        <p className="text-white/80 text-xs">Interaction Designer</p>
+                                        <p className="text-white/80 text-xs">{t('micro.team.chuyueTitle')}</p>
                                     </div>
                                 </div>
 
@@ -182,7 +184,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Yike Hu</h3>
-                                        <p className="text-white/80 text-xs">Visual Designer & Video Editor</p>
+                                        <p className="text-white/80 text-xs">{t('micro.team.yikeTitle')}</p>
                                     </div>
                                 </div>
 
@@ -195,7 +197,7 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">My Role</h3>
-                                        <p className="text-white/80 text-xs">Interaction & AR Developer</p>
+                                        <p className="text-white/80 text-xs">{t('micro.team.myRoleTitle')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -205,19 +207,19 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                         <div className="relative z-10 space-y-12">
                             {/* Project Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">01. Project Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('micro.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    <strong className="text-white">Micro_Invasion</strong> is an AR experience that visualizes how microplastics enter the body through ordinary routines.
+                                    <strong className="text-white">Micro_Invasion</strong> {t('micro.overview.body1')}
                                 </p>
                                 <p className="text-lg text-white/90 leading-relaxed mt-4">
-                                    Framed around a dining scene, the project uses real-time tracking, segmentation, and particle simulation to reveal invisible contamination on the user&apos;s hands, face, clothing, and surrounding environment.
+                                    {t('micro.overview.body2')}
                                 </p>
                             </section>
 
                             {/* Concept */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">02. Concept</h2>
-                                <h3 className="text-2xl font-bold text-white mb-6">Hidden Contamination</h3>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('micro.concept.title')}</h2>
+                                <h3 className="text-2xl font-bold text-white mb-6">{t('micro.concept.subtitle')}</h3>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {/* Card 1: Skin Contact */}
@@ -229,9 +231,9 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">Skin Contact</h4>
+                                        <h4 className="text-lg font-semibold text-white mb-2">{t('micro.concept.c1.title')}</h4>
                                         <p className="text-white/70 text-sm leading-relaxed">
-                                            Degraded plastics leave micro-sized particles that stick to the skin during daily use.
+                                            {t('micro.concept.c1.desc')}
                                         </p>
                                     </div>
 
@@ -244,9 +246,9 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">Food Intake</h4>
+                                        <h4 className="text-lg font-semibold text-white mb-2">{t('micro.concept.c2.title')}</h4>
                                         <p className="text-white/70 text-sm leading-relaxed">
-                                            Produce can carry microplastics absorbed from the environment.
+                                            {t('micro.concept.c2.desc')}
                                         </p>
                                     </div>
 
@@ -259,9 +261,9 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
-                                        <h4 className="text-lg font-semibold text-white mb-2">Respiration</h4>
+                                        <h4 className="text-lg font-semibold text-white mb-2">{t('micro.concept.c3.title')}</h4>
                                         <p className="text-white/70 text-sm leading-relaxed">
-                                            Polyester and nylon fabrics release airborne microfibers that can be inhaled.
+                                            {t('micro.concept.c3.desc')}
                                         </p>
                                     </div>
                                 </div>
@@ -269,19 +271,19 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                             {/* Interaction Design */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">03. Interaction Design</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('micro.interaction.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* Interaction 1: Skin Exposure */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">1 — Skin Exposure</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.i1.title')}</h3>
                                         <div className="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Trigger:</strong> Hand sanitizer interaction</p>
-                                                <p className="text-white/80 mb-4"><strong className="text-white">Effect:</strong> Activates hand segmentation and particle attachment</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('micro.triggerLabel')}</strong> {t('micro.i1.trigger')}</p>
+                                                <p className="text-white/80 mb-4"><strong className="text-white">{t('micro.effectLabel')}</strong> {t('micro.i1.effect')}</p>
                                                 <div className="space-y-2 text-white/70 text-sm">
-                                                    <p><strong className="text-white">Object:</strong> Hand Sanitizer</p>
-                                                    <p><strong className="text-white">Segment:</strong> Hand Segmentation Mask</p>
+                                                    <p><strong className="text-white">{t('micro.objectLabel')}</strong> {t('micro.i1.object')}</p>
+                                                    <p><strong className="text-white">{t('micro.segmentLabel')}</strong> {t('micro.i1.segment')}</p>
                                                 </div>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
@@ -296,14 +298,14 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                     {/* Interaction 2: Food Exposure */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">2 — Food Exposure</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.i2.title')}</h3>
                                         <div className="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Trigger:</strong> Apple proximity</p>
-                                                <p className="text-white/80 mb-4"><strong className="text-white">Effect:</strong> Triggers particle accumulation on the face region</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('micro.triggerLabel')}</strong> {t('micro.i2.trigger')}</p>
+                                                <p className="text-white/80 mb-4"><strong className="text-white">{t('micro.effectLabel')}</strong> {t('micro.i2.effect')}</p>
                                                 <div className="space-y-2 text-white/70 text-sm">
-                                                    <p><strong className="text-white">Object:</strong> Apple</p>
-                                                    <p><strong className="text-white">Segment:</strong> Face Segmentation</p>
+                                                    <p><strong className="text-white">{t('micro.objectLabel')}</strong> {t('micro.i2.object')}</p>
+                                                    <p><strong className="text-white">{t('micro.segmentLabel')}</strong> {t('micro.i2.segment')}</p>
                                                 </div>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
@@ -318,14 +320,14 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                     {/* Interaction 3: Fabric Exposure */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">3 — Fabric Exposure</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.i3.title')}</h3>
                                         <div className="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Trigger:</strong> Napkin wipe</p>
-                                                <p className="text-white/80 mb-4"><strong className="text-white">Effect:</strong> Attaches fibers to the clothing segmentation</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('micro.triggerLabel')}</strong> {t('micro.i3.trigger')}</p>
+                                                <p className="text-white/80 mb-4"><strong className="text-white">{t('micro.effectLabel')}</strong> {t('micro.i3.effect')}</p>
                                                 <div className="space-y-2 text-white/70 text-sm">
-                                                    <p><strong className="text-white">Object:</strong> Napkin</p>
-                                                    <p><strong className="text-white">Segment:</strong> Clothing Region</p>
+                                                    <p><strong className="text-white">{t('micro.objectLabel')}</strong> {t('micro.i3.object')}</p>
+                                                    <p><strong className="text-white">{t('micro.segmentLabel')}</strong> {t('micro.i3.segment')}</p>
                                                 </div>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
@@ -340,12 +342,12 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                     {/* Final Reveal */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">Final Reveal</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.finalReveal.title')}</h3>
                                         <p className="text-white/90 mb-4">
-                                            A room-scale particle reveal expands beyond the user&apos;s body and fills the environment.
+                                            {t('micro.finalReveal.body')}
                                         </p>
                                         <p className="text-white/80 italic mb-4 text-lg">
-                                            &quot;Welcome to the world of microplastics.&quot;
+                                            &quot;{t('micro.finalReveal.quote')}&quot;
                                         </p>
                                         <div className="rounded-xl overflow-hidden border border-white/10">
                                             <img
@@ -360,20 +362,20 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                             {/* Technical Implementation */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">04. Technical Implementation</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('micro.tech.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-8">
-                                    I engineered the interaction system, AR logic, image tracking, segmentation, and world-mesh effects.
+                                    {t('micro.tech.intro')}
                                 </p>
 
                                 <div className="space-y-6">
                                     {/* A. Image Tracking System */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">A. Image Tracking System</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.tech.a.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
-                                            <li>Designed a large QR marker as the central anchor</li>
-                                            <li>Built three collider boxes as event triggers</li>
-                                            <li>Developed the interaction flow: skin → food → fabric → environment</li>
-                                            <li>Created a real-time distance-tracking script to measure hand-to-collider proximity</li>
+                                            <li>{t('micro.tech.a.b1')}</li>
+                                            <li>{t('micro.tech.a.b2')}</li>
+                                            <li>{t('micro.tech.a.b3')}</li>
+                                            <li>{t('micro.tech.a.b4')}</li>
                                         </ul>
                                         <div className="rounded-xl overflow-hidden border border-white/10">
                                             <img
@@ -386,12 +388,12 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                     {/* B. Body Tracking & Segmentation */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">B. Body Tracking & Segmentation</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.tech.b.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
-                                            <li>Integrated a hand-detection helper image for segmentation debugging</li>
-                                            <li>Adapted the <code className="text-white/60 bg-white/5 px-1 rounded">example_segmentation</code> template for particle emission</li>
-                                            <li>Controlled segmentation masks for targeted particle activation</li>
-                                            <li>Linked segmentation output to interaction states</li>
+                                            <li>{t('micro.tech.b.b1')}</li>
+                                            <li>{t('micro.tech.b.b2')}</li>
+                                            <li>{t('micro.tech.b.b3')}</li>
+                                            <li>{t('micro.tech.b.b4')}</li>
                                         </ul>
                                         <div className="rounded-xl overflow-hidden border border-white/10">
                                             <img
@@ -404,11 +406,11 @@ export default function MicroInvasionProjectPage({ metadata, content }: MicroInv
 
                                     {/* C. World Mesh Integration */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                        <h3 className="text-xl font-bold text-white mb-4">C. World Mesh Integration</h3>
+                                        <h3 className="text-xl font-bold text-white mb-4">{t('micro.tech.c.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>Extended the simple world mesh template for room-scale particle mapping</li>
-                                            <li>Configured mesh-based particle emission reactive to the environment</li>
-                                            <li>Optimized performance by limiting unnecessary particles</li>
+                                            <li>{t('micro.tech.c.b1')}</li>
+                                            <li>{t('micro.tech.c.b2')}</li>
+                                            <li>{t('micro.tech.c.b3')}</li>
                                         </ul>
                                     </div>
                                 </div>

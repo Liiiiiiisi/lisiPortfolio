@@ -10,17 +10,19 @@ export default async function Project() {
     <div className="min-h-screen flex flex-col bg-black" style={{ backgroundColor: '#000000' }}>
       <Navigation />
       <main className="flex-1 pt-16" style={{ backgroundColor: '#000000' }}>
-        <ProjectList 
+        <ProjectList
           showThumbnail={false}
           projects={projects.map(project => ({
             id: project.id,
             title: project.title,
+            title_zh: project.title_zh,
             href: `/projects/${project.id}`,
             video: project.video,
             cover: project.cover,
             category: project.category,
+            category_zh: project.category_zh,
             features: project.features,
-          }))} 
+          }))}
         />
       </main>
       <Footer isDark={true} />

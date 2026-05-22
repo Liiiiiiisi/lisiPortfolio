@@ -6,6 +6,7 @@ import { ArrowLeft, Code, Sparkles, Palette, Lightbulb, VolumeX, Volume2 } from 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
+import { useLanguage } from '@/context/LanguageContext';
 import YouMayAlsoLike from './YouMayAlsoLike';
 
 // YouTube IFrame API types
@@ -59,6 +60,7 @@ interface PrayForBlessingProjectPageProps {
 }
 
 export default function PrayForBlessingProjectPage({ metadata, content }: PrayForBlessingProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'pray-for-blessing';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);
@@ -175,7 +177,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
 
@@ -201,17 +203,17 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">LET&apos;S MAKE A WISH</h1>
-                            <p className="text-white/60 text-lg">Immersive Ritual VR Experience</p>
+                            <p className="text-white/60 text-lg">{t('pray.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* Unity */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -229,7 +231,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-2">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
                                             OpenXR
@@ -267,7 +269,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Wenqu Tang</h3>
-                                        <p className="text-white/80 text-xs">Unity Developer</p>
+                                        <p className="text-white/80 text-xs">{t('pray.team.wenquTitle')}</p>
                                     </div>
                                 </div>
 
@@ -280,7 +282,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Chuyue Yu</h3>
-                                        <p className="text-white/80 text-xs">Environment Artist</p>
+                                        <p className="text-white/80 text-xs">{t('pray.team.chuyueTitle')}</p>
                                     </div>
                                 </div>
 
@@ -293,7 +295,7 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">My Role</h3>
-                                        <p className="text-white/80 text-xs">Technical Artist &amp; Interaction Designer</p>
+                                        <p className="text-white/80 text-xs">{t('pray.team.myRoleTitle')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -303,15 +305,15 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                         <div className="relative z-10 space-y-12">
                             {/* Project Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">01. Project Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('pray.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    An interactive VR experience that transforms traditional Asian wish-making rituals into intuitive, emotionally engaging moments. I developed the interaction system, VFX, shaders, lighting, and UX flow to craft a cohesive immersive experience.
+                                    {t('pray.overview.body')}
                                 </p>
                             </section>
 
                             {/* My Role */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">02. My Role</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('pray.myRole.title')}</h2>
 
                                 <div className="relative -mx-4 md:-mx-8">
                                     <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent px-4 md:px-8">
@@ -322,9 +324,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Code className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">XR Interaction Programming</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('pray.myRole.card1.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Developed intuitive VR interactions for ritual experiences
+                                                    {t('pray.myRole.card1.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -336,9 +338,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Sparkles className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Real-Time VFX & Shader Development</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('pray.myRole.card2.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Created custom shaders and visual effects for ritual atmosphere
+                                                    {t('pray.myRole.card2.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -350,9 +352,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Palette className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Lighting & Environmental Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('pray.myRole.card3.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed lighting and environmental atmosphere for immersive experience
+                                                    {t('pray.myRole.card3.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -364,22 +366,22 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                 <Lightbulb className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Rapid Prototyping & Problem-Solving</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('pray.myRole.card4.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Solved technical challenges and iterated on interaction design
+                                                    {t('pray.myRole.card4.desc')}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <p className="text-white/80 mt-6 leading-relaxed">
-                                    I translated rituals—praying, writing blessings, releasing lanterns—into intuitive VR interactions with meaningful feedback.
+                                    {t('pray.myRole.summary')}
                                 </p>
                             </section>
 
                             {/* User Journey */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">03. User Journey</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('pray.journey.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* 03.1 Close Eyes */}
@@ -392,9 +394,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Wish Icon"
                                                         className="w-20 h-20 md:w-24 md:h-24"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.1 Close Eyes and Make Wishes</h3>
+                                                    <h3 className="text-xl font-bold text-white">{t('pray.journey.j1.title')}</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Buddha&apos;s halo lights up when the player prays.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('pray.journey.feedbackLabel')}</strong> {t('pray.journey.j1.feedback')}</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -416,9 +418,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Bucket Icon"
                                                         className="w-20 h-20 md:w-24 md:h-24"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.2 Shake the Bucket to Make Wishes</h3>
+                                                    <h3 className="text-xl font-bold text-white">{t('pray.journey.j2.title')}</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> A bamboo stick is generated with a personalized fortune.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('pray.journey.feedbackLabel')}</strong> {t('pray.journey.j2.feedback')}</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -440,9 +442,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Drum Icon"
                                                         className="w-20 h-20 md:w-24 md:h-24"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.3 Beat Drums to Start Festival</h3>
+                                                    <h3 className="text-xl font-bold text-white">{t('pray.journey.j3.title')}</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> Drumming triggers festival music and a scene transition.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('pray.journey.feedbackLabel')}</strong> {t('pray.journey.j3.feedback')}</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -464,9 +466,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Write Icon"
                                                         className="w-20 h-20 md:w-24 md:h-24"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.4 Copy &quot;Fu&quot; to Pray for Luck</h3>
+                                                    <h3 className="text-xl font-bold text-white">{t('pray.journey.j4.title')}</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The player writes the &quot;Fu&quot; symbol to bring luck.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('pray.journey.feedbackLabel')}</strong> {t('pray.journey.j4.feedback')}</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -488,9 +490,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                                                         alt="Lantern Icon"
                                                         className="w-20 h-20 md:w-24 md:h-24"
                                                     />
-                                                    <h3 className="text-xl font-bold text-white">03.5 Release the Sky Lantern</h3>
+                                                    <h3 className="text-xl font-bold text-white">{t('pray.journey.j5.title')}</h3>
                                                 </div>
-                                                <p className="text-white/80 mb-2"><strong className="text-white">Feedback:</strong> The lantern ignites, glows, and rises into the sky.</p>
+                                                <p className="text-white/80 mb-2"><strong className="text-white">{t('pray.journey.feedbackLabel')}</strong> {t('pray.journey.j5.feedback')}</p>
                                             </div>
                                             <div className="rounded-xl overflow-hidden border border-white/10">
                                                 <img
@@ -507,51 +509,51 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
                             {/* Core Contributions */}
                             <section>
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">04. Core Contributions</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">{t('pray.contributions.title')}</h2>
                                 </div>
 
                                 <div className="space-y-8">
                                     {/* 4.1 Ritual Interaction Design */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">4.1 Ritual Interaction Design</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('pray.c41.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>&quot;Fu&quot; handwriting</li>
-                                            <li>Lantern ignition & flight</li>
+                                            <li>{t('pray.c41.b1')}</li>
+                                            <li>{t('pray.c41.b2')}</li>
                                         </ul>
                                     </div>
 
                                     {/* 4.2 Custom Shaders & VFX */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">4.2 Custom Shaders & VFX</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('pray.c42.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>Fire ignition</li>
-                                            <li>Lantern glow shader</li>
-                                            <li>Buddha orbit light</li>
-                                            <li>Festival fireworks</li>
+                                            <li>{t('pray.c42.b1')}</li>
+                                            <li>{t('pray.c42.b2')}</li>
+                                            <li>{t('pray.c42.b3')}</li>
+                                            <li>{t('pray.c42.b4')}</li>
                                         </ul>
                                         <p className="text-white/70 text-sm italic mt-4">
-                                            Fixed lantern silhouette issue by redesigning the shader + post-processing pipeline.
+                                            {t('pray.c42.note')}
                                         </p>
                                     </div>
 
                                     {/* 4.3 XR Systems & Logic */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">4.3 XR Systems & Logic</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('pray.c43.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>Custom hand poses</li>
-                                            <li>Teleport refinement</li>
-                                            <li>Object snapping</li>
-                                            <li>Haptic feedback</li>
-                                            <li>Cinemachine-driven animation</li>
+                                            <li>{t('pray.c43.b1')}</li>
+                                            <li>{t('pray.c43.b2')}</li>
+                                            <li>{t('pray.c43.b3')}</li>
+                                            <li>{t('pray.c43.b4')}</li>
+                                            <li>{t('pray.c43.b5')}</li>
                                         </ul>
                                     </div>
 
                                     {/* 4.4 Technical Problem Solving */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">4.4 Technical Problem Solving</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('pray.c44.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li>Lantern glow pipeline fix</li>
-                                            <li>Git workflow stabilization</li>
+                                            <li>{t('pray.c44.b1')}</li>
+                                            <li>{t('pray.c44.b2')}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -559,9 +561,9 @@ export default function PrayForBlessingProjectPage({ metadata, content }: PrayFo
 
                             {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">05. Outcome</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('pray.outcome.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    This project highlights my strength in <strong className="text-white">XR interactions, real-time visuals, and technical problem-solving</strong>, delivering an experience users described as <em className="text-white/80">calming, nostalgic, and emotionally resonant</em>.
+                                    {t('pray.outcome.body')}
                                 </p>
                             </section>
 

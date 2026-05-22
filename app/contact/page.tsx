@@ -5,35 +5,38 @@ import { Mail, Linkedin, Github, Globe } from 'lucide-react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-
-const socialLinks = [
-  {
-    name: 'Email',
-    href: 'mailto:lxie082@outlook.com',
-    icon: Mail,
-    description: 'Drop me a line',
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/lisi-xie-5aa373157/',
-    icon: Linkedin,
-    description: 'Connect professionally',
-  },
-  {
-    name: 'GitHub',
-    href: 'https://github.com',
-    icon: Github,
-    description: 'View my code',
-  },
-  {
-    name: 'ResearchGate',
-    href: 'https://researchgate.net',
-    icon: Globe,
-    description: 'Academic work',
-  },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
+
+  const socialLinks = [
+    {
+      nameKey: 'contact.email.name',
+      href: 'mailto:lxie082@outlook.com',
+      icon: Mail,
+      descKey: 'contact.email.description',
+    },
+    {
+      nameKey: 'contact.linkedin.name',
+      href: 'https://www.linkedin.com/in/lisi-xie-5aa373157/',
+      icon: Linkedin,
+      descKey: 'contact.linkedin.description',
+    },
+    {
+      nameKey: 'contact.github.name',
+      href: 'https://github.com',
+      icon: Github,
+      descKey: 'contact.github.description',
+    },
+    {
+      nameKey: 'contact.researchgate.name',
+      href: 'https://researchgate.net',
+      icon: Globe,
+      descKey: 'contact.researchgate.description',
+    },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <Navigation />
@@ -44,7 +47,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-bold mb-8 text-white"
           >
-            GET IN TOUCH
+            {t('contact.heading')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -52,13 +55,13 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-400 mb-16"
           >
-            Open for collaborations, freelance projects, or just a chat about the future of XR.
+            {t('contact.subtext')}
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {socialLinks.map((link, index) => (
               <motion.div
-                key={link.name}
+                key={link.nameKey}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
@@ -83,10 +86,10 @@ export default function Contact() {
                   <link.icon size={28} className="text-gray-400 group-hover:text-white transition-colors" />
                   <div className="text-left">
                     <span className="text-lg font-semibold text-gray-200 group-hover:text-white transition-colors block">
-                      {link.name}
+                      {t(link.nameKey)}
                     </span>
                     <span className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors">
-                      {link.description}
+                      {t(link.descKey)}
                     </span>
                   </div>
                 </Link>
@@ -99,4 +102,3 @@ export default function Contact() {
     </div>
   );
 }
-

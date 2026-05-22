@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowLeft, Box, Layers, Code, Video, VolumeX, Volume2 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { withBasePath } from '@/lib/paths';
+import { useLanguage } from '@/context/LanguageContext';
 import StorytellingUnitDesignSection from './StorytellingUnitDesignSection';
 import YouMayAlsoLike from './YouMayAlsoLike';
 
@@ -59,6 +60,7 @@ interface CanopyOfEchoProjectPageProps {
 }
 
 export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfEchoProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'canopy-of-echo';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);
@@ -175,7 +177,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
 
@@ -201,17 +203,17 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Canopy of Echo</h1>
-                            <p className="text-white/60 text-lg">Digital Heritage Kinetic Installation</p>
+                            <p className="text-white/60 text-lg">{t('canopy.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* TouchDesigner */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -241,7 +243,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC Communication</span>
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Computer Vision</span>
@@ -265,7 +267,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Saurabhkumar Ramanbhai Parmar</h3>
-                                        <p className="text-white/80 text-xs">Systems Development, Physical Prototyping</p>
+                                        <p className="text-white/80 text-xs">{t('canopy.team.sauraTitle')}</p>
                                     </div>
                                 </div>
 
@@ -278,7 +280,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Findlay Cumming</h3>
-                                        <p className="text-white/80 text-xs">VR Systems Development</p>
+                                        <p className="text-white/80 text-xs">{t('canopy.team.findlayTitle')}</p>
                                     </div>
                                 </div>
 
@@ -291,7 +293,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">Jingru Feng</h3>
-                                        <p className="text-white/80 text-xs">Architectural Narrative Design</p>
+                                        <p className="text-white/80 text-xs">{t('canopy.team.jingruTitle')}</p>
                                     </div>
                                 </div>
 
@@ -304,7 +306,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="text-lg font-bold text-white">My Role</h3>
-                                        <p className="text-white/80 text-xs">Interactive Prototyping (Unreal), Narrative Design, Production Coordination</p>
+                                        <p className="text-white/80 text-xs">{t('canopy.team.myRoleTitle')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -314,17 +316,17 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                         <div className="relative z-10 space-y-12">
                             {/* Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Canopy of Echo is a real-scale kinetic installation that turns heritage memory into motion, rhythm, and light. Designed for the Great Bao&apos;en Temple under the competition theme &quot;One Wall, One Tower, One River,&quot; the work connects Nanjing&apos;s artefacts and citizens through an interactive &quot;river of stories.&quot;
+                                    {t('canopy.overview.body')}
                                 </p>
                             </section>
 
                             {/* Deliverables */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">2. Deliverables</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.deliverables.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
-                                    Our team delivered a complete pipeline from concept to physical + digital prototyping:
+                                    {t('canopy.deliverables.intro')}
                                 </p>
                                 
                                 {/* 4 Media Items in 2x2 Grid */}
@@ -340,7 +342,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             />
                                         </div>
                                         <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">Small Scale Model</p>
+                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d1')}</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
@@ -354,7 +356,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             />
                                         </div>
                                         <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">Physical Model</p>
+                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d2')}</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
@@ -368,7 +370,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             />
                                         </div>
                                         <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">Unreal Prototype</p>
+                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d3')}</p>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
@@ -382,7 +384,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             />
                                         </div>
                                         <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">Rendered Video</p>
+                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d4')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -390,7 +392,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                             {/* User Journey */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">3. User Journey</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('canopy.journey.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* 3.1 */}
@@ -409,10 +411,10 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                3.1 Connection with the River — Flow of Memory
+                                                {t('canopy.journey.j31.title')}
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
-                                                The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
+                                                {t('canopy.journey.j31.body')}
                                             </p>
                                         </div>
                                     </div>
@@ -433,10 +435,10 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                3.2 Connection with the Wall — Reconstructing What Once Stood
+                                                {t('canopy.journey.j32.title')}
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
-                                                Facing the ancient city wall, the roofline references the lost tower. Visitors can visually &quot;restore&quot; the historic architecture through perspective.
+                                                {t('canopy.journey.j32.body')}
                                             </p>
                                         </div>
                                     </div>
@@ -457,10 +459,10 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                3.3 Connection with the Tower — Approaching Stories
+                                                {t('canopy.journey.j33.title')}
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
-                                                When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
+                                                {t('canopy.journey.j33.body')}
                                             </p>
                                         </div>
                                     </div>
@@ -481,10 +483,10 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                         {/* Bottom Caption Bar */}
                                         <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
                                             <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                3.4 Connection with the Audience — Participatory Heritage
+                                                {t('canopy.journey.j34.title')}
                                             </h3>
                                             <p className="text-sm md:text-base text-white/90">
-                                                Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
+                                                {t('canopy.journey.j34.body')}
                                             </p>
                                         </div>
                                     </div>
@@ -494,7 +496,7 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                             {/* Core Contributions */}
                             <section>
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">4. Core Contributions</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">{t('canopy.contributions.title')}</h2>
                                 </div>
 
                                 <div className="space-y-8">
@@ -503,13 +505,13 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                                     {/* 4.2 Unreal Interactive Prototype */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-6">
-                                        <h3 className="text-2xl font-bold text-white">4.2 Unreal Interactive Prototype — Interactive Winch System</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('canopy.c42.title')}</h3>
                                         <p className="text-white/90 leading-relaxed">
-                                            I built a real-time pipeline connecting:
+                                            {t('canopy.c42.intro')}
                                         </p>
                                         <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                                             <p className="text-white/80 text-center mb-4">
-                                                Real-time communication between Unreal Engine and TouchDesigner via OSC.
+                                                {t('canopy.c42.oscCaption')}
                                             </p>
                                             <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                                                 <Image
@@ -522,17 +524,17 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             </div>
                                         </div>
                                         <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                            <h4 className="text-lg font-semibold text-white mb-4">Two motion states</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('canopy.c42.motionStatesTitle')}</h4>
                                             {/* Text Content */}
                                             <div className="mb-6">
                                                 <div className="grid grid-cols-2 gap-4">
                                                     <div>
-                                                        <p className="text-white font-semibold mb-1">Sinewave Mode</p>
-                                                        <p className="text-white/80 text-sm">smooth continuous motion (idle loop)</p>
+                                                        <p className="text-white font-semibold mb-1">{t('canopy.c42.sinewave.title')}</p>
+                                                        <p className="text-white/80 text-sm">{t('canopy.c42.sinewave.desc')}</p>
                                                     </div>
                                                     <div className="border-l border-white/20 pl-4">
-                                                        <p className="text-white font-semibold mb-1">Freeze Mode</p>
-                                                        <p className="text-white/80 text-sm">pauses when a visitor approaches</p>
+                                                        <p className="text-white font-semibold mb-1">{t('canopy.c42.freeze.title')}</p>
+                                                        <p className="text-white/80 text-sm">{t('canopy.c42.freeze.desc')}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -548,15 +550,15 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
                                             </div>
                                         </div>
                                         <p className="text-white/90 leading-relaxed">
-                                            Using MediaPipe, cameras detect visitor positions. When someone enters a zone, the corresponding unit freezes, then resumes after they leave—creating a clear reading-and-discovery rhythm.
+                                            {t('canopy.c42.mediapipe')}
                                         </p>
                                     </div>
 
                                     {/* 4.3 Video Production */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">4.3 Video Production</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('canopy.c43.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-6">
-                                            I wrote the script, built animation beats, set up scenes and lighting, and rendered the narrative video to communicate the concept, interaction logic, and heritage value.
+                                            {t('canopy.c43.body')}
                                         </p>
                                         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                                             <iframe
@@ -573,9 +575,9 @@ export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfE
 
                             {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcome</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.outcome.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
-                                    <strong className="text-white">Winner</strong> — Best Heritage Narrative Prize 2025 Digital Heritage Competition
+                                    {t('canopy.outcome.body')}
                                 </p>
                                 <div className="relative w-full rounded-xl overflow-hidden">
                                     <Image

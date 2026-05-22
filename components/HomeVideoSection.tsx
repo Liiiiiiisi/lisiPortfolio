@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HomeVideoSectionProps {
   youtubeUrl?: string;
@@ -9,6 +10,7 @@ interface HomeVideoSectionProps {
 
 export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Trigger animation after component mounts
@@ -150,7 +152,7 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
                 transition: 'opacity 600ms ease-out, transform 600ms ease-out',
               }}
             >
-              Creative Designer for Interactive & Immersive Experiences
+              {t('home.headline')}
             </h1>
 
             {/* Subtitle */}
@@ -167,7 +169,7 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
                 transition: 'opacity 600ms ease-out 80ms, transform 600ms ease-out 80ms',
               }}
             >
-              Crafting concept-driven visual and interactive experiences
+              {t('home.subtitle')}
             </p>
 
             {/* Byline Row - with CTA aligned on right */}
@@ -185,7 +187,7 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
                   transition: 'opacity 600ms ease-out 100ms, transform 600ms ease-out 100ms',
                 }}
               >
-                Lisi Xie — Creative Designer
+                {t('home.byline')}
               </p>
 
               {/* CTA Button - aligned with byline */}
@@ -214,7 +216,7 @@ export default function HomeVideoSection({ youtubeUrl }: HomeVideoSectionProps) 
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
                 }}
               >
-                View Selected Projects →
+                {t('home.cta')}
               </Link>
             </div>
           </div>

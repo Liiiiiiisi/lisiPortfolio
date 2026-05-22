@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+import { useLanguage } from '@/context/LanguageContext';
 
 // YouTube IFrame API types
 declare global {
@@ -59,6 +60,7 @@ interface VREducationProjectPageProps {
 }
 
 export default function VREducationProjectPage({ metadata, content }: VREducationProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'vr-education';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);
@@ -174,7 +176,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
 
@@ -212,17 +214,17 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Guardian&apos;s Guide</h1>
-                            <p className="text-white/60 text-lg">VR Training Experience for Caregivers of Autistic Children</p>
+                            <p className="text-white/60 text-lg">{t('vr.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* Unity */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -252,7 +254,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-2">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
                                             C#
@@ -275,15 +277,15 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                         <div className="relative z-10 space-y-12">
                             {/* 2. Project Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Project Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('vr.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Guardian&apos;s Guide is a VR learning experience designed to help new caregivers understand and support a non-verbal autistic child. The experience focuses on approachable, practice-based learning and teaches essential caregiving skills through realistic sensory and communication challenges.
+                                    {t('vr.overview.body')}
                                 </p>
                             </section>
 
                             {/* 3. My Role */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">2. My Role</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('vr.myRole.title')}</h2>
 
                                 <div className="relative -mx-4 md:-mx-8">
                                     {/* Scroll Container */}
@@ -295,9 +297,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 <MousePointer2 className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Interaction Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('vr.myRole.card1.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed VR interaction and onboarding systems
+                                                    {t('vr.myRole.card1.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -309,9 +311,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 <Workflow className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Logic & Flow</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('vr.myRole.card2.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Implemented scoring logic, triggers, and task flow in Unity
+                                                    {t('vr.myRole.card2.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -323,9 +325,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 <Shield className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Mechanics</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('vr.myRole.card3.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Built anti-cheating and progression mechanics
+                                                    {t('vr.myRole.card3.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -337,9 +339,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 <Layers className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Architecture</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('vr.myRole.card4.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Structured scene flow and overall user experience architecture
+                                                    {t('vr.myRole.card4.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -351,9 +353,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 <Heart className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Accessibility</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('vr.myRole.card5.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Designed interactions aligned with autistic sensory needs
+                                                    {t('vr.myRole.card5.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -365,16 +367,16 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                             <section>
                                 {/* Header Card */}
                                 <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">3. Core Contributions</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">{t('vr.contributions.title')}</h2>
                                     <p className="text-white/70 text-base md:text-lg">
-                                        I contributed across interaction design, system logic, anti-cheating mechanics, and overall scene structure.
+                                        {t('vr.contributions.intro')}
                                     </p>
                                 </div>
 
                                 <div className="space-y-8">
                                     {/* 4.1 Interaction System Design */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.1 Interaction System Design</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('vr.c31.title')}</h3>
                                         <div>
                                             <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                                 <img
@@ -384,9 +386,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 {/* Gradient Overlay & Text for GIF */}
                                                 <div className="bg-black/40 backdrop-blur-sm p-6 border-t border-white/10">
-                                                    <h3 className="text-xl font-semibold text-white mb-2">Interaction System Design</h3>
+                                                    <h3 className="text-xl font-semibold text-white mb-2">{t('vr.c31.mediaTitle')}</h3>
                                                     <p className="text-white/80 text-sm md:text-base">
-                                                        Inspired by <em>The Escape Artist</em> controller tutorial, I designed an onboarding flow that makes VR controls intuitive even for first-time users.
+                                                        {t('vr.c31.mediaCaption')}
                                                     </p>
                                                 </div>
                                             </div>
@@ -399,7 +401,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                             </div>
                                             <p className="text-white/90 leading-relaxed mb-4">
-                                                This system reduces onboarding friction by providing an interactive, visual understanding of core VR controls.
+                                                {t('vr.c31.body')}
                                             </p>
                                         </div>
                                     </div>
@@ -407,9 +409,9 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                     {/* 4.2 System Logic & Gameplay Mechanics */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-8">
                                         <div>
-                                            <h3 className="text-2xl font-bold text-white mb-4">3.2 System Logic & Gameplay Mechanics</h3>
+                                            <h3 className="text-2xl font-bold text-white mb-4">{t('vr.c32.title')}</h3>
                                             <p className="text-white/90 leading-relaxed">
-                                                I designed the underlying logic that drives tasks, feedback, and progression throughout the experience.
+                                                {t('vr.c32.intro')}
                                             </p>
                                         </div>
 
@@ -424,7 +426,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
                                                     <p className="text-sm md:text-base text-white/90">
-                                                        Implemented visual state changes (red → yellow) to mark completed interactions.
+                                                        {t('vr.c32.gif1')}
                                                     </p>
                                                 </div>
                                             </div>
@@ -438,7 +440,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
                                                     <p className="text-sm md:text-base text-white/90">
-                                                        Built a collision-based scoring system to validate object placement.
+                                                        {t('vr.c32.gif2')}
                                                     </p>
                                                 </div>
                                             </div>
@@ -452,22 +454,22 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
                                                     <p className="text-sm md:text-base text-white/90">
-                                                        Implemented TextMesh-linked scoring for real-time interaction feedback.
+                                                        {t('vr.c32.gif3')}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <p className="text-white/90 leading-relaxed">
-                                            These mechanics structure the learning process and support clear, consistent feedback.
+                                            {t('vr.c32.outro')}
                                         </p>
                                     </div>
 
                                     {/* 4.3 Anti-Cheating Mechanics */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.3 Anti-Cheating Mechanics</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('vr.c33.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-6">
-                                            To ensure meaningful learning rather than trial-and-error, I implemented:
+                                            {t('vr.c33.intro')}
                                         </p>
 
                                         <div className="space-y-6">
@@ -480,7 +482,7 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
                                                     <p className="text-sm md:text-base text-white/90">
-                                                        Automatic removal of unselected options once a choice is made, preventing trial-and-error behavior.
+                                                        {t('vr.c33.gif1')}
                                                     </p>
                                                 </div>
                                             </div>
@@ -494,28 +496,28 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
                                                 />
                                                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/35 backdrop-blur-md">
                                                     <p className="text-sm md:text-base text-white/90">
-                                                        Deactivated UI trigger sockets after interaction to prevent repeated scoring on the same action.
+                                                        {t('vr.c33.gif2')}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <p className="text-white/90 leading-relaxed mt-6">
-                                            These systems preserve learning integrity and maintain authentic decision-making.
+                                            {t('vr.c33.outro')}
                                         </p>
                                     </div>
 
                                     {/* 4.4 Scene Architecture & Flow */}
                                     <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">3.4 Scene Architecture & Flow</h3>
+                                        <h3 className="text-2xl font-bold text-white">{t('vr.c34.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            The experience progresses through four core scenes:
+                                            {t('vr.c34.intro')}
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li><strong className="text-white">Tutorial</strong> — Users learn VR controls</li>
-                                            <li><strong className="text-white">White Room</strong> — Users review Kid X&apos;s profile through object-based interactions</li>
-                                            <li><strong className="text-white">Kitchen (Guided Task)</strong> — Users complete caregiving tasks with hints and instant UI feedback</li>
-                                            <li><strong className="text-white">Living Room (Independent Task)</strong> — Users apply their learning without hints</li>
+                                            <li>{t('vr.c34.scene1')}</li>
+                                            <li>{t('vr.c34.scene2')}</li>
+                                            <li>{t('vr.c34.scene3')}</li>
+                                            <li>{t('vr.c34.scene4')}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -523,22 +525,22 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
 
                             {/* 5. Technical Breakdown */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. Technical Breakdown</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('vr.tech.title')}</h2>
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.1 Interaction Systems</h3>
+                                        <h3 className="text-2xl font-bold mb-4 text-white">{t('vr.tech.t41.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>OpenXR-based input abstraction</li>
-                                            <li>State-driven interaction feedback</li>
-                                            <li>Modular, event-based interaction design</li>
+                                            <li>{t('vr.tech.t41.b1')}</li>
+                                            <li>{t('vr.tech.t41.b2')}</li>
+                                            <li>{t('vr.tech.t41.b3')}</li>
                                         </ul>
                                     </div>
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold mb-4 text-white">4.2 Gameplay Logic</h3>
+                                        <h3 className="text-2xl font-bold mb-4 text-white">{t('vr.tech.t42.title')}</h3>
                                         <ul className="list-disc list-inside space-y-2 text-white/80">
-                                            <li>Rule-based scoring system</li>
-                                            <li>Trigger lifecycle control</li>
-                                            <li>Decoupled logic and UI feedback</li>
+                                            <li>{t('vr.tech.t42.b1')}</li>
+                                            <li>{t('vr.tech.t42.b2')}</li>
+                                            <li>{t('vr.tech.t42.b3')}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -546,12 +548,12 @@ export default function VREducationProjectPage({ metadata, content }: VREducatio
 
                             {/* 5. Outcomes & Learnings */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">5. Outcomes & Learnings</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('vr.outcomes.title')}</h2>
                                 <ul className="list-disc list-inside space-y-3 text-white/90 text-lg">
-                                    <li>Improved usability for first-time VR users through simplified onboarding</li>
-                                    <li>Validated behavior-based training approaches for neurodivergent learning</li>
-                                    <li>Established a scalable, rule-based framework for VR learning systems</li>
-                                    <li>Identified future directions, including adaptive difficulty and richer behavioral states</li>
+                                    <li>{t('vr.outcomes.b1')}</li>
+                                    <li>{t('vr.outcomes.b2')}</li>
+                                    <li>{t('vr.outcomes.b3')}</li>
+                                    <li>{t('vr.outcomes.b4')}</li>
                                 </ul>
                             </section>
 

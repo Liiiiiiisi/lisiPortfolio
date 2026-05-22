@@ -16,6 +16,7 @@ function GitHubIcon({ className }: { className?: string }) {
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+import { useLanguage } from '@/context/LanguageContext';
 
 // YouTube IFrame API types
 declare global {
@@ -68,6 +69,7 @@ interface CarbonNeutralProjectPageProps {
 }
 
 export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNeutralProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'carbon-neutral';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);
@@ -183,7 +185,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
 
@@ -209,17 +211,17 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Personal carbonNeutral</h1>
-                            <p className="text-white/60 text-lg">AR mobile game</p>
+                            <p className="text-white/60 text-lg">{t('carbon.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* Unity */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -249,7 +251,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-2">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
                                             Plane Tracking
@@ -272,53 +274,53 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                         <div className="relative z-10 space-y-12">
                             {/* Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('carbon.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Personal Carbon Neutral is an AR game prototype that transforms a player&apos;s real-world carbon footprint into interactive digital creatures. The project integrates AR, environmental data, and game mechanics to explore how emerging technology can drive sustainable behavior through play.
+                                    {t('carbon.overview.body')}
                                 </p>
                             </section>
 
                             {/* Problem */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">2. Problem</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('carbon.problem.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-4">
-                                    Carbon emissions are invisible and abstract, making them difficult for individuals to understand or act on.
+                                    {t('carbon.problem.body1')}
                                 </p>
                                 <p className="text-white/90 leading-relaxed mb-4">
-                                    Even people who want to behave sustainably often lack:
+                                    {t('carbon.problem.body2')}
                                 </p>
                                 <div className="flex flex-wrap gap-4 md:gap-6 mb-4">
                                     <div className="flex items-center gap-2 text-white/80">
                                         <Clock className="w-5 h-5 text-white/60" />
-                                        <span>Real-time feedback</span>
+                                        <span>{t('carbon.problem.feedback')}</span>
                                     </div>
                                     <div className="flex items-center gap-2 text-white/80">
                                         <Lightbulb className="w-5 h-5 text-white/60" />
-                                        <span>Behavioral insight</span>
+                                        <span>{t('carbon.problem.insight')}</span>
                                     </div>
                                     <div className="flex items-center gap-2 text-white/80">
                                         <Heart className="w-5 h-5 text-white/60" />
-                                        <span>An engaging reason to change habits</span>
+                                        <span>{t('carbon.problem.reason')}</span>
                                     </div>
                                 </div>
                                 <p className="text-white/90 leading-relaxed">
-                                    <strong className="text-white">Design challenge:</strong> How can technology make personal carbon impact visible, actionable, and emotionally meaningful?
+                                    <strong className="text-white">{t('carbon.problem.challenge')}</strong>
                                 </p>
                             </section>
 
                             {/* Concept */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">3. Concept</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('carbon.concept.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed mb-6">
-                                    The game visualizes carbon emissions as creatures that players can interact with and transform through sustainable actions.
+                                    {t('carbon.concept.intro')}
                                 </p>
 
                                 <div className="space-y-8">
                                     {/* SCM */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">SCM – Small Carbon Monsters</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.concept.scm.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            SCMs are formed from a player&apos;s daily carbon emissions. Players can <strong className="text-white">purify</strong> SCMs to reduce their footprint and add them to a creature collection for future battles.
+                                            {t('carbon.concept.scm.body')}
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -331,9 +333,9 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                     {/* LCM */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">LCM – Large Carbon Monsters</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.concept.lcm.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            LCMs are generated from the <strong className="text-white">combined emissions of all players in a city</strong>. Defeating an LCM symbolizes achieving <strong className="text-white">temporary collective carbon neutrality</strong>.
+                                            {t('carbon.concept.lcm.body')}
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -345,38 +347,38 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                     </div>
 
                                     <p className="text-white/90 leading-relaxed">
-                                        This system reframes climate responsibility into a <strong className="text-white">playable loop</strong> where real-world actions create in-game power.
+                                        {t('carbon.concept.loop')}
                                     </p>
                                 </div>
                             </section>
 
                             {/* System & Mechanics */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">4. System & Mechanics</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('carbon.system.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* Behavior Tracking */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">Behavior Tracking</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.system.behavior.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-6">
-                                            The system gathers emission-related actions through two channels.
+                                            {t('carbon.system.behavior.intro')}
                                         </p>
 
                                         <div className="space-y-6 mb-6">
                                             <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                                <h4 className="text-xl font-semibold text-white mb-3">Auto-detected behaviors (AI pattern recognition)</h4>
+                                                <h4 className="text-xl font-semibold text-white mb-3">{t('carbon.system.auto.title')}</h4>
                                                 <p className="text-white/80 mb-3">
-                                                    By analyzing movement rhythm and route patterns, the system can infer transport type:
+                                                    {t('carbon.system.auto.intro')}
                                                 </p>
                                                 <ul className="list-disc list-inside space-y-1 text-white/80 ml-4">
-                                                    <li>Walking</li>
-                                                    <li>Biking</li>
-                                                    <li>Bus routes</li>
-                                                    <li>Subway travel</li>
-                                                    <li>Taxi / ride services</li>
+                                                    <li>{t('carbon.system.auto.b1')}</li>
+                                                    <li>{t('carbon.system.auto.b2')}</li>
+                                                    <li>{t('carbon.system.auto.b3')}</li>
+                                                    <li>{t('carbon.system.auto.b4')}</li>
+                                                    <li>{t('carbon.system.auto.b5')}</li>
                                                 </ul>
                                                 <p className="text-white/60 text-sm italic mt-3">
-                                                    Concept: public transit follows fixed routes + consistent speeds; other modes have distinct patterns, making classification possible.
+                                                    {t('carbon.system.auto.note')}
                                                 </p>
                                             </div>
 
@@ -389,18 +391,18 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                             </div>
 
                                             <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                                <h4 className="text-xl font-semibold text-white mb-3">Manually verified behaviors</h4>
+                                                <h4 className="text-xl font-semibold text-white mb-3">{t('carbon.system.manual.title')}</h4>
                                                 <p className="text-white/80 mb-3">
-                                                    Actions requiring simple proof uploads include:
+                                                    {t('carbon.system.manual.intro')}
                                                 </p>
                                                 <ul className="list-disc list-inside space-y-1 text-white/80 ml-4">
-                                                    <li>Recycling</li>
-                                                    <li>Energy-saving habits</li>
-                                                    <li>Conscious or low-impact shopping</li>
-                                                    <li>Sustainable diet choices</li>
+                                                    <li>{t('carbon.system.manual.b1')}</li>
+                                                    <li>{t('carbon.system.manual.b2')}</li>
+                                                    <li>{t('carbon.system.manual.b3')}</li>
+                                                    <li>{t('carbon.system.manual.b4')}</li>
                                                 </ul>
                                                 <p className="text-white/80 mt-3">
-                                                    To motivate these actions, players unlock <strong className="text-white">mini-games</strong> that reinforce sustainable habits.
+                                                    {t('carbon.system.manual.outro')}
                                                 </p>
                                             </div>
 
@@ -416,18 +418,18 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                     {/* Reward Loop */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold text-white mb-4">Reward Loop</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.system.reward.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            Sustainable behaviors convert into in-game value:
+                                            {t('carbon.system.reward.intro')}
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4">
-                                            <li><strong className="text-white">Coins</strong> – unlock skins</li>
-                                            <li><strong className="text-white">Magic power</strong> – used in combat</li>
-                                            <li><strong className="text-white">EXP</strong> – upgrades and evolves characters</li>
-                                            <li><strong className="text-white">City progress</strong> – contributes to defeating LCMs</li>
+                                            <li>{t('carbon.system.reward.b1')}</li>
+                                            <li>{t('carbon.system.reward.b2')}</li>
+                                            <li>{t('carbon.system.reward.b3')}</li>
+                                            <li>{t('carbon.system.reward.b4')}</li>
                                         </ul>
                                         <p className="text-white/90 leading-relaxed mt-4">
-                                            This creates a <strong className="text-white">closed feedback system</strong> where physical actions directly affect digital outcomes.
+                                            {t('carbon.system.reward.outro')}
                                         </p>
                                     </div>
                                 </div>
@@ -435,14 +437,14 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                             {/* Character Design */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">5. Character Design</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('carbon.character.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* Whale Willy */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">Main Character – Whale Willy</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.character.whale.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            Inspired by whales as natural <strong className="text-white">carbon sinks</strong>. Willy&apos;s appearance evolves based on the player&apos;s activity and progress.
+                                            {t('carbon.character.whale.body')}
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -455,9 +457,9 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                     {/* SCM Monsters */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">SCM Monsters</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.character.scm.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            SCM creatures represent everyday environmental issues.
+                                            {t('carbon.character.scm.body')}
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -470,9 +472,9 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                     {/* LCM Monster */}
                                     <div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">LCM Monster – Giant Salamander</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.character.lcm.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            A boss creature inspired by <strong className="text-white">extreme flood events</strong> and ecosystem vulnerability.
+                                            {t('carbon.character.lcm.body')}
                                         </p>
                                         <div className="w-full my-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
@@ -482,7 +484,7 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
                                             />
                                         </div>
                                         <p className="text-white/90 leading-relaxed">
-                                            Each character anchors a real climate issue through playful, approachable visual storytelling.
+                                            {t('carbon.character.lcm.outro')}
                                         </p>
                                     </div>
                                 </div>
@@ -490,22 +492,22 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                             {/* Technical Build */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">6. Technical Build</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('carbon.tech.title')}</h2>
 
                                 <div className="space-y-8">
                                     {/* 6.1 Modeling */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold text-white mb-4">6.1 Modeling & Visual Exploration (Cinema 4D)</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.tech.t61.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            I initially explored a <strong className="text-white">voxel-style particle system</strong> using Tool 4D Voxygen to visualize characters as &quot;carbon particles.&quot; Although visually intriguing, this approach created:
+                                            {t('carbon.tech.t61.body1')}
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
-                                            <li>Unstable motion during FBX export</li>
-                                            <li>High-frequency visual noise causing AR discomfort</li>
-                                            <li>Poor readability in small real-world environments</li>
+                                            <li>{t('carbon.tech.t61.b1')}</li>
+                                            <li>{t('carbon.tech.t61.b2')}</li>
+                                            <li>{t('carbon.tech.t61.b3')}</li>
                                         </ul>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            To improve usability and performance, I transitioned to <strong className="text-white">cleaner 3D models</strong> with strong silhouettes, while maintaining carbon-inspired design cues.
+                                            {t('carbon.tech.t61.body2')}
                                         </p>
                                         <p className="text-white/60 text-sm italic mb-4">
                                             Tools: Cinema 4D, Voxygen plugin
@@ -521,15 +523,15 @@ export default function CarbonNeutralProjectPage({ metadata, content }: CarbonNe
 
                                     {/* 6.2 AR Prototype */}
                                     <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                                        <h3 className="text-2xl font-bold text-white mb-4">6.2 AR Prototype Development</h3>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{t('carbon.tech.t62.title')}</h3>
                                         <p className="text-white/90 leading-relaxed mb-4">
-                                            In Unity, I built two AR battle prototypes that integrate animation, interaction logic, and spatial mapping.
+                                            {t('carbon.tech.t62.body')}
                                         </p>
                                         <ul className="list-disc list-inside space-y-2 text-white/80 ml-4 mb-4">
-                                            <li>C# battle logic</li>
-                                            <li>Animator state machine</li>
-                                            <li>Vuforia plane detection</li>
-                                            <li>Real-world player movement mapped to combat distance</li>
+                                            <li>{t('carbon.tech.t62.b1')}</li>
+                                            <li>{t('carbon.tech.t62.b2')}</li>
+                                            <li>{t('carbon.tech.t62.b3')}</li>
+                                            <li>{t('carbon.tech.t62.b4')}</li>
                                         </ul>
                                         <div className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img

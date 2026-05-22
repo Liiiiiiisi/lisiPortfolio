@@ -2,24 +2,21 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [language, setLanguage] = useState<'EN' | 'CN'>('EN');
+  const { language, setLanguage, t } = useLanguage();
   const isProjectPage = pathname?.startsWith('/projects/');
   const isHomePage = pathname === '/';
 
   const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/project', label: 'Project' },
-    { href: '/about', label: 'About' },
-    { href: '/resume', label: 'Resume' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/', label: t('nav.home') },
+    { href: '/project', label: t('nav.project') },
+    { href: '/about', label: t('nav.about') },
+    { href: '/resume', label: t('nav.resume') },
+    { href: '/contact', label: t('nav.contact') },
   ];
-
-  // Debug: log pathname to console (remove in production)
-  // console.log('Current pathname:', pathname);
 
   const toggleLanguage = () => {
     setLanguage(language === 'EN' ? 'CN' : 'EN');

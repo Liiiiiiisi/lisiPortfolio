@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { withBasePath } from '@/lib/paths';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Helper component for tool logos
 function ToolLogo({ name, alt }: { name: string; alt: string }) {
@@ -83,16 +84,18 @@ function GoldsmithsLogo({ name, alt }: { name: string; alt: string }) {
   );
 }
 
-const sections = [
-  { id: 'awards', label: 'Awards' },
-  { id: 'projects', label: 'Selected Projects' },
-  { id: 'practice', label: 'Practice' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
-  { id: 'contact', label: 'Download / Contact' },
-];
-
 export default function Resume() {
+  const { t } = useLanguage();
+
+  const sections = [
+    { id: 'awards', label: t('resume.nav.awards') },
+    { id: 'projects', label: t('resume.nav.projects') },
+    { id: 'practice', label: t('resume.nav.practice') },
+    { id: 'skills', label: t('resume.nav.skills') },
+    { id: 'education', label: t('resume.nav.education') },
+    { id: 'contact', label: t('resume.nav.contact') },
+  ];
+
   const sectionIds = sections.map(s => s.id);
   const activeSection = useScrollSpy(sectionIds, 150);
   const navRef = useRef<HTMLDivElement>(null);
@@ -208,28 +211,28 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Awards
+                  {t('resume.nav.awards')}
                 </h2>
                 <div className="max-w-[56ch] space-y-6">
-                  <motion.div 
+                  <motion.div
                     className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90"
                     initial={{ opacity: 0, y: 4 }}
                     whileInView={{ opacity: 0.9, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: 0.05, ease: 'easeOut' }}
                   >
-                    <p className="font-medium mb-1">XRDC 2025 — Contextual AI Prize & Community Impact</p>
-                    <p className="opacity-80">Project: SIGNIE (MR ASL Tutor & Translator)</p>
+                    <p className="font-medium mb-1">{t('resume.award1.title')}</p>
+                    <p className="opacity-80">{t('resume.award1.project')}</p>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90"
                     initial={{ opacity: 0, y: 4 }}
                     whileInView={{ opacity: 0.9, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: 0.1, ease: 'easeOut' }}
                   >
-                    <p className="font-medium mb-1">Digital Heritage Competition — Best Heritage Prize</p>
-                    <p className="opacity-80">Project: Canopy of Echo (Great Bao&apos;en Monastery Museum)</p>
+                    <p className="font-medium mb-1">{t('resume.award2.title')}</p>
+                    <p className="opacity-80">{t('resume.award2.project')}</p>
                   </motion.div>
                 </div>
               </motion.section>
@@ -250,7 +253,7 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Selected Projects
+                  {t('resume.nav.projects')}
                 </h2>
                 <div className="max-w-[56ch] space-y-10">
                   {/* Project 1 */}
@@ -261,12 +264,12 @@ export default function Resume() {
                     transition={{ duration: 0.35, delay: 0, ease: 'easeOut' }}
                   >
                     <h3 className="text-white text-lg md:text-xl font-semibold mb-4 opacity-100">
-                      SIGNIE — MR ASL Tutor & Translator
+                      {t('resume.project1.title')}
                     </h3>
                     <ul className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 space-y-2 mb-4 list-disc list-inside">
-                      <li>World-space UI & MR readability (floating text, interaction cues)</li>
-                      <li>Virtual guide system (hand animations, triggers, UI events)</li>
-                      <li>Micro-gesture interaction + voice-driven logic (Wit.ai)</li>
+                      <li>{t('resume.project1.bullet1')}</li>
+                      <li>{t('resume.project1.bullet2')}</li>
+                      <li>{t('resume.project1.bullet3')}</li>
                     </ul>
                     <div className="text-white text-sm opacity-70">
                       Unity / C# / MR / Hand Tracking / Interaction Systems
@@ -281,12 +284,12 @@ export default function Resume() {
                     transition={{ duration: 0.35, delay: 0.05, ease: 'easeOut' }}
                   >
                     <h3 className="text-white text-lg md:text-xl font-semibold mb-4 opacity-100">
-                      GUARDIAN&apos;S GUIDE — VR Training System
+                      {t('resume.project2.title')}
                     </h3>
                     <ul className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 space-y-2 mb-4 list-disc list-inside">
-                      <li>Modular C# interaction and rule-based systems</li>
-                      <li>Onboarding flow, scoring logic, and feedback design</li>
-                      <li>Accessibility-oriented interaction and environment tuning</li>
+                      <li>{t('resume.project2.bullet1')}</li>
+                      <li>{t('resume.project2.bullet2')}</li>
+                      <li>{t('resume.project2.bullet3')}</li>
                     </ul>
                     <div className="text-white text-sm opacity-70">
                       Unity / C# / VR / Interaction Design / Training Systems
@@ -301,12 +304,12 @@ export default function Resume() {
                     transition={{ duration: 0.35, delay: 0.1, ease: 'easeOut' }}
                   >
                     <h3 className="text-white text-lg md:text-xl font-semibold mb-4 opacity-100">
-                      PRAY FOR BLESSING — VR Immersive Experience
+                      {t('resume.project3.title')}
                     </h3>
                     <ul className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 space-y-2 mb-4 list-disc list-inside">
-                      <li>Core VR interaction systems (gesture-based handwriting)</li>
-                      <li>URP particle VFX optimization (~25% GPU load reduction)</li>
-                      <li>Shader Graph materials and timeline-driven sequencing</li>
+                      <li>{t('resume.project3.bullet1')}</li>
+                      <li>{t('resume.project3.bullet2')}</li>
+                      <li>{t('resume.project3.bullet3')}</li>
                     </ul>
                     <div className="text-white text-sm opacity-70">
                       Unity / C# / URP / VFX / Optimization
@@ -331,15 +334,15 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Practice
+                  {t('resume.nav.practice')}
                 </h2>
                 <div className="max-w-[56ch]">
                   <div className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 space-y-4">
-                    <p className="font-medium opacity-100">Freelance XR Developer & Designer (2024–Present)</p>
+                    <p className="font-medium opacity-100">{t('resume.practice.title')}</p>
                     <ul className="space-y-2 list-disc list-inside">
-                      <li>Delivered Unity XR prototypes and interaction systems</li>
-                      <li>Built immersive experiences for exhibitions and research projects</li>
-                      <li>Worked end-to-end across interaction design, implementation, and iteration</li>
+                      <li>{t('resume.practice.bullet1')}</li>
+                      <li>{t('resume.practice.bullet2')}</li>
+                      <li>{t('resume.practice.bullet3')}</li>
                     </ul>
                   </div>
                 </div>
@@ -361,7 +364,7 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Skills
+                  {t('resume.nav.skills')}
                 </h2>
                 <div className="max-w-[56ch] space-y-6">
                   <motion.div
@@ -370,7 +373,7 @@ export default function Resume() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: 0, ease: 'easeOut' }}
                   >
-                    <h3 className="text-white text-base font-medium mb-4 opacity-100">Tools</h3>
+                    <h3 className="text-white text-base font-medium mb-4 opacity-100">{t('resume.skills.toolsLabel')}</h3>
                     <div className="flex flex-wrap gap-x-6 gap-y-3 items-center">
                       <div className="flex items-center gap-2">
                         <ToolLogo name="unity" alt="Unity" />
@@ -444,11 +447,9 @@ export default function Resume() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: 0.05, ease: 'easeOut' }}
                   >
-                    <h3 className="text-white text-base font-medium mb-3 opacity-100">Features</h3>
+                    <h3 className="text-white text-base font-medium mb-3 opacity-100">{t('resume.skills.featuresLabel')}</h3>
                     <p className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90">
-                      C# · XR Interaction Systems · Hand Tracking / Micro-gestures<br />
-                      World-space UI · URP VFX / Particle Systems · Shader Graph<br />
-                      Cinemachine & Timeline · Profiling & Optimization · Git
+                      {t('resume.skills.featuresText')}
                     </p>
                   </motion.div>
                 </div>
@@ -470,10 +471,10 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Education
+                  {t('resume.nav.education')}
                 </h2>
                 <div className="max-w-[56ch] space-y-4">
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-6"
                     initial={{ opacity: 0, y: 4 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -484,11 +485,11 @@ export default function Resume() {
                       <GoldsmithsLogo name="goldsmiths" alt="Goldsmiths" />
                     </div>
                     <div className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 flex-1">
-                      <p className="font-medium opacity-100">MA Virtual & Augmented Reality — Goldsmiths, University of London</p>
-                      <p className="opacity-80">Distinction, 2024</p>
+                      <p className="font-medium opacity-100">{t('resume.edu1.degree')}</p>
+                      <p className="opacity-80">{t('resume.edu1.result')}</p>
                     </div>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-6"
                     initial={{ opacity: 0, y: 4 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -499,8 +500,8 @@ export default function Resume() {
                       <SchoolLogo name="sva" alt="School of Visual Arts" />
                     </div>
                     <div className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90 flex-1">
-                      <p className="font-medium opacity-100">BFA Design — School of Visual Arts</p>
-                      <p className="opacity-80">Honors, 2020</p>
+                      <p className="font-medium opacity-100">{t('resume.edu2.degree')}</p>
+                      <p className="opacity-80">{t('resume.edu2.result')}</p>
                     </div>
                   </motion.div>
                 </div>
@@ -522,17 +523,17 @@ export default function Resume() {
                     textShadow: '0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.15)',
                   }}
                 >
-                  Download / Contact
+                  {t('resume.nav.contact')}
                 </h2>
                 <div className="max-w-[56ch] space-y-3">
                   <p className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90">
-                    Download PDF Resume
+                    {t('resume.download.pdf')}
                   </p>
                   <p className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90">
                     Email: lxie082@outlook.com
                   </p>
                   <p className="text-white text-[15px] md:text-[16px] leading-relaxed opacity-90">
-                    Based at London, UK
+                    {t('resume.download.location')}
                   </p>
             </div>
               </motion.section>

@@ -7,14 +7,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { withBasePath } from '@/lib/paths';
 import ProjectTechMenu from './ProjectTechMenu';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Project {
   id: string;
   title: string;
+  title_zh?: string;
   href: string;
   video?: string;
   cover?: string;
   category?: string;
+  category_zh?: string;
   features?: string[];
 }
 
@@ -63,6 +66,7 @@ const projectGithubUrls: Record<string, string> = {
 };
 
 export default function ProjectList({ projects, enableHoverVideo = true }: ProjectListProps) {
+  const { language } = useLanguage();
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -260,14 +264,14 @@ export default function ProjectList({ projects, enableHoverVideo = true }: Proje
                         ? "text-white font-[700]"
                         : "text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400"
                     )}>
-                      {project.title}
+                      {language === 'CN' && project.title_zh ? project.title_zh : project.title}
                     </h2>
                     {project.category && (
                       <span className={cn(
                         "text-lg text-gray-500 transition-colors duration-300",
                         hoveredIndex === index && "text-white"
                       )}>
-                        {project.category}
+                        {language === 'CN' && project.category_zh ? project.category_zh : project.category}
                       </span>
                     )}
                   </div>

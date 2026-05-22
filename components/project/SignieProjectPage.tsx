@@ -16,6 +16,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { withBasePath } from '@/lib/paths';
 import YouMayAlsoLike from './YouMayAlsoLike';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Helper component for tool logos that handles both PNG and SVG
 function ToolLogo({ name, alt }: { name: string; alt: string }) {
@@ -64,6 +65,7 @@ interface SignieProjectPageProps {
 }
 
 export default function SignieProjectPage({ metadata, content }: SignieProjectPageProps) {
+    const { t } = useLanguage();
     const projectId = 'signie';
     const [isMuted, setIsMuted] = useState(true);
     const playerRef = useRef<YTPlayer | null>(null);
@@ -171,7 +173,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                             className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
                         >
                             <ArrowLeft size={20} />
-                            <span className="font-medium">Back to Projects</span>
+                            <span className="font-medium">{t('shared.backToProjects')}</span>
                         </Link>
                     </div>
 
@@ -197,17 +199,17 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                         {/* Title Section */}
                         <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
                             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Signie</h1>
-                            <p className="text-white/60 text-lg">Mixed Reality ASL Learning & Live Translation System</p>
+                            <p className="text-white/60 text-lg">{t('signie.subtitle')}</p>
                         </section>
 
                         {/* Technical Stack */}
                         <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">Technical Stack</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
 
                             <div className="space-y-6">
                                 {/* Tools Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Tools</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
                                     <div className="flex flex-wrap gap-3">
                                         {/* Unity */}
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
@@ -254,7 +256,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                                 {/* Features Section */}
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Features</h3>
+                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
                                     <div className="flex flex-wrap gap-2">
                                         <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">
                                             Hand Tracking
@@ -283,31 +285,31 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                         <div className="relative z-10 space-y-12">
                             {/* Project Overview */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">1. Project Overview</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('signie.overview.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Signie is an immersive ASL (American Sign Language) learning and translation system built around real-time hand tracking, micro-gestures, and AI-driven feedback. It evolved from concept validation into playable learning experiences, and ultimately into AI-glasses-based live translation.
+                                    {t('signie.overview.body')}
                                 </p>
                             </section>
 
                             {/* System Evolution */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">2. System Evolution</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('signie.evolution.title')}</h2>
 
                                 <div className="space-y-12">
                                     {/* Stage 01 */}
                                     <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 01 — Concept & Interaction Prototype</h3>
-                                        <p className="text-white/70 text-sm mb-4">XRCC Hackathon Winner</p>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{t('signie.stage01.title')}</h3>
+                                        <p className="text-white/70 text-sm mb-4">{t('signie.stage01.badge')}</p>
                                         
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-2">{t('signie.stage01.goalTitle')}</h4>
                                             <p className="text-white/90 leading-relaxed">
-                                                Establish the core concept: teaching ASL through real-time hand-tracked interaction rather than passive observation.
+                                                {t('signie.stage01.goal')}
                                             </p>
                                         </div>
 
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-3">What We Built</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-3">{t('signie.stage01.builtTitle')}</h4>
                                             <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl my-4">
                                                 {/* Media Area */}
                                                 <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden">
@@ -323,10 +325,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 {/* Text Area */}
                                                 <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                     <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                        ASL tutor interaction concept
+                                                        {t('signie.stage01.media1.title')}
                                                     </h3>
                                                     <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                        Miro board mapping UI/UX design, learning flow, and demo narrative
+                                                        {t('signie.stage01.media1.caption')}
                                                     </p>
                                                 </div>
                                             </div>
@@ -346,10 +348,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     {/* Text Area */}
                                                     <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                         <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                            Motion capture pipeline
+                                                            {t('signie.stage01.media2.title')}
                                                         </h3>
                                                         <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                            Captured selected ASL sentences with Dollars MoCap, then cleaned and refined the motion data in Blender.
+                                                            {t('signie.stage01.media2.caption')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -371,10 +373,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                XR prototype_Unity
+                                                                {t('signie.stage01.media3.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Prototyped hand-tracked interaction in Unity to demonstrate core interaction concepts
+                                                                {t('signie.stage01.media3.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -393,10 +395,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                XR prototype_ShapeXR
+                                                                {t('signie.stage01.media4.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Spatial interaction testing using ShapeXR
+                                                                {t('signie.stage01.media4.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -420,17 +422,17 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 {/* Text Area */}
                                                 <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                     <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                        Outcome
+                                                        {t('signie.stage01.outcome.title')}
                                                     </h3>
                                                     <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                        🏆 Winner of XRCC Hackathon (Contextual AI: Utility with camera access & Community Prize)
+                                                        {t('signie.stage01.outcome.caption')}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('signie.stage01.teamTitle')}</h4>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {/* Brian Mira Card */}
                                                 <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
@@ -441,7 +443,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <h3 className="text-lg font-bold text-white">Brian Mira</h3>
-                                                        <p className="text-white/80 text-xs">Motion capture, video editing</p>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage01.team.brian')}</p>
                                                     </div>
                                                 </div>
 
@@ -454,7 +456,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <h3 className="text-lg font-bold text-white">Mohammad Asim Khan</h3>
-                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage01.team.mohammad')}</p>
                                                     </div>
                                                 </div>
 
@@ -467,7 +469,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <h3 className="text-lg font-bold text-white">Manikant Mudgil</h3>
-                                                        <p className="text-white/80 text-xs">ShapeXR prototyping, UI design</p>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage01.team.manikant')}</p>
                                                     </div>
                                                 </div>
 
@@ -479,8 +481,8 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         </svg>
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
-                                                        <p className="text-white/80 text-xs">Project management, UX design, animator, XR Developer</p>
+                                                        <h3 className="text-lg font-bold text-white">{t('shared.myRole')}</h3>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage01.team.myRole')}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -489,23 +491,23 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                                     {/* Stage 02 */}
                                     <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 02 — Playable Learning Experience</h3>
-                                        <p className="text-white/70 text-sm mb-4">AWE Presentation</p>
-                                        
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{t('signie.stage02.title')}</h3>
+                                        <p className="text-white/70 text-sm mb-4">{t('shared.awePresentaion')}</p>
+
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-2">{t('signie.stage02.goalTitle')}</h4>
                                             <p className="text-white/90 leading-relaxed">
-                                                Transform the prototype into a fully playable ASL learning system with structured progression and feedback.
+                                                {t('signie.stage02.goal')}
                                             </p>
                                         </div>
 
                                         <div className="mb-6">
-                                            <h4 className="text-xl font-semibold text-white mb-4">Key Learning Experiences</h4>
+                                            <h4 className="text-xl font-semibold text-white mb-4">{t('signie.stage02.keyExperiencesTitle')}</h4>
                                             
                                             {/* Experience 1 */}
                                             <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
-                                                <h5 className="text-lg font-semibold text-white mb-3">1. Virtual Guide — Gesture Learning</h5>
-                                                <p className="text-white/90 mb-4">Guided practice with real-time feedback and review.</p>
+                                                <h5 className="text-lg font-semibold text-white mb-3">{t('signie.stage02.exp1.title')}</h5>
+                                                <p className="text-white/90 mb-4">{t('signie.stage02.exp1.desc')}</p>
                                                 <div className="space-y-4 mb-4">
                                                     <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                         {/* Media Area */}
@@ -522,10 +524,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                Learn
+                                                                {t('signie.stage02.exp1.learn.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Copy a static pose to unlock the full motion, visualized with movement bubbles.
+                                                                {t('signie.stage02.exp1.learn.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -544,10 +546,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                Review
+                                                                {t('signie.stage02.exp1.review.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Replay the virtual guide via on-screen buttons to practice before continuing.
+                                                                {t('signie.stage02.exp1.review.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -556,8 +558,8 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                                             {/* Experience 2 */}
                                             <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
-                                                <h5 className="text-lg font-semibold text-white mb-3">2. Rhythm-Based ASL Game</h5>
-                                                <p className="text-white/90 mb-4">Learn ASL letters through music-driven interaction.</p>
+                                                <h5 className="text-lg font-semibold text-white mb-3">{t('signie.stage02.exp2.title')}</h5>
+                                                <p className="text-white/90 mb-4">{t('signie.stage02.exp2.desc')}</p>
                                                 <div className="mb-4">
                                                     <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                         {/* Media Area */}
@@ -574,10 +576,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                Music Game
+                                                                {t('signie.stage02.exp2.musicGame.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Sign correctly to grow the basket, then catch falling fruits in rhythm.
+                                                                {t('signie.stage02.exp2.musicGame.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -586,8 +588,8 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                                             {/* Experience 3 */}
                                             <div className="mb-8 bg-white/5 rounded-2xl p-6 border border-white/5">
-                                                <h5 className="text-lg font-semibold text-white mb-3">3. Word & Gesture Practice</h5>
-                                                <p className="text-white/90 mb-4">Test comprehension and recall.</p>
+                                                <h5 className="text-lg font-semibold text-white mb-3">{t('signie.stage02.exp3.title')}</h5>
+                                                <p className="text-white/90 mb-4">{t('signie.stage02.exp3.desc')}</p>
                                                 <div className="space-y-4">
                                                     <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                         {/* Media Area */}
@@ -604,10 +606,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                Word Picking
+                                                                {t('signie.stage02.exp3.wordPicking.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Identify and select the correct word from a signed sentence.
+                                                                {t('signie.stage02.exp3.wordPicking.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -626,10 +628,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         {/* Text Area */}
                                                         <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                             <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                                Gesture Matching
+                                                                {t('signie.stage02.exp3.gestureMatching.title')}
                                                             </h3>
                                                             <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                                Sign a displayed sentence to complete the task.
+                                                                {t('signie.stage02.exp3.gestureMatching.caption')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -638,7 +640,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                         </div>
 
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-4">Supporting Tools & Systems</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('signie.stage02.supportingTitle')}</h4>
                                             <div className="space-y-4">
                                                 <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                     {/* Media Area */}
@@ -655,10 +657,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     {/* Text Area */}
                                                     <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                         <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                            Virtual Guide Tool
+                                                            {t('signie.stage02.virtualGuideTool.title')}
                                                         </h3>
                                                         <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                            A custom in-headset tool for recording tutor and two-hand gestures to drive guided learning.
+                                                            {t('signie.stage02.virtualGuideTool.caption')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -678,10 +680,10 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     {/* Text Area */}
                                                     <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                         <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                                                            Gesture Recognition System
+                                                            {t('signie.stage02.gestureRecognition.title')}
                                                         </h3>
                                                         <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                            Real-time gesture detection and correctness validation implemented in Unity.
+                                                            {t('signie.stage02.gestureRecognition.caption')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -689,7 +691,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                         </div>
 
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('shared.team')}</h4>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                                 {/* Siming Wang Card */}
                                                 <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
@@ -700,7 +702,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <h3 className="text-lg font-bold text-white">Siming Wang</h3>
-                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage02.team.siming')}</p>
                                                     </div>
                                                 </div>
 
@@ -712,8 +714,8 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         </svg>
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
-                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                        <h3 className="text-lg font-bold text-white">{t('shared.myRole')}</h3>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage02.team.myRole')}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -722,7 +724,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     href="#"
                                                     className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-white/5 border border-white/20 px-4 py-2 rounded-full transition-all hover:bg-white/10"
                                                 >
-                                                    AWE Presentation
+                                                    {t('shared.awePresentaion')}
                                                 </a>
                                             </div>
                                         </div>
@@ -730,17 +732,17 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                                     {/* Stage 03 */}
                                     <div className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10">
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Stage 03 — AI Glasses: Live ASL Translation</h3>
-                                        
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{t('signie.stage03.title')}</h3>
+
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-2">Goal</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-2">{t('signie.stage03.goalTitle')}</h4>
                                             <p className="text-white/90 leading-relaxed">
-                                                Extend Signie from learning into real-world communication using wearable XR.
+                                                {t('signie.stage03.goal')}
                                             </p>
                                         </div>
 
                                         <div className="mb-6">
-                                            <h4 className="text-lg font-semibold text-white mb-4">What We Built</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('signie.stage03.builtTitle')}</h4>
                                             <div className="space-y-4">
                                                 <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                                     {/* Media Area */}
@@ -757,7 +759,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     {/* Text Area */}
                                                     <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                         <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                            Micro-gesture input for hands-free system control
+                                                            {t('signie.stage03.media1.caption')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -777,7 +779,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     {/* Text Area */}
                                                     <div className="p-4 border-t border-white/10 bg-white/5 rounded-b-2xl">
                                                         <p className="text-sm md:text-base text-white/90 line-clamp-2">
-                                                            Live translation converts voice to text via Wit.ai, then drives sign animation through an animation state machine.
+                                                            {t('signie.stage03.media2.caption')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -785,7 +787,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                         </div>
 
                                         <div>
-                                            <h4 className="text-lg font-semibold text-white mb-4">Team</h4>
+                                            <h4 className="text-lg font-semibold text-white mb-4">{t('shared.team')}</h4>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {/* Siming Wang Card */}
                                                 <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
@@ -796,7 +798,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <h3 className="text-lg font-bold text-white">Siming Wang</h3>
-                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage03.team.siming')}</p>
                                                     </div>
                                                 </div>
 
@@ -808,8 +810,8 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                         </svg>
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <h3 className="text-lg font-bold text-white">My Role</h3>
-                                                        <p className="text-white/80 text-xs">XR Developer</p>
+                                                        <h3 className="text-lg font-bold text-white">{t('shared.myRole')}</h3>
+                                                        <p className="text-white/80 text-xs">{t('signie.stage03.team.myRole')}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -820,7 +822,7 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                             {/* My Role */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">3. My Role</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('signie.myRole.title')}</h2>
 
                                 <div className="relative -mx-4 md:-mx-8">
                                     <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent px-4 md:px-8">
@@ -831,9 +833,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Palette className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Interaction & UX Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('signie.myRole.card1.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Interaction & UX design for hand-tracked XR systems
+                                                    {t('signie.myRole.card1.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -845,9 +847,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Code className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Gesture Recognition</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('signie.myRole.card2.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Gesture recognition and micro-gesture mapping
+                                                    {t('signie.myRole.card2.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -859,9 +861,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Smartphone className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Learning Experience Design</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('signie.myRole.card3.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Learning experience and progression design
+                                                    {t('signie.myRole.card3.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -873,9 +875,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Sparkles className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Animation Systems</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('signie.myRole.card4.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Animation state machines for sign language output
+                                                    {t('signie.myRole.card4.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -887,9 +889,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
                                                 <Zap className="w-6 h-6 text-white/60" strokeWidth={1.5} />
                                             </div>
                                             <div className="relative z-10 mt-12">
-                                                <h3 className="text-lg font-semibold text-white mb-2">Rapid Prototyping</h3>
+                                                <h3 className="text-lg font-semibold text-white mb-2">{t('signie.myRole.card5.title')}</h3>
                                                 <p className="text-white/60 text-sm leading-relaxed">
-                                                    Rapid prototyping across XR, games, and AI wearables
+                                                    {t('signie.myRole.card5.desc')}
                                                 </p>
                                             </div>
                                         </div>
@@ -899,9 +901,9 @@ export default function SignieProjectPage({ metadata, content }: SignieProjectPa
 
                             {/* Outcome */}
                             <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">4. Outcome</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('signie.outcome.title')}</h2>
                                 <p className="text-lg text-white/90 leading-relaxed">
-                                    Signie evolved from a conceptual ASL tutor into a scalable system supporting learning, practice, and live translation—demonstrating how embodied interaction and AI-driven systems can expand accessibility and communication.
+                                    {t('signie.outcome.body')}
                                 </p>
                             </section>
 
