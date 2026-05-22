@@ -96,9 +96,7 @@ export default function Resume() {
     }
   }, [router]);
 
-  if (process.env.NEXT_PUBLIC_SHOW_RESUME !== 'true') {
-    return null;
-  }
+  
 
   const sections = [
     { id: 'awards', label: t('resume.nav.awards') },
@@ -112,6 +110,10 @@ export default function Resume() {
   const sectionIds = sections.map(s => s.id);
   const activeSection = useScrollSpy(sectionIds, 150);
   const navRef = useRef<HTMLDivElement>(null);
+  
+  if (process.env.NEXT_PUBLIC_SHOW_RESUME !== 'true') {
+    return null;
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
