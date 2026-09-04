@@ -1,15 +1,14 @@
 {
-  "title": "The Micro_Invasion AR",
-  "role": "Creative Technologist",
+  "title": "The Micro_Invasion",
+  "role": "Interaction & AR Developer",
   "tech": [
-    "Snapchat Lens",
     "Lens Studio",
-    "JavaScript",
-    "AR 3D Modeling"
+    "Body Tracking",
+    "World Mesh",
+    "Particle Systems"
   ],
-  "description": "Augmented reality experience using Snapchat Lens Studio",
-  "challenge": "Creating an engaging AR experience accessible through social media",
-  "solution": "Developed an AR lens using Snapchat Lens Studio with 3D modeling and JavaScript",
-  "outcome": "Successfully created an interactive AR experience for social media"
+  "description": "An AR exposure experience that makes invisible microplastic contact visible on the body and across surrounding space.",
+  "challenge": "Translate three everyday exposure routes into legible embodied interactions.",
+  "solution": "A custom proximity-trigger system connecting tracked hands, body effects, and a tuned world-mesh particle reveal.",
+  "outcome": "A working AR prototype spanning touch, eating, breathing, and spatial accumulation."
 }
-

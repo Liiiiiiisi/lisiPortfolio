@@ -1,113 +1,54 @@
 # Datnie
-**Mixed Reality Dating App**
 
----
+## Current Positioning
 
-## Technical Stack
+A dating-product concept exploring expressive browsing, profiles, gestures, and character-led visual storytelling.
 
-Unity · Unreal Engine · Blender · Figma  
-UI / UX Design · Gesture-Based Interaction Design  
-Character Groom (Fur) · Animation  
+## Current Portfolio Structure
 
-*(Gesture interaction explored at the design and prototyping level)*
+1. Hero
+2. Product Idea
+3. From Vision to Interface
+4. Interaction Vocabulary
+5. Building the Product World
+6. Role & Process
 
----
+## Role / Ownership
 
-## Team
+Lisi Xie: UI/UX, interaction flow, character development, animation, and Unreal visual production. Siming Wang: Unity interaction implementation, XR development, animation, and direction.
 
-**Siming Wang** — XR Developer, Animation Creator, Director  
+## Tools / Platform
 
-**My Role** — UI/UX Design · Animation Creation · Visual Prototyping
+Figma, Blender, Unreal Engine, Unity, character animation, groom simulation, and visual prototyping.
 
----
+## Current Media Map
 
-## Project Overview
+| Asset | Usage | Status |
+| --- | --- | --- |
+| videos/preview.mp4 + preview-poster.webp | Hero and project preview | Active |
+| images/cover.webp | Homepage/project card | Active |
+| images/datine_MV.mp4 | Version 1 promotional film | Active |
+| images/datnie-unity-ui-overview.mp4 | Version 2 refined interface | Active |
+| images/Swipe to Browse.mp4 | Interaction / browse | Active |
+| images/datnie-profile-navigation.mp4 | Interaction / profile navigation | Active |
+| images/datnie-double-tap-like.mp4 | Interaction / double-tap like | Active |
+| images/datnie-voice-to-text.mp4 | Interaction / voice-to-text | Active |
+| images/Grab to Interact.mp4 | Interaction / spatial card | Active |
+| images/groommaking.mp4 + poster | Character and groom pipeline | Active |
+| images/train.mp4 + poster | Motion/process | Active |
+| images/trainshot.mp4 + poster | Unreal visual production / More Work | Active |
+| images/profoliophoto.mp4 + poster | Product-world process | Active |
+| images/figma.mp4 + poster | Interface design / More Work | Active |
+| images/uxboard.mp4 + poster | UX process | Active |
+| images/grabcard.mp4 + poster | More Work filmstrip | Active |
 
-Datnie is a mixed reality dating app designed to reduce conversation fatigue.  
-Through hands-first interaction, users explore matches, express interest, and communicate without relying on text-heavy input.  
-As conversations evolve, repeated behaviors are reflected back through the interface, turning familiar responses into lighter interactions.
+## Concept vs Built
 
-*Hang out and meet someone who matches you daily.*
+Version 1 is a music-led promotional film focused on atmosphere and identity. Version 2 shifts emphasis to product/UI interaction. The visuals are Lisi's production work; the promotional-film music was generated with Suno.
 
----
+## Removed / Deprecated Content
 
-## Design Challenge
-
-Dating apps often rely on repetitive, text-heavy interactions that interrupt emotional flow.  
-Users spend more time replying than connecting, leading to passive scrolling and interaction fatigue.
-
----
-
-## Key Insight
-
-When interaction becomes vocal, physical, and spatial, communication feels lighter and more natural.  
-Gestures can replace typing, and visual feedback can reduce cognitive load — allowing users to focus on presence rather than replies.
-
----
-
-## Solution
-
-Datnie explores a gesture- and voice-driven mixed reality experience,  
-where interaction is shaped through motion, timing, and visual response rather than traditional menus.
-
-The system concept emphasizes reducing repetition while preserving personal expression through adaptive interface behavior.
-
----
-
-## User Journey
-
-*(Gesture-based interaction explored through visual and animation-driven prototypes)*
-
-### 1. Swipe
-
-Swipe to skip and move to the next match.  
-A continuous gesture used as a navigational metaphor to maintain flow and reduce decision pressure.
-
----
-
-### 2. Tap → Swipe → Tap
-
-Tap to enter, swipe to navigate within profile layers, tap again to explore deeper content.  
-A gesture sequence designed to replace hierarchical UI with spatial progression.
-
----
-
-### 3. Double Tap — Like
-
-Double-tap to like the current match.  
-A deliberate gesture chosen to convey intent and emotional emphasis.
-
----
-
-### 4. Hold — Voice to Text
-
-Hold to activate voice input and send a message.  
-A time-based gesture that supports conversational continuity and presence.
-
----
-
-### 5. Repeated Answer Concept
-
-As conversations continue, frequently used responses are surfaced and reused through interface prompts.  
-A conceptual exploration of how behavior patterns can reduce repetitive input.
-
----
-
-## Core Contributions
-
-- Designed and modeled characters in **Blender**, and implemented replaceable **groom-based fur visuals** in **Unreal Engine** to enhance expressive presence  
-
-- Created animation-driven interaction feedback, focusing on how characters and UI visually respond to user actions  
-
-- Designed a gesture-oriented UI structure (tap, swipe, double-tap, hold) as an **interaction vocabulary** rather than a technical system  
-
-- Rapidly prototyped visual, animation, and UI concepts directly in engine to explore interaction flow and experiential quality  
-
----
-
-## My Approach
-
-I focus on visualizing interaction ideas through animation and spatial UI —  
-using motion, timing, and feedback to explore how interfaces feel rather than how they are technically implemented.
-
-By prototyping directly in the engine, I translate interaction concepts into tangible, experiential prototypes.
+- Do not frame Version 1 as failed or unclear.
+- Do not imply Lisi composed or produced the music.
+- Do not mention internal team conflict.
+- Superseded addtop, logogroom, pivot, run, and trainout exports remain review-only until their exact blobs are recoverable from Git history.

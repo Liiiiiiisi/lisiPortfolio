@@ -1,602 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Box, Layers, Code, Video, VolumeX, Volume2 } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { withBasePath } from '@/lib/paths';
-import { useLanguage } from '@/context/LanguageContext';
-import StorytellingUnitDesignSection from './StorytellingUnitDesignSection';
-import YouMayAlsoLike from './YouMayAlsoLike';
+import LazyVideo from "@/components/LazyVideo";
+import { withBasePath } from "@/lib/paths";
+import NextProjectTransition from "@/components/NextProjectTransition";
+import { nextSequenceEntry } from "@/data/projectSequence";
+import CaseStudyCinematicHero from "@/components/project/CaseStudyCinematicHero";
 
-// YouTube IFrame API types
-declare global {
-  interface Window {
-    YT: {
-      ready: (fn: () => void) => void;
-      Player: new (el: string | HTMLElement, opts: Record<string, unknown>) => YTPlayer;
-    };
-    onYouTubeIframeAPIReady?: () => void;
-  }
+const root = "/projects/canopy-of-echo/images";
+const nextProject = nextSequenceEntry("canopy-of-echo");
+
+function Video({ name, alt, className = "aspect-video", fit = "cover" }: { name: string; alt: string; className?: string; fit?: "cover" | "contain" }) {
+  return <div className={`relative overflow-hidden bg-[#ded8cf] ${className}`}><LazyVideo src={`${root}/${name}.mp4`} poster={`${root}/${name}-poster.webp`} alt={alt} className={`absolute inset-0 h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"}`} /></div>;
+}
+function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) { return <p className={`case-category-label ${light ? "text-white/60" : "text-[#716b64]"}`}>{children}</p>; }
+function Title({ children }: { children: React.ReactNode }) { return <h2 className="case-section-title">{children}</h2>; }
+function Subheading({ children }: { children: React.ReactNode }) { return <h3 className="case-media-title">{children}</h3>; }
+function Intro({ children }: { children: React.ReactNode }) { return <p className="case-lead">{children}</p>; }
+function Body({ children }: { children: React.ReactNode }) { return <p className="case-body">{children}</p>; }
+function MediaTitle({ children }: { children: React.ReactNode }) { return <h3 className="case-media-title">{children}</h3>; }
+function Caption({ children }: { children: React.ReactNode }) { return <p className="case-media-caption">{children}</p>; }
+function StoryImage({ src, alt }: { src: string; alt: string }) {
+  return <div className="relative aspect-square overflow-hidden rounded-full bg-[#ded8cf]"><Image src={withBasePath(src)} alt={alt} fill sizes="(min-width: 768px) 27vw, 45vw" className="object-cover" /></div>;
+}
+function Opening({ label, title, children }: { label: string; title: React.ReactNode; children: React.ReactNode }) {
+  return <div className="grid grid-cols-12 gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-6"><Label>{label}</Label><div className="mt-6"><Title>{title}</Title></div></div><div className="col-span-12 mt-6 md:col-span-4 md:col-start-8 md:mt-7"><Intro>{children}</Intro></div></div>;
 }
 
-interface YTPlayer {
-  mute: () => void;
-  unMute: () => void;
-}
+export default function CanopyOfEchoProjectPage() {
+  const interactionStages = [
+    ["01 / Presence", "Visitor approaches"],
+    ["02 / Detection", "MediaPipe detects position"],
+    ["03 / Signal", "TouchDesigner → OSC → Unreal"],
+    ["04 / Response", "Unit pauses on approach and resumes when the visitor leaves"],
+  ];
+  const roles = [["Spatial + 3D", "3D modelling and environment development."], ["Interaction Prototyping", "Unreal, TouchDesigner and OSC integration."], ["Storytelling", "Developing heritage stories into narrative units."], ["Production", "Coordination, budgeting and final video production."]];
+  return <main className="min-h-screen overflow-x-clip bg-[#faf6f1] text-[#1b1917]">
+    <header><CaseStudyCinematicHero title={<>CANOPY<br />OF ECHO</>} outcome="BEST HERITAGE NARRATIVE PRIZE" proposition="A kinetic installation that turns heritage stories into motion, light, and spatial encounter." role="Creative Technologist" year="2025" team="Saurabhkumar Parmar · Findlay Cumming · Jingru Feng · Lisi Xie" mediaSrc={`${root}/rendered.mp4`} poster={`${root}/rendered-poster.webp`} mediaAlt="Canopy of Echo kinetic installation in motion" /></header>
 
-const CANOPY_VIDEO_ID = "q6Wia9Mm6wg";
+    <div className="mx-auto max-w-[90rem] px-5 md:px-10">
+      <section className="py-28 md:py-52"><Opening label="/01   EXPERIENCE" title={<>THE EXPERIENCE</>}>Heritage stories can feel distant when they remain contained in sites, objects, and text. Canopy of Echo makes them spatial and observable: visitors meet stories through movement, light, and proximity.</Opening><div className="mt-20 md:mt-24"><Video name="user-journey-5-1" alt="Visitors experiencing the illuminated kinetic canopy" className="aspect-[16/8]" /></div></section>
 
-// Helper component for tool logos that handles both PNG and SVG
-function ToolLogo({ name, alt }: { name: string; alt: string }) {
-    const [imgSrc, setImgSrc] = React.useState(withBasePath(`/assets/logos/${name}.svg`));
-    const [hasError, setHasError] = React.useState(false);
+      <section className="py-28 md:py-52"><Opening label="/02   SPATIAL NARRATIVE" title={<>ONE WALL,<br />ONE TOWER,<br />ONE RIVER</>}>The installation connects architecture, landscape, and audience through a continuous spatial narrative.</Opening><div className="mt-20 space-y-28 md:mt-24 md:space-y-32">
+        <article className="grid grid-cols-12 gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-4"><Label>01 / River</Label><div className="mt-4"><Subheading>Flow of Memory</Subheading></div><div className="mt-5"><Body>A continuous sine-wave rhythm references the river and the movement of collective memory across generations.</Body></div></div><div className="col-span-12 mt-10"><Video name="rendered" alt="Wide rendered view of the flowing kinetic installation" className="aspect-[16/7]" /></div></article>
+        <article className="case-media-split"><div className="sm:col-span-4"><Label>02 / Wall</Label><div className="mt-4"><Subheading>Reconstructing What Once Stood</Subheading></div><div className="mt-5"><Body>Facing the ancient city wall, the installation’s roofline and perspective reference the lost historic structure—allowing its outline to be perceived again.</Body></div></div><div className="sm:col-span-8 sm:col-start-5"><Video name="user-journey-5-2" alt="Installation perspective reconstructing the historic wall" /></div></article>
+        <article className="grid grid-cols-12 gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-7"><Video name="user-journey-5-3" alt="A visitor approaching an individual story unit" /></div><div className="col-span-12 mt-8 md:col-span-4 md:col-start-9 md:mt-0 md:self-center"><Label>03 / Tower</Label><div className="mt-4"><Subheading>Approaching Stories</Subheading></div><div className="mt-5"><Body>As a visitor approaches a unit, its movement pauses so the embedded story can be observed.</Body></div></div></article>
+        <article className="grid grid-cols-12 gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-4"><Label>04 / Audience</Label><div className="mt-4"><Subheading>Living Memory</Subheading></div><div className="mt-5"><Body>Heritage becomes an evolving archive rather than fixed historical content—inviting people to rediscover relics and contribute personal stories.</Body></div></div><div className="col-span-12 mt-10 md:col-span-9 md:col-start-4"><Video name="user-journey-5-4" alt="Audience participating in the living heritage archive" className="aspect-[16/8]" /></div></article>
+      </div></section>
 
-    return (
-        <Image
-            src={imgSrc}
-            alt={alt}
-            width={20}
-            height={20}
-            className="object-contain"
-            onError={() => {
-                if (imgSrc.includes('.svg')) {
-                    // Try PNG if SVG fails
-                    setImgSrc(withBasePath(`/assets/logos/${name}.png`));
-                } else {
-                    // Hide if both fail
-                    setHasError(true);
-                }
-            }}
-            style={{ display: hasError ? 'none' : 'block' }}
-        />
-    );
-}
+      <section className="py-28 md:py-52"><Opening label="/03   STORIES" title={<>STORIES IN<br />THE CANOPY</>}>The team distilled 18 historical and contemporary stories into narrative units embedded throughout the installation.</Opening><div className="mt-20 space-y-28 md:mt-24 md:space-y-32">
+        <article className="grid grid-cols-12 items-center gap-x-6 md:gap-x-8"><div className="col-span-12 grid grid-cols-2 gap-6 md:col-span-7 md:gap-8"><StoryImage src={`${root}/Relics1.webp`} alt="The Returning Relics artwork" /><StoryImage src={`${root}/Relics2.webp`} alt="The Returning Relics detail" /></div><div className="col-span-12 mt-8 md:col-span-5 md:mt-0"><Label>01 / Story</Label><div className="mt-4"><Subheading>The Returning Relics</Subheading></div><div className="mt-5"><Body>A family chose to donate more than 30 treasured artefacts, protecting a shared inheritance instead of treating it as private property.</Body></div></div></article>
+        <article className="grid grid-cols-12 items-center gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-5"><Label>02 / Story</Label><div className="mt-4"><Subheading>History Beneath Our Feet</Subheading></div><div className="mt-5"><Body>An everyday brick beneath an elderly woman’s stool was discovered to be a 600-year-old Ming city-wall brick—history hidden in daily life.</Body></div></div><div className="col-span-12 mt-8 grid grid-cols-2 gap-6 md:col-span-7 md:mt-0 md:gap-8"><StoryImage src={`${root}/Feet1.webp`} alt="History Beneath Our Feet artwork" /><StoryImage src={`${root}/Feet2.webp`} alt="History Beneath Our Feet detail" /></div></article>
+      </div></section>
 
-interface CanopyOfEchoProjectPageProps {
-  metadata?: any;
-  content?: string;
-}
+      <section className="py-28 md:py-52"><Opening label="/04   INTERACTION" title={<>PROVING THE<br />INTERACTION</>}>Visitor position is detected and translated into a responsive motion state, pausing the corresponding story unit before movement resumes.</Opening><div className="mt-20 grid grid-cols-12 gap-x-6 md:mt-24 md:items-center md:gap-x-8"><div className="col-span-12 md:col-span-4"><ol className="space-y-8">{interactionStages.map(([label, description]) => <li key={label}><Label>{label}</Label><p className="case-body mt-2 text-ink">{description}</p></li>)}</ol></div><div className="col-span-12 mt-10 md:col-span-8 md:mt-0"><Video name="TD" alt="TouchDesigner visitor-position feasibility test" /><div className="mt-4"><MediaTitle>TouchDesigner / Position Detection</MediaTitle><div className="mt-2"><Caption>Camera position data drives the responsive motion state.</Caption></div></div></div></div><div className="case-media-pair mt-28 md:mt-32"><div className="case-media-unit"><Video name="OSC" alt="OSC communication test" /><div className="mt-4"><MediaTitle>OSC / Signal Routing</MediaTitle><div className="mt-2"><Caption>Passing visitor-state data between TouchDesigner and Unreal.</Caption></div></div></div><div className="case-media-unit"><Video name="unreal-prototype" alt="Unreal motion prototype" /><div className="mt-4"><MediaTitle>Unreal / Motion State</MediaTitle><div className="mt-2"><Caption>Visualizing the corresponding unit response.</Caption></div></div></div></div></section>
 
-export default function CanopyOfEchoProjectPage({ metadata, content }: CanopyOfEchoProjectPageProps) {
-    const { t } = useLanguage();
-    const projectId = 'canopy-of-echo';
-    const [isMuted, setIsMuted] = useState(true);
-    const playerRef = useRef<YTPlayer | null>(null);
+      <section className="py-28 md:py-52"><Opening label="/05   PROCESS" title={<>FROM SYSTEM<br />TO SPACE</>}>The project moved from behavior validation to spatial translation, physical scale testing, and a larger working demonstration.</Opening><div className="case-media-pair mt-20 md:mt-24">
+        <article className="case-media-unit case-media-stack"><div><Label>01 / Feasibility</Label><div className="mt-4"><Subheading>TouchDesigner Test</Subheading></div><div className="mt-2"><Caption>Validate that visitor position could trigger a unit’s motion state.</Caption></div></div><Video name="TD" alt="Short TouchDesigner feasibility test" /></article>
+        <article className="case-media-unit case-media-stack"><div><Label>02 / Spatialization</Label><div className="mt-4"><Subheading>Rendered Model</Subheading></div><div className="mt-2"><Caption>Translate the interaction into a complete architectural environment.</Caption></div></div><Video name="rendered" alt="Rendered spatial model" /></article>
+        <article className="case-media-unit case-media-stack"><div><Label>03 / Scale Test</Label><div className="mt-4"><Subheading>Small-Scale Model</Subheading></div><div className="mt-2"><Caption>Test the kinetic idea as a physical assembly.</Caption></div></div><Video name="small-scale-model" alt="Small-scale physical model" /></article>
+        <article className="case-media-unit case-media-stack"><div><Label>04 / Physical Prototype</Label><div className="mt-4"><Subheading>Large Demo</Subheading></div><div className="mt-2"><Caption>Built at scale to go beyond digital rendering.</Caption></div></div><Video name="physical-model" alt="Large physical kinetic demonstration" /></article>
+      </div></section>
 
-    useEffect(() => {
-        const initPlayer = () => {
-            const el = document.getElementById('canopy-hero-yt-player');
-            if (!el || el.querySelector('iframe')) return;
+      <section className="py-28 md:py-52"><div className="grid grid-cols-12 gap-x-6 md:gap-x-8"><div className="col-span-12 md:col-span-7"><Label>/06&nbsp;&nbsp; CONTRIBUTION</Label><div className="mt-5"><Title>MY CONTRIBUTION</Title></div></div><dl className="col-span-12 mt-14 md:col-span-5 md:mt-0">{roles.map(([title, body]) => <div key={title} className="py-6"><dt className="case-category-label">{title}</dt><dd className="case-body mt-3 text-[#716b64]">{body}</dd></div>)}</dl></div></section>
+    </div>
 
-            new window.YT.Player('canopy-hero-yt-player', {
-                videoId: CANOPY_VIDEO_ID,
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    loop: 1,
-                    playlist: CANOPY_VIDEO_ID,
-                    controls: 0,
-                    modestbranding: 1,
-                    rel: 0,
-                    iv_load_policy: 3,
-                    playsinline: 1,
-                },
-                events: {
-                    onReady: (event: { target: YTPlayer }) => {
-                        playerRef.current = event.target;
-                    },
-                },
-            });
-        };
-
-        if (window.YT?.Player) {
-            window.YT.ready(initPlayer);
-        } else {
-            const prev = window.onYouTubeIframeAPIReady;
-            window.onYouTubeIframeAPIReady = () => {
-                prev?.();
-                initPlayer();
-            };
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScript = document.getElementsByTagName('script')[0];
-            firstScript?.parentNode?.insertBefore(tag, firstScript);
-        }
-
-        return () => {
-            playerRef.current = null;
-        };
-    }, []);
-
-    const toggleMute = () => {
-        const p = playerRef.current;
-        if (!p) return;
-        if (isMuted) {
-            p.unMute();
-            setIsMuted(false);
-        } else {
-            p.mute();
-            setIsMuted(true);
-        }
-    };
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const { innerWidth, innerHeight } = window;
-        const x = (e.clientX / innerWidth) * 100;
-        const y = (e.clientY / innerHeight) * 100;
-        document.documentElement.style.setProperty("--mouse-x", `${x}%`);
-        document.documentElement.style.setProperty("--mouse-y", `${y}%`);
-    };
-
-    return (
-        <div className="relative min-h-screen text-white selection:bg-neon-cyan/30" onMouseMove={handleMouseMove}>
-            {/* Background Video (YouTube) - 120% crop to hide YT UI */}
-            <div className="absolute inset-0 overflow-hidden">
-                <iframe
-                    src={`https://www.youtube.com/embed/${CANOPY_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${CANOPY_VIDEO_ID}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`}
-                    title="Canopy of Echo background"
-                    className="absolute pointer-events-none border-0 grayscale opacity-[0.22]"
-                    style={{ width: '120%', height: '120%', top: '-10%', left: '-10%' }}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                />
-            </div>
-
-            {/* Flashlight Overlay */}
-            <div
-                className="pointer-events-none fixed inset-0 z-[1]"
-                style={{
-                    backdropFilter: "brightness(1.35)",
-                    background: `radial-gradient(
-                        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                        rgba(0,0,0,0) 0,
-                        rgba(0,0,0,0.45) 160px,
-                        rgba(0,0,0,0.85) 340px
-                    )`
-                }}
-            />
-
-            {/* Content Wrapper */}
-            <div className="relative z-10">
-                {/* Hero Video Section (YouTube) with mute toggle */}
-                <div id="video_hero" className="w-full h-[80vh] md:h-[100vh] overflow-hidden relative">
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div
-                            id="canopy-hero-yt-player"
-                            className="absolute border-0"
-                            style={{ width: '120%', height: '120%', top: '-10%', left: '-10%' }}
-                        />
-                    </div>
-
-                    {/* Back Button Overlay */}
-                    <div className="absolute top-8 left-8 z-20">
-                        <Link
-                            href="/projects"
-                            className="inline-flex items-center gap-2 text-white/90 hover:text-white bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full transition-all hover:bg-black/60 border border-white/10"
-                        >
-                            <ArrowLeft size={20} />
-                            <span className="font-medium">{t('shared.backToProjects')}</span>
-                        </Link>
-                    </div>
-
-                    {/* Mute / Unmute button - bottom left */}
-                    <button
-                        type="button"
-                        onClick={toggleMute}
-                        className="absolute bottom-8 left-8 z-20 inline-flex items-center justify-center w-12 h-12 rounded-full bg-black/40 backdrop-blur-md text-white/90 hover:text-white hover:bg-black/60 border border-white/10 transition-all"
-                        aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-                    >
-                        {isMuted ? <VolumeX size={22} /> : <Volume2 size={22} />}
-                    </button>
-                </div>
-
-                {/* Content Container */}
-                <div className="py-12 px-4 md:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="space-y-12 max-w-5xl mx-auto"
-                    >
-                        {/* Title Section */}
-                        <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl text-center">
-                            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">Canopy of Echo</h1>
-                            <p className="text-white/60 text-lg">{t('canopy.subtitle')}</p>
-                        </section>
-
-                        {/* Technical Stack */}
-                        <section className="max-w-4xl mx-auto mt-10 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-xl">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6">{t('shared.technicalStack')}</h2>
-
-                            <div className="space-y-6">
-                                {/* Tools Section */}
-                                <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.tools')}</h3>
-                                    <div className="flex flex-wrap gap-3">
-                                        {/* TouchDesigner */}
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                            <ToolLogo name="touchdesigner" alt="TouchDesigner" />
-                                            TouchDesigner
-                                        </span>
-
-                                        {/* Unreal Engine */}
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                            <ToolLogo name="unreal-engine" alt="Unreal Engine" />
-                                            Unreal Engine
-                                        </span>
-
-                                        {/* Blender */}
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                            <ToolLogo name="blender" alt="Blender" />
-                                            Blender
-                                        </span>
-
-                                        {/* Illustrator */}
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80 flex items-center gap-2">
-                                            <ToolLogo name="illustrator" alt="Illustrator" />
-                                            Illustrator
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Features Section */}
-                                <div>
-                                    <h3 className="text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">{t('shared.features')}</h3>
-                                    <div className="flex flex-wrap gap-3">
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">OSC Communication</span>
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Computer Vision</span>
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Laser Cutting</span>
-                                        <span className="px-3 py-1 rounded-full border border-white/20 text-xs text-white/80">Kinetic Control</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Team Section */}
-                        <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Team</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* Saurabhkumar Ramanbhai Parmar Card */}
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
-                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-lg font-bold text-white">Saurabhkumar Ramanbhai Parmar</h3>
-                                        <p className="text-white/80 text-xs">{t('canopy.team.sauraTitle')}</p>
-                                    </div>
-                                </div>
-
-                                {/* Findlay Cumming Card */}
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
-                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-lg font-bold text-white">Findlay Cumming</h3>
-                                        <p className="text-white/80 text-xs">{t('canopy.team.findlayTitle')}</p>
-                                    </div>
-                                </div>
-
-                                {/* Jingru Feng Card */}
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
-                                        <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-lg font-bold text-white">Jingru Feng</h3>
-                                        <p className="text-white/80 text-xs">{t('canopy.team.jingruTitle')}</p>
-                                    </div>
-                                </div>
-
-                                {/* My Role Card */}
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center flex-shrink-0 border border-teal-400/30">
-                                        <svg className="w-5 h-5 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-lg font-bold text-white">My Role</h3>
-                                        <p className="text-white/80 text-xs">{t('canopy.team.myRoleTitle')}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Content Wrapper */}
-                        <div className="relative z-10 space-y-12">
-                            {/* Overview */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.overview.title')}</h2>
-                                <p className="text-lg text-white/90 leading-relaxed">
-                                    {t('canopy.overview.body')}
-                                </p>
-                            </section>
-
-                            {/* Deliverables */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.deliverables.title')}</h2>
-                                <p className="text-lg text-white/90 leading-relaxed mb-6">
-                                    {t('canopy.deliverables.intro')}
-                                </p>
-                                
-                                {/* 4 Media Items in 2x2 Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/small-scale-model.gif")}
-                                                alt="Small Scale Model"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d1')}</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/physical-model.gif")}
-                                                alt="Physical Model"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d2')}</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/unreal-prototype.gif")}
-                                                alt="Unreal Prototype"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d3')}</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/rendered.gif")}
-                                                alt="Rendered Video"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        <div className="bg-white/5 backdrop-blur-xl border-t border-white/10 px-4 py-3">
-                                            <p className="text-white/70 text-xs text-center">{t('canopy.deliverables.d4')}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* User Journey */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">{t('canopy.journey.title')}</h2>
-
-                                <div className="space-y-8">
-                                    {/* 3.1 */}
-                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
-                                        {/* GIF Background */}
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-1.gif")}
-                                                alt="Connection with the River — Flow of Memory"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        
-                                        {/* Bottom Caption Bar */}
-                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
-                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                {t('canopy.journey.j31.title')}
-                                            </h3>
-                                            <p className="text-sm md:text-base text-white/90">
-                                                {t('canopy.journey.j31.body')}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* 3.2 */}
-                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
-                                        {/* GIF Background */}
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-2.gif")}
-                                                alt="Connection with the Wall — Reconstructing What Once Stood"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        
-                                        {/* Bottom Caption Bar */}
-                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
-                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                {t('canopy.journey.j32.title')}
-                                            </h3>
-                                            <p className="text-sm md:text-base text-white/90">
-                                                {t('canopy.journey.j32.body')}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* 3.3 */}
-                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
-                                        {/* GIF Background */}
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-3.gif")}
-                                                alt="Connection with the Tower — Approaching Stories"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        
-                                        {/* Bottom Caption Bar */}
-                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
-                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                {t('canopy.journey.j33.title')}
-                                            </h3>
-                                            <p className="text-sm md:text-base text-white/90">
-                                                {t('canopy.journey.j33.body')}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* 3.4 */}
-                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
-                                        {/* GIF Background */}
-                                        <div className="relative w-full aspect-video">
-                                            <Image
-                                                src={withBasePath("/projects/canopy-of-echo/images/user-journey-5-4.gif")}
-                                                alt="Connection with the Audience — Participatory Heritage"
-                                                fill
-                                                className="object-cover"
-                                                unoptimized={true}
-                                            />
-                                        </div>
-                                        
-                                        {/* Bottom Caption Bar */}
-                                        <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-black/60 backdrop-blur-sm border-t border-white/10">
-                                            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                                                {t('canopy.journey.j34.title')}
-                                            </h3>
-                                            <p className="text-sm md:text-base text-white/90">
-                                                {t('canopy.journey.j34.body')}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Core Contributions */}
-                            <section>
-                                <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl mb-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">{t('canopy.contributions.title')}</h2>
-                                </div>
-
-                                <div className="space-y-8">
-                                    {/* 4.1 Storytelling & Unit Design */}
-                                    <StorytellingUnitDesignSection />
-
-                                    {/* 4.2 Unreal Interactive Prototype */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-6">
-                                        <h3 className="text-2xl font-bold text-white">{t('canopy.c42.title')}</h3>
-                                        <p className="text-white/90 leading-relaxed">
-                                            {t('canopy.c42.intro')}
-                                        </p>
-                                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                            <p className="text-white/80 text-center mb-4">
-                                                {t('canopy.c42.oscCaption')}
-                                            </p>
-                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                                                <Image
-                                                    src={withBasePath("/projects/canopy-of-echo/images/OSC.gif")}
-                                                    alt="OSC Pipeline"
-                                                    fill
-                                                    className="object-cover"
-                                                    unoptimized={true}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                                            <h4 className="text-lg font-semibold text-white mb-4">{t('canopy.c42.motionStatesTitle')}</h4>
-                                            {/* Text Content */}
-                                            <div className="mb-6">
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div>
-                                                        <p className="text-white font-semibold mb-1">{t('canopy.c42.sinewave.title')}</p>
-                                                        <p className="text-white/80 text-sm">{t('canopy.c42.sinewave.desc')}</p>
-                                                    </div>
-                                                    <div className="border-l border-white/20 pl-4">
-                                                        <p className="text-white font-semibold mb-1">{t('canopy.c42.freeze.title')}</p>
-                                                        <p className="text-white/80 text-sm">{t('canopy.c42.freeze.desc')}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* GIF Below Text */}
-                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                                                <Image
-                                                    src={withBasePath("/projects/canopy-of-echo/images/TD.gif")}
-                                                    alt="TouchDesigner Motion States"
-                                                    fill
-                                                    className="object-cover"
-                                                    unoptimized={true}
-                                                />
-                                            </div>
-                                        </div>
-                                        <p className="text-white/90 leading-relaxed">
-                                            {t('canopy.c42.mediapipe')}
-                                        </p>
-                                    </div>
-
-                                    {/* 4.3 Video Production */}
-                                    <div className="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 shadow-xl space-y-4">
-                                        <h3 className="text-2xl font-bold text-white">{t('canopy.c43.title')}</h3>
-                                        <p className="text-white/90 leading-relaxed mb-6">
-                                            {t('canopy.c43.body')}
-                                        </p>
-                                        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                                            <iframe
-                                                src="https://www.youtube.com/embed/HB7Pn_7LZ4o"
-                                                title="Video Production"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                                className="absolute inset-0 w-full h-full"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Outcome */}
-                            <section className="relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 shadow-xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">{t('canopy.outcome.title')}</h2>
-                                <p className="text-lg text-white/90 leading-relaxed mb-6">
-                                    {t('canopy.outcome.body')}
-                                </p>
-                                <div className="relative w-full rounded-xl overflow-hidden">
-                                    <Image
-                                        src={withBasePath("/projects/canopy-of-echo/images/Outcome.JPG")}
-                                        alt="Outcome"
-                                        width={1200}
-                                        height={800}
-                                        className="w-full h-auto object-cover"
-                                    />
-                                </div>
-                            </section>
-
-                            {/* You May Also Like */}
-                            <YouMayAlsoLike currentProjectId={projectId} />
-                        </div>
-
-                    </motion.div>
-                </div>
-            </div>
+    <section className="bg-[#1b1917] py-28 text-[#faf6f1] md:py-52">
+      <div className="mx-auto grid max-w-[90rem] grid-cols-12 items-start gap-x-6 px-5 md:gap-x-8 md:px-10">
+        <div className="col-span-12 min-w-0 lg:col-span-5">
+          <Label light>/07&nbsp;&nbsp; OUTCOME</Label>
+          <h2 className="case-project-title mt-5 !text-[clamp(3.75rem,6.5vw,7rem)] !leading-[0.83] text-white">BEST<br />HERITAGE<br />NARRATIVE<br />PRIZE</h2>
+          <p className="case-lead mt-8 text-white/65">Winner — Best Heritage Narrative Prize<br />2025 Digital Heritage Competition</p>
         </div>
-    );
+        <div className="col-span-12 mt-12 min-w-0 lg:col-span-7 lg:mt-0">
+          <Image src={withBasePath(`${root}/Outcome.webp`)} alt="Team at the 2025 Digital Heritage Competition award ceremony" width={1600} height={1067} className="h-auto w-full object-cover" />
+        </div>
+      </div>
+    </section>
+    {nextProject && <NextProjectTransition next={nextProject} />}
+  </main>;
 }

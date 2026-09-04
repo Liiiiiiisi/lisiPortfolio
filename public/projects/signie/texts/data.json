@@ -1,16 +1,27 @@
 {
-  "title": "Signie ASL Tutor & Translator",
-  "role": "Creative Technologist",
-  "tech": [
-    "Unity",
-    "Blender",
-    "Dollars Mocap",
-    "Wit.ai",
-    "Eleven Labs"
+  "title": "Signie",
+  "proposition": "An MR learning system that evolved from guided ASL practice into a wearable live-translation concept.",
+  "role": "Project management, interaction and UX design, animation, XR development",
+  "team": [
+    "Brian Mira",
+    "Mohammad Asim Khan",
+    "Manikant Mudgil",
+    "Siming Wang",
+    "Lisi Xie"
   ],
-  "description": "An innovative ASL learning platform with translation capabilities",
-  "challenge": "Creating an accessible platform for ASL learning and translation",
-  "solution": "Built an interactive web application using React and Next.js with AI-powered translation",
-  "outcome": "Successfully created a functional ASL learning and translation tool"
+  "platform": [
+    "Mixed reality",
+    "Hand tracking",
+    "AI glasses"
+  ],
+  "outcome": "2× XRDC Award Winner — Contextual AI & Community Impact",
+  "narrative": [
+    "The Idea",
+    "V1 / Building the Core Experience",
+    "V2 / From a Demo to a Learning System",
+    "V3 / Exploring AI Glasses",
+    "From Design to Build",
+    "My Contribution",
+    "Outcome"
+  ]
 }
-

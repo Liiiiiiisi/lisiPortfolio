@@ -1,15 +1,14 @@
 {
-  "title": "VR Education Expanding ASD Caregiver Pool",
+  "title": "Guardian's Guide",
   "role": "Creative Technologist",
   "tech": [
     "Unity",
     "C#",
-    "Oculus SDK",
-    "VR Interaction"
+    "OpenXR",
+    "XR Interaction Toolkit"
   ],
-  "description": "Virtual reality training system for autism spectrum disorder caregivers",
-  "challenge": "Creating an accessible VR training platform for ASD caregivers",
-  "solution": "Developed an immersive VR experience using Unity and Oculus SDK to train caregivers",
-  "outcome": "Successfully created a VR training system for expanding the caregiver pool"
+  "description": "A practice-based VR experience for first-time caregivers.",
+  "challenge": "Help first-time caregivers move from learning VR controls to applying care knowledge independently.",
+  "solution": "A four-stage journey through tutorial, child profile, guided kitchen practice, and independent living-room decisions.",
+  "outcome": "An implemented and tested Unity VR training prototype."
 }
-

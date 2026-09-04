@@ -34,3 +34,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# original media (pre-compression backups)
+/media-backup/
+
+/scripts/venv/

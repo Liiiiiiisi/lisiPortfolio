@@ -1,52 +1,20 @@
 /**
- * Get the base path for the application
- * In production with GitHub Pages, this will be the repository name
- * In development, this will be empty
+ * Environment-driven base path handling.
+ * Same public interface as the existing portfolio's withBasePath(path),
+ * but implemented via NEXT_PUBLIC_BASE_PATH instead of route guessing.
+ *
+ * NEXT_PUBLIC_BASE_PATH is inlined at build time by Next.js.
+ * Empty for local dev; set to "/<repo-name>" for GitHub Pages later.
  */
-export function getBasePath(): string {
-  // Check if we're in a browser environment
-  if (typeof window !== 'undefined') {
-    // Client-side: try to detect from current path
-    // GitHub Pages typically has the repo name as first segment
-    const path = window.location.pathname;
-    
-    // Known routes that shouldn't be considered basePath
-    const knownRoutes = ['project', 'about', 'resume', 'contact', 'projects', '_next'];
-    
-    // Extract first segment
-    const segments = path.split('/').filter(Boolean);
-    if (segments.length > 0 && !knownRoutes.includes(segments[0])) {
-      // This might be basePath (repo name)
-      return `/${segments[0]}`;
-    }
-  }
-  
-  // Server-side or fallback: use environment variable
-  // This will be set during build in GitHub Actions
-  if (process.env.NEXT_PUBLIC_BASE_PATH) {
-    return process.env.NEXT_PUBLIC_BASE_PATH;
-  }
-  
-  // Default: no basePath for local development
-  return '';
-}
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
-/**
- * Prefix a path with basePath if needed
- */
 export function withBasePath(path: string): string {
-  const basePath = getBasePath();
-  if (!basePath) return path;
-  
-  // Don't double-prefix
-  if (path.startsWith(basePath)) return path;
-  
-  // Don't prefix absolute URLs
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) {
-    return path;
-  }
-  
-  // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return `${basePath}${normalizedPath}`;
+  // Only absolute logical paths under public/ belong to this helper.
+  // External URLs, protocols such as mailto:, hash links, and relative
+  // values are intentionally returned unchanged.
+  if (!path.startsWith('/') || path.startsWith('//')) return path;
+
+  // Idempotency: a path carrying the current deployment prefix is final.
+  if (BASE_PATH && (path === BASE_PATH || path.startsWith(`${BASE_PATH}/`))) return path;
+  return `${BASE_PATH}${path}`;
 }

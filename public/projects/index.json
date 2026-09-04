@@ -6,7 +6,7 @@
     "category": "Mixed Reality ASL Learning & Live Translation System",
     "category_zh": "混合现实 ASL 学习与实时翻译系统",
     "video": "/projects/signie/videos/preview.mp4",
-    "cover": "/projects/signie/images/cover.png",
+    "cover": "/projects/signie/images/cover.webp",
     "features": ["Hand Tracking", "Gesture Recognition", "Micro-Gestures", "Voice-to-Text", "Virtual Guide", "Animation State Machine"]
   },
   {
@@ -15,8 +15,8 @@
     "title_zh": "Canopy of Echo",
     "category": "Digital Heritage Kinetic Installation",
     "category_zh": "数字遗产动态装置",
-    "video": "/projects/canopy-of-echo/videos/preview.mp4",
-    "cover": "/projects/canopy-of-echo/images/cover.png",
+    "video": "/projects/canopy-of-echo/images/user-journey-5-2.mp4",
+    "cover": "/projects/canopy-of-echo/images/user-journey-5-2-poster.webp",
     "features": []
   },
   {
@@ -26,7 +26,7 @@
     "category": "Mixed Reality Dating App",
     "category_zh": "混合现实交友应用",
     "video": "/projects/datnie/videos/preview.mp4",
-    "cover": "/projects/datnie/images/cover.png",
+    "cover": "/projects/datnie/images/cover.webp",
     "features": []
   },
   {
@@ -36,7 +36,7 @@
     "category": "VR Training Experience for Caregivers of Autistic Children",
     "category_zh": "自闭症儿童护理人员 VR 培训体验",
     "video": "/projects/vr-education/videos/preview.mp4",
-    "cover": "/projects/vr-education/images/cover.png",
+    "cover": "/projects/vr-education/images/cover.webp",
     "features": ["C#", "OpenXR", "Collision & UI-Based Scoring", "Practice-Based Learning"]
   },
   {
@@ -46,7 +46,7 @@
     "category": "Immersive Ritual VR Experience",
     "category_zh": "沉浸式仪式 VR 体验",
     "video": "/projects/pray-for-blessing/videos/preview.mp4",
-    "cover": "/projects/pray-for-blessing/images/cover.png",
+    "cover": "/projects/pray-for-blessing/images/cover.webp",
     "features": ["OpenXR", "XR Interaction Toolkit", "Shader Graph", "VFX Graph", "Cinemachine", "C#"]
   },
   {
@@ -56,7 +56,7 @@
     "category": "AR Snapchat",
     "category_zh": "AR Snapchat",
     "video": "/projects/micro-invasion/videos/preview.mp4",
-    "cover": "/projects/micro-invasion/images/cover.png",
+    "cover": "/projects/micro-invasion/images/cover.webp",
     "features": ["Body Tracking", "Segmentation", "World Mesh", "Particle System", "Image Tracking"]
   },
   {
@@ -66,7 +66,7 @@
     "category": "AR mobile game",
     "category_zh": "AR 手机游戏",
     "video": "/projects/carbon-neutral/videos/preview.mp4",
-    "cover": "/projects/carbon-neutral/images/cover.png",
+    "cover": "/projects/carbon-neutral/images/cover.webp",
     "features": ["Plane Tracking", "State-Driven Interaction", "Animator State Machine", "C#"]
   }
 ]

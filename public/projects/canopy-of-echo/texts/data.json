@@ -1,9 +1,14 @@
 {
   "title": "Canopy of Echo",
   "role": "Creative Technologist",
-  "tech": [],
-  "description": "Project description placeholder",
-  "challenge": "Challenge placeholder",
-  "solution": "Solution placeholder",
-  "outcome": "Outcome placeholder"
+  "tech": [
+    "Unreal Engine",
+    "TouchDesigner",
+    "OSC",
+    "Physical Prototyping"
+  ],
+  "description": "A kinetic installation that turns heritage stories into motion, light, and spatial encounter.",
+  "challenge": "Make heritage stories spatial, observable, and responsive rather than leaving them contained in objects and text.",
+  "solution": "A proximity-responsive canopy linking visitor tracking, signal routing, real-time motion, and physical kinetic prototypes.",
+  "outcome": "Winner — Best Heritage Narrative Prize, 2025 Digital Heritage Competition."
 }

@@ -1,103 +1,53 @@
-00. Project Video
-<!-- placeholder: video_hero -->
+# Canopy of Echo
 
-Tools Used: TouchDesigner · Unreal Engine · Blender · Illustrator · OSC · MediaPipe · Physical Winches
+## Current Positioning
 
-1. Overview
+A kinetic heritage installation that turns local stories into motion, light, and a proximity-responsive spatial encounter.
 
-Canopy of Echo is a real-scale kinetic installation that turns heritage memory into motion, rhythm, and light.
-Designed for the Great Bao’en Temple under the competition theme “One Wall, One Tower, One River,” the work connects Nanjing’s artefacts and citizens through an interactive “river of stories.”
+## Current Portfolio Structure
 
-2. Context
+1. Hero
+2. Experience
+3. One Wall, One Tower, One River
+4. Stories in the Canopy
+5. Proving the Interaction
+6. From System to Space
+7. Contribution
+8. Outcome
 
-Historic narratives often feel distant because they’re locked inside sites, objects, and text.
+## Role / Ownership
 
-Design challenge:
-How can a heritage installation make history spatial, observable, and emotionally engaging—so visitors don’t just read stories, but encounter them?
+Team: Saurabhkumar Parmar, Findlay Cumming, Jingru Feng, and Lisi Xie. Lisi's documented contribution covers spatial/3D work, interaction prototyping, heritage storytelling, and production coordination.
 
-3. Deliverables
+## Tools / Platform
 
-Our team delivered a complete pipeline from concept to physical + digital prototyping:
+Unreal Engine, TouchDesigner, OSC, MediaPipe-based position tracking, 3D modelling, and physical prototyping.
 
-Full-scale physical installation
+## Current Media Map
 
-Miniature model
+| Asset | Usage | Status |
+| --- | --- | --- |
+| images/rendered.mp4 + poster | Hero, spatial narrative, and process | Active |
+| images/user-journey-5-1.mp4 + poster | Experience | Active |
+| images/user-journey-5-2.mp4 + poster | Wall narrative and project preview | Active |
+| images/user-journey-5-3.mp4 + poster | Tower narrative | Active |
+| images/user-journey-5-4.mp4 + poster | Audience narrative | Active |
+| images/Relics1.webp + Relics2.webp | Story / Returning Relics | Active |
+| images/Feet1.webp + Feet2.webp | Story / History Beneath Our Feet | Active |
+| images/TD.mp4 + poster | Interaction feasibility | Active |
+| images/OSC.mp4 + poster | OSC signal routing | Active |
+| images/unreal-prototype.mp4 + poster | Unreal motion state | Active |
+| images/small-scale-model.mp4 + poster | Small physical scale test | Active |
+| images/physical-model.mp4 + poster | Large physical demonstration | Active |
+| images/Outcome.webp | Award outcome | Active |
 
-Unreal Engine interaction prototype
+## Concept vs Built
 
-VR prototype
+The current progression is TouchDesigner feasibility → spatial/rendered model → small physical model → large physical demo.
 
-<!-- 4 GIFs in a row (titles on top) --> <!-- row_4_media: Small Scale Model | Physical Model | Unreal Prototype | VR Prototype -->
+## Removed / Deprecated Content
 
-
-
-
-
-
-
-
-4. Team
-
-Saurabhkumar Ramanbhai Parmar — Developer, Physical Prototype, Project Management
-Findlay Cumming — VR Developer
-Jingru Feng — Architecture & Storytelling Designer
-My Role — 3D Modelling · Unreal Prototype · Storytelling Design · Production Coordination & Budgeting · Video Editing
-
-5. User Journey
-5.1 Connection with the River — Flow of Memory
-
-The installation moves in a continuous sine-wave rhythm, mirroring the river and symbolizing the flow of collective memory.
-
-5.2 Connection with the Wall — Reconstructing What Once Stood
-
-Facing the ancient city wall, the roofline references the lost tower. Visitors can visually “restore” the historic architecture through perspective.
-
-5.3 Connection with the Tower — Approaching Stories
-
-When visitors step close to a unit, the winch pauses so they can observe and absorb the embedded story.
-
-5.4 Connection with the Audience — Participatory Heritage
-
-Visitors are encouraged to explore the city, rediscover relics, and upload personal stories—expanding the installation with living memory over time.
-
-6. Core Contributions
-6.1 Storytelling & Unit Design
-
-In collaboration with Jingru, I distilled 18 historical and contemporary stories into narrative modules embedded in each kinetic unit. Examples:
-
-The Returning Relics
-A family donated 30+ treasured artefacts: “These are our roots — they cannot be sold.” A quiet act of public heritage protection.
-
-History Beneath Our Feet
-A brick used to prop up an elderly woman’s stool was found to be a 600-year-old Ming city wall brick—history hidden in daily life.
-
-From Shield to Foundation
-A former defensive brick now supports Nanjing University’s architecture—shifting from protecting the city to supporting generations.
-
-Together, these stories form a flowing narrative landscape linking wall, tower, river, and citizens into one evolving memory.
-
-6.2 Unreal Interactive Prototype — Interactive Winch System
-
-I built a real-time pipeline connecting:
-
-Unreal Engine ↔ TouchDesigner ↔ OSC
-
-Two motion states:
-
-Sinewave Mode — smooth continuous motion
-
-Freeze Mode — pauses when visitors approach
-
-
-
-
-Using MediaPipe, cameras detect visitor positions.
-When someone enters a zone, the corresponding unit freezes, then resumes after they leave—creating a clear reading-and-discovery rhythm.
-
-6.3 Video Production
-
-I wrote the script, built animation beats, set up scenes and lighting, and rendered the narrative video to communicate the concept, interaction logic, and heritage value.
-
-7. Outcome
-
-Winner — Best Heritage Narrative Prize 2025 Digital Heritage Competition
+- Outdated development ordering is deprecated.
+- Shield1.webp, Shield2.webp, and Tower.webp remain review-only because they are referenced by a dormant legacy component but not the current page.
+- Legacy preview/cover files remain review-only and are not treated as current page media.
+- The obsolete Untitled documentation file was removed.

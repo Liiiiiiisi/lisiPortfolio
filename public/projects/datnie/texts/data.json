@@ -1,9 +1,14 @@
 {
   "title": "Datnie",
-  "role": "Creative Technologist",
-  "tech": [],
-  "description": "Project description placeholder",
-  "challenge": "Challenge placeholder",
-  "solution": "Solution placeholder",
-  "outcome": "Outcome placeholder"
+  "role": "UI/UX Design, Character & Animation, Unreal Visual Prototyping",
+  "tech": [
+    "Figma",
+    "Blender",
+    "Unreal Engine",
+    "Unity"
+  ],
+  "description": "A dating concept exploring lighter ways to browse, respond, and connect without constant typing.",
+  "challenge": "Communicate both the product identity and its gesture-based interaction vocabulary.",
+  "solution": "A music-led promotional film followed by a refined, interaction-focused Unity interface.",
+  "outcome": "A cohesive product world spanning UI/UX, character development, animation, and real-time visual production."
 }

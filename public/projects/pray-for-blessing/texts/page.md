@@ -1,95 +1,44 @@
-# LET’S MAKE A WISH — Immersive Ritual VR Experience
+# Let's Make a Wish
 
-*(project video placeholder)*
+## Current Positioning
 
----
+A collaborative XR experience that reimagines traditional wish-making rituals as embodied interaction.
 
-## Technical Stack
-Unity · OpenXR · XR Interaction Toolkit · Shader Graph · VFX Graph · Particle System  
-Cinemachine · C# · Post-Processing · Lighting Design
+## Current Portfolio Structure
 
----
+1. Hero
+2. Ritual Journey
+3. Ritual as Interaction
+4. Lantern Experience
+5. Embodied Interaction
+6. Role & Build
 
-## Team
-**Wenqu Tang — Unity Developer**  
-**Chuyue Yu — Environment Artist**  
-**My Role — Technical Artist & Interaction Designer**
+## Role / Ownership
 
----
+Team: Lisi Xie, Chuyue Yu, and Wenqu Tang. Lisi's documented contribution covers the lantern interaction, handwriting board and pen, fireworks and Buddha halo, lighting, environment, and Cinemachine. Chuyue contributed environment/NPC arrangement, asset sourcing, and drum interaction. Wenqu contributed the fortune bucket and eye-close interaction.
 
-## 01. Project Overview
-An interactive VR experience that transforms traditional Asian wish-making rituals into intuitive, emotionally engaging moments.  
-I developed the interaction system, VFX, shaders, lighting, and UX flow to craft a cohesive immersive experience.
+## Tools / Platform
 
----
+Unity, XR interaction, real-time VFX, environment lighting, and Cinemachine.
 
-## 02. My Role  
-*(Display as 4 cards with icons)*
+## Current Media Map
 
-- **XR Interaction Programming**  
-- **Real-Time VFX & Shader Development**  
-- **Lighting & Environmental Design**  
-- **Rapid Prototyping & Technical Problem-Solving**
+| Asset | Usage | Status |
+| --- | --- | --- |
+| images/gif-lantern.mp4 + poster | Hero and lantern experience | Active |
+| videos/preview.mp4 + preview-poster.webp | Homepage/transition preview | Active |
+| images/cover.webp | Homepage/project card | Active |
+| images/gif-write.mp4 + poster | Ritual journey / writing | Active |
+| images/gif-bucket.mp4 + poster | Ritual journey / fortune bucket | Active |
+| images/gif-drum.mp4 + poster | Ritual journey / drum | Active |
+| images/gif-wish.mp4 + poster | Ritual journey / wish gesture | Active |
+| images/unity-lighting-process.png | Role & Build / lighting process | Active |
 
-I translated rituals—praying, writing blessings, releasing lanterns—into intuitive VR interactions with meaningful feedback.
+## Concept vs Built
 
----
+The current case study documents a built Unity XR ritual sequence and each collaborator's implemented contribution.
 
-## 03. User Journey  
-*(Left: TASK — Right: FEEDBACK layout)*
+## Removed / Deprecated Content
 
-### 03.1 Close Eyes and Make Wishes  
-**Task Icon:** icon-wish.png  
-**Feedback GIF:** gif-wish.gif  
-**Feedback:** Buddha’s halo lights up when the player prays.
-
-### 03.2 Shake the Bucket to Make Wishes  
-**Task Icon:** icon-bucket.png  
-**Feedback GIF:** gif-bucket.gif  
-**Feedback:** A bamboo stick is generated with a personalized fortune.
-
-### 03.3 Beat Drums to Start Festival  
-**Task Icon:** icon-drum.png  
-**Feedback GIF:** gif-drum.gif  
-**Feedback:** Drumming triggers festival music and a scene transition.
-
-### 03.4 Copy “Fu” to Pray for Luck  
-**Task Icon:** icon-write.png  
-**Feedback GIF:** gif-write.gif  
-**Feedback:** The player writes the “Fu” symbol to bring luck.
-
-### 03.5 Release the Sky Lantern  
-**Task Icon:** icon-lantern.png  
-**Feedback GIF:** gif-lantern.gif  
-**Feedback:** The lantern ignites, glows, and rises into the sky.
-
----
-
-## 04. Core Contributions
-
-### 4.1 Ritual Interaction Design
-- “Fu” handwriting  
-- Lantern ignition & flight  
-
-### 4.2 Custom Shaders & VFX
-- Fire ignition  
-- Lantern glow shader  
-- Buddha orbit light  
-- Festival fireworks  
-*Fixed lantern silhouette issue by redesigning the shader + post-processing pipeline.*
-
-### 4.3 XR Systems & Logic
-- Custom hand poses  
-- Teleport refinement  
-- Object snapping  
-- Haptic feedback  
-- Cinemachine-driven animation
-
-### 4.4 Technical Problem Solving
-- Lantern glow pipeline fix  
-- Git workflow stabilization  
-
----
-
-## 05. Outcome
-This project highlights my strength in **XR interactions, real-time visuals, and technical problem-solving**, delivering an experience users described as *calming, nostalgic, and emotionally resonant*.
+- The development timeline was reference material only and must not be restored as a section, modal, or archive.
+- Unused standalone ritual icon exports remain review-only until their exact blobs are recoverable from Git history.

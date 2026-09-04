@@ -1,22 +1,24 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Providers from "../components/Providers";
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import Providers from '@/components/Providers';
+import FloatingNavigation from '@/components/FloatingNavigation';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Lisi Portfolio",
-  description: "Personal portfolio website",
+  title: 'Lisi Xie — Creative Technologist & Interactive Designer',
+  description:
+    'Portfolio of Lisi Xie: responsive experiences across XR, AI and real-time media. 2× XRDC Award Winner.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="antialiased" style={{ backgroundColor: '#000000' }} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Providers>
           {children}
+          {/* Top-level, outside <main>, so position:fixed is never affected
+              by a Hero (or any page section) transform/overflow context. */}
+          <FloatingNavigation />
         </Providers>
       </body>
     </html>

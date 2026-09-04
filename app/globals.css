@@ -2,64 +2,241 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------ */
+/* Self-hosted display font — Barlow Condensed (OFL), latin subset.    */
+/* Local WOFF2 only: no next/font, no runtime CDN.                     */
+/* Relative URLs so Next's asset pipeline handles base paths.          */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/barlow-condensed-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./fonts/barlow-condensed-latin-800-normal.woff2') format('woff2');
+}
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — the single source of truth for color and layout.    */
+/* Tailwind maps these in tailwind.config.ts (bg, ink, muted, ...).    */
+/* ------------------------------------------------------------------ */
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  --color-bg: #faf6f1;
+  --color-surface: #eee8de;
+  --color-ink: #1b1917;
+  --color-muted: #716b64;
+  --color-line: #ded8cf;
+
+  /* Serenity Blue — a micro-accent only (~3–5% of the interface): active
+     nav segments, progress fills, small hover/link states, SEE MORE.
+     Never backgrounds, titles, large buttons or cards. */
+  --color-accent: #929fc1;
+  /* Same hue, darkened, for cases where the accent carries TEXT or a focus
+     ring. #929fc1 sits at ~2.5:1 on the background, which fails both the
+     4.5:1 text minimum and the 3:1 focus-indicator minimum; this shade
+     reaches ~4.9:1 while still reading as Serenity Blue. */
+  --color-accent-strong: #5a6b96;
+
+  /* Ghosted display type for the professional title — recessive but legible. */
+  --color-title-ghost: #d6cfc6;
+  --max-width-site: 72rem;
+  /* Phase 1 initial tuning value; recalibrate with final More Work media. */
+  --contact-runway: 70svh;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ededed;
+@media (min-width: 640px) {
+  :root { --contact-runway: 60svh; }
+}
+
+/* Smooth anchor scrolling — disabled under reduced motion. */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Ensure full height and proper background */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Shared case-study typography extracted from the rendered Signie editorial
+   implementation in CaseStudyPage. Signie and legacy case studies consume the
+   same semantic roles; project-specific components must not redefine them. */
+@layer components {
+  .featured-project-title {
+    -webkit-text-stroke: 1px var(--color-bg);
+    paint-order: stroke fill;
   }
 
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .case-project-title {
+    @apply font-display text-[clamp(4.5rem,12vw,11rem)] font-extrabold uppercase leading-[0.76] tracking-[-0.015em] text-ink;
   }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  .case-section-title {
+    @apply font-display text-[clamp(1.9rem,3.6vw,3.75rem)] font-bold uppercase leading-[0.94] tracking-[0.005em] text-ink;
+  }
+
+  .case-stage-title {
+    @apply font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold uppercase leading-[1.05] tracking-[0.01em] text-ink;
+  }
+
+  .case-module-title {
+    @apply font-display text-lg font-bold uppercase leading-tight text-ink md:text-xl;
+  }
+
+  .case-lead {
+    @apply max-w-[34rem] text-sm font-normal leading-[1.75] text-muted sm:text-[0.95rem];
+  }
+
+  .case-body {
+    @apply max-w-[34rem] text-sm font-normal leading-[1.75] text-muted sm:text-[0.95rem];
+  }
+
+  .case-media-title {
+    @apply font-mono text-[0.68rem] font-normal uppercase leading-normal tracking-[0.14em] text-ink;
+  }
+
+  .case-media-caption {
+    @apply text-xs font-normal leading-relaxed text-muted sm:text-sm;
+  }
+
+  .case-category-label {
+    @apply font-mono text-[0.68rem] font-normal uppercase leading-normal tracking-[0.14em] text-muted;
+  }
+
+  .case-meta-label {
+    @apply font-mono text-[0.64rem] font-normal uppercase leading-normal tracking-[0.14em] text-muted;
+  }
+
+  /* White-based hierarchy for any typography intentionally overlaid on
+     moving or photographic media. Opacity, never gray hue, carries rank. */
+  .case-overlay-title {
+    color: rgb(255 255 255 / 100%);
+  }
+
+  .case-overlay-secondary {
+    color: rgb(255 255 255 / 92%);
+  }
+
+  .case-overlay-body {
+    color: rgb(255 255 255 / 88%);
+  }
+
+  .case-overlay-label {
+    color: rgb(255 255 255 / 82%);
+  }
+
+  .case-overlay-value {
+    color: rgb(255 255 255 / 90%);
+  }
+
+  /* The single structural boundary between global project navigation and
+     project-specific content. Required on every case-study header. */
+  .case-header-divider {
+    @apply h-px w-full bg-line;
+  }
+
+  /* Shared readability layer for intentional immersive Hero media. */
+  .case-hero-scrim {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25;
+  }
+
+  /* Signie's brighter immersive mode protects only the left/lower-left
+     text-safe area and leaves the MR scene open toward the right. */
+  .case-hero-scrim-signie {
+    @apply absolute inset-0;
+    background:
+      linear-gradient(90deg, rgb(30 25 21 / 72%) 0%, rgb(30 25 21 / 52%) 34%, rgb(30 25 21 / 12%) 66%, transparent 84%),
+      linear-gradient(0deg, rgb(30 25 21 / 58%) 0%, rgb(30 25 21 / 18%) 38%, transparent 64%);
+  }
+
+  @media (max-width: 639px) {
+    .case-hero-scrim-signie {
+      background:
+        linear-gradient(0deg, rgb(30 25 21 / 82%) 0%, rgb(30 25 21 / 58%) 48%, rgb(30 25 21 / 8%) 82%, transparent 100%),
+        linear-gradient(90deg, rgb(30 25 21 / 36%) 0%, transparent 86%);
+    }
+  }
+
+  /* Shared explanatory-media compositions. Media and its explanation stay
+     together; asymmetry comes from explicit 8/4 or 4/8 grid relationships. */
+  .case-media-split {
+    @apply grid grid-cols-1 items-center gap-7 sm:grid-cols-12 sm:gap-x-8;
+  }
+
+  .case-media-split-top {
+    @apply items-start;
+  }
+
+  .case-media-pair {
+    @apply grid grid-cols-1 items-start gap-8 sm:grid-cols-2;
+  }
+
+  .case-media-unit {
+    @apply w-full;
+  }
+
+  /* Vertical explanatory-media units keep text and media as one compact unit. */
+  .case-media-stack {
+    @apply flex flex-col gap-4;
   }
 }
 
-/* Markdown Content Styles for Project Pages */
-.markdown-content {
-  @apply max-w-none;
+/* Visible focus for keyboard users — uses the darker accent so the ring
+   clears the 3:1 contrast minimum against the background. */
+:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 2px;
 }
 
-/* Glass morphism effect */
-.glass-container {
-  @apply rounded-2xl bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-xl;
+/* Skip link — visually hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+  font-size: 0.875rem;
+  transition: top 0.15s ease;
 }
 
-/* Project Page Specific Styles */
-.project-page {
-  @apply min-h-screen flex flex-col bg-white dark:bg-gray-900;
-}
-
-.project-content {
-  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+.skip-link:focus-visible {
+  top: 0.75rem;
 }

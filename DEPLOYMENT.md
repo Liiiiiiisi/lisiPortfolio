@@ -101,9 +101,10 @@ Your portfolio will be available at:
 - After deployment, paths should work with the base path
 
 ### 404 Errors on Project Pages
-- Ensure projects exist in `public/projects/` directory
-- Check that `public/projects/index.json` is valid JSON
-- Verify project directories have `texts/data.json` and `texts/page.md`
+
+- Confirm the canonical slug exists in `data/projectCatalog.ts`
+- Confirm the route resolves under `app/projects/[slug]/`
+- Confirm the case-study component/data mapping and public media paths use the correct physical folder
 
 ## Important Notes
 

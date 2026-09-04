@@ -1,49 +1,76 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+/**
+ * Bilingual content provider. Public interface matches the existing portfolio:
+ * t(key) returns the current-language string for a typed key.
+ */
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react';
+import { en, type TranslationKey } from '@/locales/en';
+import { zh } from '@/locales/zh';
 
-type Language = 'EN' | 'CN';
+export type Language = 'en' | 'zh';
 
-interface LanguageContextType {
+const translations: Record<Language, Record<TranslationKey, string>> = { en, zh };
+
+interface LanguageContextValue {
   language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  setLanguage: (language: Language) => void;
+  toggleLanguage: () => void;
+  t: (key: TranslationKey) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | null>(null);
+const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('EN');
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>('en');
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('language') as Language | null;
-    if (saved === 'EN' || saved === 'CN') {
-      setLanguageState(saved);
-    }
+    const saved = window.localStorage.getItem('lisi-portfolio-language');
+    if (saved === 'en' || saved === 'zh') setLanguage(saved);
+    setStorageReady(true);
   }, []);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem('language', lang);
-  };
+  useEffect(() => {
+    if (!storageReady) return;
+    window.localStorage.setItem('lisi-portfolio-language', language);
+  }, [language, storageReady]);
 
-  const t = (key: string): string => {
-    // Lazily import to avoid circular deps — resolved at call time
-    const { en } = require('../locales/en');
-    const { zh } = require('../locales/zh');
-    const dict = language === 'CN' ? zh : en;
-    return dict[key] ?? key;
-  };
+  // Keep the document language attribute in sync for assistive tech.
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+  }, [language]);
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
+  const t = useCallback(
+    (key: TranslationKey) => translations[language][key] ?? en[key],
+    [language],
   );
+
+  const toggleLanguage = useCallback(
+    () => setLanguage((current) => (current === 'en' ? 'zh' : 'en')),
+    [],
+  );
+
+  const value = useMemo(
+    () => ({ language, setLanguage, toggleLanguage, t }),
+    [language, toggleLanguage, t],
+  );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
-export function useLanguage() {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error('useLanguage must be used inside LanguageProvider');
-  return ctx;
+export function useLanguage(): LanguageContextValue {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 }

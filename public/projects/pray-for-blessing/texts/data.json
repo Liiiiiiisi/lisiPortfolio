@@ -1,14 +1,14 @@
 {
-  "title": "Pray for Blessing VR",
-  "role": "Creative Technologist",
+  "title": "Let's Make a Wish",
+  "role": "Technical Artist / Interaction Designer",
   "tech": [
     "Unity",
-    "Shader Graph",
-    "VR Particle System"
+    "XR Interaction",
+    "Real-time VFX",
+    "Cinemachine"
   ],
-  "description": "Immersive VR ritual experience with advanced particle effects",
-  "challenge": "Creating a meaningful VR experience that captures ritual and spiritual practices",
-  "solution": "Developed an immersive VR experience using Unity with advanced shader and particle systems",
-  "outcome": "Successfully created a contemplative VR ritual experience"
+  "description": "Traditional wish-making rituals reimagined as an interactive XR experience.",
+  "challenge": "Translate writing, fortune, drum, lantern, and wish rituals into a coherent embodied journey.",
+  "solution": "A collaborative Unity XR sequence combining interaction development, lighting, environment, and real-time effects.",
+  "outcome": "A built ritual experience with clearly documented team ownership."
 }
-

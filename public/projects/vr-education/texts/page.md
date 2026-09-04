@@ -1,97 +1,65 @@
-<!-- placeholder: video_hero -->
+# Guardian's Guide
 
-# VR Education Expanding ASD Caregiver Pool
+## Current Positioning
 
----
+A practice-based VR training experience that helps first-time caregivers move from guided onboarding to independent caregiving decisions.
 
-## 1. Overview
+## Current Portfolio Structure
 
-**Guardian's Guide** is a VR learning experience designed to help new caregivers understand and support a non-verbal autistic child. The experience focuses on approachable, practice-based learning and teaches essential caregiving skills through realistic sensory and communication challenges.
+1. Hero
+2. Training Journey
+3. Tutorial
+4. Child Profile
+5. Guided Kitchen
+6. Independent Living Room
+7. System & Build
+8. Validation
+9. Contribution
 
----
+## Role / Ownership
 
-## 2. My Role
+Independent project by Lisi Xie. Current credited role: Creative Technologist, covering experience design, Unity development, XR interaction, and user testing.
 
-- Designed VR interaction and onboarding systems  
-- Implemented scoring logic, triggers, and task flow in Unity  
-- Built anti-cheating and progression mechanics  
-- Structured scene flow and overall user experience architecture  
-- Designed interactions aligned with autistic sensory needs  
+## Tools / Platform
 
----
+Unity, C#, OpenXR, XR Interaction Toolkit, and VR prototyping.
 
-## 3. Core Contributions
+## Current Media Map
 
-### 3.1 Interaction System Design
+| Asset | Usage | Status |
+| --- | --- | --- |
+| videos/preview.mp4 + preview-poster.webp | Hero and project preview | Active |
+| images/cover.webp | Homepage/project card | Active |
+| images/guardian-journey-tutorial.mp4 + poster | Training Journey / tutorial | Active |
+| images/guardian-journey-child-profile.mp4 + poster | Training Journey / child profile | Active |
+| images/guardian-journey-kitchen.mp4 + poster | Training Journey / guided kitchen | Active |
+| images/guardian-journey-living-room.mp4 + poster | Training Journey / independent living room | Active |
+| images/Tutorialfullgif.mp4 + poster | Tutorial controls | Active |
+| images/contrast.mp4 + poster | Tutorial reference/adaptation | Active |
+| images/guardian-paper-profile.webp | Child Profile context | Active |
+| images/change-color.mp4 + poster | Profile discover/review state | Active |
+| images/guardian-profile-completion.mp4 + poster | Profile completion check | Active |
+| images/Kitchen overview.png | Guided Kitchen overview | Active |
+| images/guardian-kitchen-tableware.mp4 + poster | Kitchen / tableware | Active |
+| images/guardian-kitchen-toast.mp4 + poster | Kitchen / toast | Active |
+| images/Living room overview.png | Living Room overview | Active |
+| images/guardian-living-room-window.mp4 + poster | Living Room / window | Active |
+| images/guardian-living-room-tv.mp4 + poster | Living Room / television | Active |
+| images/choice-demo.mp4 + poster | Living Room / language choice | Active |
+| images/socket.mp4 + poster | Living Room / visual communication | Active |
+| images/guardian-training-decision.png | Decision-system example | Active |
+| images/guardian-unity-environment.png | System / environment build | Active |
+| images/guardian-unity-feedback.png | System / feedback logic | Active |
+| images/guardian-unity-practice-system.png | System / practice loop | Active |
+| images/guardian-caregiving-principle.png | System / encoded principles | Active |
+| images/Collision Validation.png | Validation | Active |
 
-Inspired by *The Escape Artist* controller tutorial, I designed an onboarding flow that makes VR controls intuitive even for first-time users.
+## Concept vs Built
 
-![Contrast Adjustment](/projects/vr-education/images/contrast.gif)
+The case study presents an implemented Unity VR training prototype and its tested progression from onboarding through independent practice.
 
-This system reduces onboarding friction by providing an interactive, visual understanding of core VR controls.
+## Removed / Deprecated Content
 
----
-
-### 3.2 System Logic & Gameplay Mechanics
-
-I designed the underlying logic that drives tasks, feedback, and progression throughout the experience.
-
-- Implemented visual state changes (red → yellow) to mark completed interactions  
-  ![Visual State Change](/projects/vr-education/images/change-color.gif)
-
-- Built a collision-based scoring system to detect and validate object placement  
-  ![Unity Screen](/projects/vr-education/images/unity-screen.gif)
-
-- Created a two-option choice mechanic that teaches correct caregiving decisions through paired item comparisons  
-  ![Choice Demo](/projects/vr-education/images/choice-demo.gif)
-
-These mechanics structure the learning process and support clear, consistent feedback.
-
----
-
-### 3.3 Anti-Cheating Mechanics
-
-To ensure meaningful learning rather than trial-and-error, I implemented:
-
-- Automatic removal of unselected options when a choice is made  
-  ![Option Removal](/projects/vr-education/images/removal.gif)
-
-- Deactivation of UI trigger sockets after interaction to prevent repeated scoring  
-  ![Socket Deactivation](/projects/vr-education/images/socket.gif)
-
-These systems preserve learning integrity and maintain authentic decision-making.
-
----
-
-### 3.4 Scene Architecture & Flow
-
-The experience progresses through four core scenes:
-
-- **Tutorial** — Users learn VR controls  
-- **White Room** — Users review Kid X's profile through object-based interactions  
-- **Kitchen (Guided Task)** — Users complete caregiving tasks with hints and instant UI feedback  
-- **Living Room (Independent Task)** — Users apply their learning without hints  
-
----
-
-## 4. Technical Breakdown
-
-### 4.1 Interaction Systems
-
-- VR controller mapping using OpenXR  
-- Dynamic UI feedback  
-- Object state switching via scripted events  
-
-### 4.2 Gameplay Logic
-
-- Collision-based scoring  
-- Trigger activation/deactivation  
-- TextMesh-linked scoring events  
-
----
-
-## 5. Outcomes & Learnings
-
-- **Impact**: Improved usability for first-time VR users through simplified VR onboarding  
-- **Learning**: Validated behavior-based training design for neurodivergent learning  
-- **Future**: Built a scalable framework for rule-based VR learning systems with opportunities for adaptive difficulty and richer behavioral states  
+- The former standalone “Color Wasn't Enough” narrative is not an approved documentation module.
+- Fake before/after floor-ring placeholders, generic Unity placeholders, and duplicated progression media must not be restored.
+- removal.mp4 and unity-screen.mp4 are superseded, but remain review-only until their exact blobs are recoverable from Git history.

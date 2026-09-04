@@ -1,18 +1,28 @@
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import HomeVideoSection from '@/components/HomeVideoSection';
+import Hero from '@/components/Hero';
+import ProjectsShowcase from '@/components/ProjectsShowcase';
+import MoreWork from '@/components/MoreWork';
+import Contact from '@/components/Contact';
 
-export default async function Home() {
-  const youtubeUrl = 'https://youtu.be/Jku-8eOu57I';
-
+/**
+ * Homepage.
+ *
+ * 1. Hero — full-screen landing section (unchanged, first section).
+ * 2. ProjectsShowcase — scroll-driven, pinned-stage project gallery.
+ *    Target of the floating nav's "Projects" item (#projects).
+ * 3. MoreWork — filmstrip index of additional projects (#more-work,
+ *    placeholder content for now).
+ * 4. Contact — final full-screen curtain section (#contact).
+ *
+ * Still kept in components/ for rollback (not rendered here):
+ * Navigation, FeaturedWork, About, Footer, HeroProjectPreview.
+ */
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-black" style={{ backgroundColor: '#000000' }}>
-      <Navigation />
-      <main className="flex-1 relative" style={{ backgroundColor: '#000000' }}>
-        {/* Showreel Video Section */}
-        <HomeVideoSection youtubeUrl={youtubeUrl} />
-      </main>
-      <Footer isDark={true} />
-    </div>
+    <main id="main">
+      <Hero />
+      <ProjectsShowcase />
+      <MoreWork />
+      <Contact />
+    </main>
   );
 }

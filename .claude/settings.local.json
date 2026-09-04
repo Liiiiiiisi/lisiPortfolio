@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -c ':*)",
+      "Bash(python3 -c \" import sys, json lines = sys.stdin.readlines\\(\\) for line in lines[-20:]: try: data = json.loads\\(line\\) role = data.get\\('role', ''\\) if role in ['user', 'assistant']: content = data.get\\('content', ''\\) if isinstance\\(content, list\\): for c in content: if isinstance\\(c, dict\\) and c.get\\('type'\\) == 'text': print\\(f'{role}: {c[\\\\\"text\\\\\"][:300]}'\\) break elif isinstance\\(content, str\\): print\\(f'{role}: {content[:300]}'\\) except: pass \")"
+    ]
+  }
+}
