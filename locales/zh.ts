@@ -83,8 +83,10 @@ export const zh: Record<TranslationKey, string> = {
   'case.meta.platform': '平台',
   'case.meta.year': '年份',
   'case.meta.outcome': '成果',
+  'case.meta.tools': '工具',
   'case.credits': '参与者',
   'case.nextProject': '下一个项目',
+  'case.allProjects': '全部项目',
   'case.scrollDown': '向下滚动',
   'case.backToIndex': '全部项目',
 

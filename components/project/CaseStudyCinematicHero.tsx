@@ -6,6 +6,7 @@ import LazyVideo from '@/components/LazyVideo';
 import { withBasePath } from '@/lib/paths';
 import { usePrefersReducedMotion } from '@/lib/motion';
 import { announceCaseHeroReady } from '@/lib/caseTransitionHandoff';
+import { useLanguage } from '@/context/LanguageContext';
 
 type CaseStudyCinematicHeroProps = {
   title: ReactNode;
@@ -38,11 +39,11 @@ export default function CaseStudyCinematicHero({
   role,
   year,
   team,
-  roleLabel = 'ROLE',
-  yearLabel = 'YEAR',
-  teamLabel = 'TEAM',
+  roleLabel,
+  yearLabel,
+  teamLabel,
   tools,
-  toolsLabel = 'TOOLS',
+  toolsLabel,
   mediaSrc,
   poster,
   mediaAlt,
@@ -50,6 +51,7 @@ export default function CaseStudyCinematicHero({
   mediaClassName = '',
   scrimClassName = 'case-hero-scrim',
 }: CaseStudyCinematicHeroProps) {
+  const { t } = useLanguage();
   const reducedMotion = usePrefersReducedMotion();
   const readyAnnouncedRef = useRef(false);
   const announceReady = useCallback(() => {
@@ -84,10 +86,10 @@ export default function CaseStudyCinematicHero({
         </div>
         <div className="col-span-12 mt-7 pt-5 md:col-span-4 md:mt-0 md:self-end">
           <dl className="case-meta-label grid grid-cols-2 gap-4">
-            <div><dt className="case-overlay-label">{roleLabel}</dt><dd className="case-overlay-value mt-1">{role}</dd></div>
-            <div><dt className="case-overlay-label">{yearLabel}</dt><dd className="case-overlay-value mt-1">{year}</dd></div>
-            <div className="col-span-2"><dt className="case-overlay-label">{teamLabel}</dt><dd className="case-overlay-value mt-1">{team}</dd></div>
-            {tools && <div className="col-span-2"><dt className="case-overlay-label">{toolsLabel}</dt><dd className="case-overlay-value mt-1">{tools}</dd></div>}
+            <div><dt className="case-overlay-label">{roleLabel ?? t('case.meta.role')}</dt><dd className="case-overlay-value mt-1">{role}</dd></div>
+            <div><dt className="case-overlay-label">{yearLabel ?? t('case.meta.year')}</dt><dd className="case-overlay-value mt-1">{year}</dd></div>
+            <div className="col-span-2"><dt className="case-overlay-label">{teamLabel ?? t('case.meta.team')}</dt><dd className="case-overlay-value mt-1">{team}</dd></div>
+            {tools && <div className="col-span-2"><dt className="case-overlay-label">{toolsLabel ?? t('case.meta.tools')}</dt><dd className="case-overlay-value mt-1">{tools}</dd></div>}
           </dl>
         </div>
       </div>

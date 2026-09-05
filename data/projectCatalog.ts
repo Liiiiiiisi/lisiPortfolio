@@ -16,8 +16,8 @@ export const projectCatalog: readonly ProjectCatalogEntry[] = [
   },
   {
     id: 'guardian-guide', slug: 'guardian-guide', order: 2, placement: 'featured',
-    title: "Guardian's Guide", titleZh: '守护者指南', category: 'VR Training Experience for Caregivers of Autistic Children', categoryZh: '自闭症儿童护理人员 VR 培训体验',
-    description: 'A practice-based VR learning experience for new caregivers supporting a non-verbal autistic child.', descriptionZh: '一款面向新手护理者的实践导向 VR 学习体验。',
+    title: "Guardian's Guide", titleZh: "Guardian's Guide", category: 'VR Training Experience for Caregivers of Autistic Children', categoryZh: '自闭症儿童照护者 VR 培训体验',
+    description: 'A practice-based VR learning experience for new caregivers supporting a non-verbal autistic child.', descriptionZh: '一款面向新手照护者的实践导向 VR 学习体验。',
     role: 'Interaction design · Unity development', roleZh: '交互设计 · Unity 开发', focus: 'Accessible onboarding · Rule-based learning', focusZh: '可访问引导 · 规则导向学习',
     cover: '/projects/vr-education/images/cover.webp', preview: '/projects/vr-education/videos/preview.mp4', previewPoster: '/projects/vr-education/videos/preview-poster.webp',
     heroSlot: 'left', heroMobileOrder: 1,
@@ -33,7 +33,7 @@ export const projectCatalog: readonly ProjectCatalogEntry[] = [
   },
   {
     id: 'the-micro-invasion', slug: 'the-micro-invasion', order: 4, placement: 'featured',
-    title: 'The Micro_Invasion', titleZh: '微观入侵', category: 'Augmented Reality Experience', categoryZh: '增强现实体验',
+    title: 'The Micro_Invasion', titleZh: 'The Micro_Invasion', category: 'Augmented Reality Experience', categoryZh: '增强现实体验',
     description: 'An AR experience revealing how microplastics enter the body through ordinary routines.', descriptionZh: '一个展示微塑料如何通过日常行为进入人体的 AR 体验。',
     role: 'Interaction design · AR development', roleZh: '交互设计 · AR 开发', focus: 'Body tracking · Segmentation · World mesh', focusZh: '身体追踪 · 分割 · 世界网格',
     cover: '/projects/micro-invasion/images/cover-card.png', preview: '/projects/micro-invasion/videos/preview.mp4', previewPoster: '/projects/micro-invasion/videos/preview-poster.webp',
@@ -46,13 +46,13 @@ export const projectCatalog: readonly ProjectCatalogEntry[] = [
     cover: '/projects/datnie/images/cover.webp', preview: '/projects/datnie/videos/preview.mp4', previewPoster: '/projects/datnie/videos/preview-poster.webp',
   },
   {
-    id: 'lets-make-a-wish', slug: 'lets-make-a-wish', order: 6, placement: 'more', title: "Let's Make a Wish", titleZh: '祈福', category: 'Immersive Ritual VR Experience', categoryZh: '沉浸式仪式 VR 体验',
+    id: 'lets-make-a-wish', slug: 'lets-make-a-wish', order: 6, placement: 'more', title: "Let's Make a Wish", titleZh: "Let's Make a Wish", category: 'Immersive Ritual VR Experience', categoryZh: '沉浸式仪式 VR 体验',
     description: 'A VR experience translating traditional wish-making rituals into intuitive interactions.', descriptionZh: '一个将传统祈福仪式转化为直观交互的 VR 体验。',
     role: 'Technical art · Interaction design', roleZh: '技术美术 · 交互设计', focus: 'XR interaction · Real-time VFX', focusZh: 'XR 交互 · 实时特效',
     cover: '/projects/pray-for-blessing/images/cover.webp', preview: '/projects/pray-for-blessing/videos/preview.mp4', previewPoster: '/projects/pray-for-blessing/videos/preview-poster.webp',
   },
   {
-    id: 'personal-carbon-neutral', slug: 'personal-carbon-neutral', order: 7, placement: 'more', title: 'Personal Carbon Neutral', titleZh: '个人碳中和', category: 'AR Mobile Game', categoryZh: 'AR 手机游戏',
+    id: 'personal-carbon-neutral', slug: 'personal-carbon-neutral', order: 7, placement: 'more', title: 'Personal Carbon Neutral', titleZh: 'Personal Carbon Neutral', category: 'AR Mobile Game', categoryZh: 'AR 手机游戏',
     description: 'An AR game prototype turning personal carbon impact into interactive creatures and shared goals.', descriptionZh: '一个将个人碳足迹转化为互动生物与集体目标的 AR 游戏原型。',
     role: 'Creative technology · Game design', roleZh: '创意技术 · 游戏设计', focus: 'AR systems · Sustainable behavior', focusZh: 'AR 系统 · 可持续行为',
     cover: '/projects/carbon-neutral/images/cover.webp', preview: '/projects/carbon-neutral/videos/preview.mp4', previewPoster: '/projects/carbon-neutral/videos/preview-poster.webp',

@@ -1,3 +1,5 @@
+'use client';
+
 import type { ComponentType } from 'react';
 import VREducationProjectPage from '@/components/project/VREducationProjectPage';
 import CanopyOfEchoProjectPage from '@/components/project/CanopyOfEchoProjectPage';
@@ -8,6 +10,7 @@ import CarbonNeutralProjectPage from '@/components/project/CarbonNeutralProjectP
 import ProjectSequenceNav from '@/components/ProjectSequenceNav';
 import CaseStudyStartAnchor from '@/components/CaseStudyStartAnchor';
 import type { ProjectCatalogEntry } from '@/types/project';
+import { useLanguage } from '@/context/LanguageContext';
 
 /**
  * Phase 1 compatibility bridge only. It deliberately calls the six existing
@@ -23,6 +26,8 @@ const legacyComponents: Readonly<Record<string, ComponentType>> = {
 };
 
 export default function LegacyProjectAdapter({ project }: { project: ProjectCatalogEntry }) {
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
   const LegacyComponent = legacyComponents[project.id];
   if (!LegacyComponent) return null;
   return (
@@ -32,17 +37,17 @@ export default function LegacyProjectAdapter({ project }: { project: ProjectCata
         currentIndex={project.order - 1}
         mode={project.id === 'canopy-of-echo' || project.id === 'guardian-guide' || project.id === 'the-micro-invasion' || project.id === 'datnie' || project.id === 'lets-make-a-wish' || project.id === 'personal-carbon-neutral' ? 'case-header' : 'floating'}
         descriptor={project.id === 'canopy-of-echo'
-          ? 'Kinetic Installation / Spatial Interaction / Heritage Storytelling'
+          ? (isZh ? '动态装置 / 空间交互 / 遗产叙事' : 'Kinetic Installation / Spatial Interaction / Heritage Storytelling')
           : project.id === 'guardian-guide'
-            ? 'Virtual Reality / Caregiver Training / Autism Support'
+            ? (isZh ? '虚拟现实 / 照护者培训 / 自闭症支持' : 'Virtual Reality / Caregiver Training / Autism Support')
             : project.id === 'the-micro-invasion'
-              ? 'Augmented Reality / Body Tracking / Spatial Interaction'
+              ? (isZh ? '增强现实 / 身体追踪 / 空间交互' : 'Augmented Reality / Body Tracking / Spatial Interaction')
               : project.id === 'datnie'
-                ? 'Mixed Reality / UI·UX / Motion & Interaction'
+                ? (isZh ? '混合现实 / UI/UX / 动态与交互' : 'Mixed Reality / UI/UX / Motion & Interaction')
                 : project.id === 'lets-make-a-wish'
-                  ? 'XR Cultural Experience / Unity / Interaction Design'
+                  ? (isZh ? 'XR 文化体验 / Unity / 交互设计' : 'XR Cultural Experience / Unity / Interaction Design')
                   : project.id === 'personal-carbon-neutral'
-                    ? 'AR Game / System Design / Unity'
+                    ? (isZh ? 'AR 游戏 / 系统设计 / Unity' : 'AR Game / System Design / Unity')
             : undefined}
       />
       <LegacyComponent />

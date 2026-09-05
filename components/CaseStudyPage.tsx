@@ -947,7 +947,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
             study.hero.src && <CaseStudyCinematicHero
               title={title}
               outcome={isZh ? '两项 XRDC 奖项' : '2× XRDC Award Winner'}
-              outcomeSecondary="SHOWCASED AT AWE USA 2025"
+              outcomeSecondary={isZh ? '亮相 AWE USA 2025' : 'SHOWCASED AT AWE USA 2025'}
               proposition={isZh ? study.propositionZh : study.proposition}
               role={isZh ? study.roleZh : study.role}
               year={study.year}

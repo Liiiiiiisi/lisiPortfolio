@@ -112,8 +112,8 @@ export const signieCaseStudy: CaseStudy = {
             },
             {
               ...media('awe_word', 'Early word-recall learning exercise', '早期单词回忆学习练习', 'A learner-facing word-recall exercise extending the first working MR flow.', '面向学习者的单词回忆练习，将首个可运行 MR 流程进一步扩展。', 'wide', 'contain'),
-              title: 'Virtual Instructor',
-              titleZh: '虚拟教师',
+          title: 'Word Recall Exercise',
+          titleZh: '单词回忆练习',
             },
           ],
         },
@@ -283,10 +283,10 @@ export const signieCaseStudy: CaseStudy = {
         'Signie was a team project. My contribution connected the project’s structure and learning experience to the practical work required to build and test it.',
       ],
       bodyZh: [
-        'Signie 是一个团队项目。我的贡献将项目结构与学习体验连接到实际的构建与测试工作。',
+        'Signie 是一个团队项目。我的工作贯穿项目统筹、学习体验设计、开发与测试，把概念推进为可运行的 MR 体验。',
       ],
       points: [
-        { label: 'Project ownership', labelZh: '项目职责', text: 'Meeting structure, task breakdown, production planning, and coordination across the team.', textZh: '负责会议结构、任务拆分、制作规划与团队协作。' },
+        { label: 'Project ownership', labelZh: '项目统筹', text: 'Meeting structure, task breakdown, production planning, and coordination across the team.', textZh: '负责会议组织、任务拆分、制作规划与团队协调。' },
         { label: 'Experience direction', labelZh: '体验方向', text: 'Owned the learning flow, spatial interface, and interaction behavior from concept through testing.', textZh: '负责从概念到测试阶段的学习流程、空间界面与交互行为。' },
         { label: 'XR implementation', labelZh: 'XR 实现', text: 'Built scenes, implemented interactions, and tested the working mixed-reality experience.', textZh: '构建场景、实现交互，并测试可运行的混合现实体验。' },
         { label: 'Motion / assets', labelZh: '动作与资产', text: 'Prepared production assets, animated characters, and integrated them into the Unity build.', textZh: '准备制作资产、完成角色动画，并将其集成到 Unity 版本中。' },

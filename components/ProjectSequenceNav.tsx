@@ -131,7 +131,7 @@ export default function ProjectSequenceNav({
           {embedded && (
             <div className="mt-6 grid grid-cols-12 items-baseline gap-x-8">
               <Link href="/projects" className="col-span-3 font-mono text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:text-accent-strong">
-                ← All Projects
+                ← {t('case.allProjects')}
               </Link>
               <p className="col-span-9 text-right font-mono text-[0.68rem] uppercase leading-relaxed tracking-[0.14em] text-muted lg:whitespace-nowrap">
                 {descriptor}
@@ -220,7 +220,7 @@ export default function ProjectSequenceNav({
           {embedded && (
             <div className="grid grid-cols-2 gap-x-5 gap-y-3 px-5 pb-5 pt-3">
               <Link href="/projects" className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink">
-                ← All Projects
+                ← {t('case.allProjects')}
               </Link>
               <p className="col-span-2 max-w-[28rem] font-mono text-[0.64rem] uppercase leading-relaxed tracking-[0.12em] text-muted">
                 {descriptor}

@@ -89,8 +89,10 @@ export const en = {
   'case.meta.platform': 'Platform',
   'case.meta.year': 'Year',
   'case.meta.outcome': 'Outcome',
+  'case.meta.tools': 'Tools',
   'case.credits': 'Credits',
   'case.nextProject': 'Next Project',
+  'case.allProjects': 'All Projects',
   'case.scrollDown': 'Scroll down',
   'case.backToIndex': 'All projects',
 
