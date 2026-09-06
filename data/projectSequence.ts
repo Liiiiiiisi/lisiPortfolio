@@ -12,6 +12,7 @@ export interface SequenceEntry {
   index: number;
   href: string;
   poster: string;
+  thumbnail: string;
 }
 
 export const projectSequence: readonly SequenceEntry[] = projectCatalog.map((project) => ({
@@ -25,6 +26,7 @@ export const projectSequence: readonly SequenceEntry[] = projectCatalog.map((pro
   index: project.order - 1,
   href: projectHref(project),
   poster: project.cover,
+  thumbnail: project.navThumbnail ?? project.cover,
 }));
 
 export function sequenceEntryBySlug(slug: string): SequenceEntry | undefined {

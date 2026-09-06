@@ -74,6 +74,7 @@ import {
   viewportOnce,
 } from '@/lib/motion';
 import { useScrollLensStyle } from '@/components/ScrollLens';
+import LazyVideo from '@/components/LazyVideo';
 import type { Project } from '@/types/project';
 
 const TOTAL = projects.length;
@@ -262,19 +263,15 @@ function ProjectLayer({
           and the card's shadow is never warped. */}
       <div style={lensStyle}>
         {isActive && !reducedMotion ? (
-          <video
-            src={withBasePath(project.preview)}
-            poster={withBasePath(project.previewPoster)}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
+          <LazyVideo
+            src={project.preview}
+            poster={project.previewPoster}
+            loadMargin="150px"
             className="aspect-[8/5] w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.015]"
           />
         ) : (
           <img
-            src={withBasePath(project.cover)}
+            src={withBasePath(project.homepageCover ?? project.cover)}
             alt=""
             className={`aspect-[8/5] w-full object-cover ${reducedMotion ? '' : 'transition-transform duration-300 ease-out group-hover:scale-[1.015]'}`}
           />
@@ -622,7 +619,7 @@ export default function ProjectsShowcase() {
                       <span className="whitespace-nowrap text-xs font-medium text-ink">{title}</span>
                       <span className="block h-10 w-10 shrink-0 overflow-hidden rounded-md border border-line bg-surface shadow-sm">
                         <img
-                          src={withBasePath(project.cover)}
+                          src={withBasePath(project.navThumbnail ?? project.homepageCover ?? project.cover)}
                           alt=""
                           className="h-full w-full object-cover"
                         />

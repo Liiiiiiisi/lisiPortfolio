@@ -26,7 +26,7 @@
  * placeholders) render as present but non-navigable rather than linking
  * to a missing route.
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, X } from 'lucide-react';
@@ -52,6 +52,19 @@ export default function ProjectSequenceNav({
   const isZh = language === 'zh';
   const reducedMotion = usePrefersReducedMotion();
   const [open, setOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [previewId, setPreviewId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 640px)');
+    const syncDesktop = () => {
+      setIsDesktop(query.matches);
+      if (!query.matches) setPreviewId(null);
+    };
+    syncDesktop();
+    query.addEventListener('change', syncDesktop);
+    return () => query.removeEventListener('change', syncDesktop);
+  }, []);
 
   const total = projectSequence.length;
 
@@ -68,6 +81,7 @@ export default function ProjectSequenceNav({
           <ul className="flex items-start gap-1.5">
             {projectSequence.map((entry) => {
               const isCurrent = entry.index === currentIndex;
+              const showPreview = isDesktop && previewId === entry.id;
               const title = isZh ? entry.titleZh : entry.title;
               const label = `${pad(entry.index + 1)} — ${title}`;
 
@@ -89,12 +103,12 @@ export default function ProjectSequenceNav({
                   </span>
 
                   {/* Hover / focus preview — small and quiet. */}
-                  <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-max max-w-[13rem] items-center gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-max max-w-[13rem] items-center gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
                     <span className="block h-10 w-14 shrink-0 overflow-hidden border border-line bg-surface">
-                      {entry.poster && (
+                      {showPreview && entry.thumbnail && (
                         // eslint-disable-next-line @next/next/no-img-element -- static export, unoptimized images
                         <img
-                          src={withBasePath(entry.poster)}
+                          src={withBasePath(entry.thumbnail)}
                           alt=""
                           className="h-full w-full object-cover"
                         />
@@ -108,7 +122,18 @@ export default function ProjectSequenceNav({
               );
 
               return (
-                <li key={entry.id} className="group relative min-w-0 flex-1">
+                <li
+                  key={entry.id}
+                  className="group relative min-w-0 flex-1"
+                  onPointerEnter={() => { if (isDesktop) setPreviewId(entry.id); }}
+                  onPointerLeave={() => setPreviewId((current) => current === entry.id ? null : current)}
+                  onFocus={() => { if (isDesktop) setPreviewId(entry.id); }}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setPreviewId((current) => current === entry.id ? null : current);
+                    }
+                  }}
+                >
                   {entry.href ? (
                     <Link
                       href={entry.href}

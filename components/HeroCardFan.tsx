@@ -116,7 +116,7 @@ function cardTitle(project: Project, language: string): string {
 }
 
 function heroImage(project: Project): string {
-  return withBasePath(project.cover);
+  return withBasePath(project.homepageCover ?? project.cover);
 }
 
 const CARD_SHADOW =

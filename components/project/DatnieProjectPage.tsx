@@ -64,10 +64,33 @@ function PromotionalFilm({ isZh }: { isZh: boolean }) {
 function InterfaceOverviewVideo({ isZh }: { isZh: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = usePrefersReducedMotion();
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || reducedMotion) {
+    if (!video) return;
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || reducedMotion || !shouldLoad) {
       video?.pause();
       return;
     }
@@ -87,13 +110,13 @@ function InterfaceOverviewVideo({ isZh }: { isZh: boolean }) {
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, [reducedMotion]);
+  }, [reducedMotion, shouldLoad]);
 
   return (
     <div className="relative aspect-video overflow-hidden bg-[#ded8cf]">
       <video
         ref={videoRef}
-        src={withBasePath(`${root}/images/datnie-unity-ui-overview.mp4`)}
+        src={shouldLoad ? withBasePath(`${root}/images/datnie-unity-ui-overview.mp4`) : undefined}
         autoPlay={!reducedMotion}
         loop
         muted

@@ -17,6 +17,7 @@ export default function LearningStageShowcase({ showcase, reducedMotion, isZh }:
   const [userPaused, setUserPaused] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [inViewport, setInViewport] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const elapsedRef = useRef(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const showcaseRef = useRef<HTMLDivElement>(null);
@@ -35,12 +36,23 @@ export default function LearningStageShowcase({ showcase, reducedMotion, isZh }:
     const element = showcaseRef.current;
     if (!element) return;
     if (!("IntersectionObserver" in window)) {
+      setShouldLoad(true);
       setInViewport(true);
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => setInViewport(entry.isIntersecting), { threshold: 0.01 });
-    observer.observe(element);
-    return () => observer.disconnect();
+    const loadObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true);
+        loadObserver.disconnect();
+      }
+    }, { rootMargin: "400px" });
+    const visibilityObserver = new IntersectionObserver(([entry]) => setInViewport(entry.isIntersecting), { threshold: 0.01 });
+    loadObserver.observe(element);
+    visibilityObserver.observe(element);
+    return () => {
+      loadObserver.disconnect();
+      visibilityObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -48,7 +60,7 @@ export default function LearningStageShowcase({ showcase, reducedMotion, isZh }:
     if (!video || reducedMotion) return;
     if (paused) video.pause();
     else video.play().catch(() => undefined);
-  }, [activeIndex, paused, reducedMotion]);
+  }, [activeIndex, paused, reducedMotion, shouldLoad]);
 
   useEffect(() => {
     if (reducedMotion) {
@@ -98,7 +110,7 @@ export default function LearningStageShowcase({ showcase, reducedMotion, isZh }:
         // eslint-disable-next-line @next/next/no-img-element
         <img key={activeStage.id} src={withBasePath(activeStage.media.poster)} alt={alt} className={`absolute inset-0 h-full w-full ${mediaFitClass}`} style={mediaStyle} />
       ) : activeStage.media.src ? (
-        <video key={activeStage.id} ref={videoRef} src={withBasePath(activeStage.media.src)} poster={activeStage.media.poster ? withBasePath(activeStage.media.poster) : undefined} onLoadedMetadata={(event) => { if (showcase.useMediaDuration && Number.isFinite(event.currentTarget.duration)) setMediaDurationMs(event.currentTarget.duration * 1000); }} autoPlay loop muted playsInline preload="metadata" aria-label={alt} className={`absolute inset-0 h-full w-full ${mediaFitClass}`} style={mediaStyle} />
+        <video key={activeStage.id} ref={videoRef} src={shouldLoad ? withBasePath(activeStage.media.src) : undefined} poster={activeStage.media.poster ? withBasePath(activeStage.media.poster) : undefined} onLoadedMetadata={(event) => { if (showcase.useMediaDuration && Number.isFinite(event.currentTarget.duration)) setMediaDurationMs(event.currentTarget.duration * 1000); }} autoPlay loop muted playsInline preload="metadata" aria-label={alt} className={`absolute inset-0 h-full w-full ${mediaFitClass}`} style={mediaStyle} />
       ) : (
         <div className="absolute inset-0 grid place-items-center bg-[#ded8cf] px-6 text-center text-[#716b64]"><div><p className="case-category-label">[ Media Placeholder ]</p><p className="case-media-title mt-3">{alt}</p></div></div>
       )}

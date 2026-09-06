@@ -11,7 +11,7 @@ export const projectCatalog: readonly ProjectCatalogEntry[] = [
     role: 'Interaction design · XR development · Prototyping', roleZh: '交互设计 · XR 开发 · 原型',
     focus: 'Hand tracking · Learning UX · AI translation', focusZh: '手部追踪 · 学习体验 · AI 翻译',
     outcome: '2× XRDC 2025 award winner', outcomeZh: 'XRDC 2025 两项奖项',
-    cover: '/projects/signie/images/signie_small_card_v1.png', preview: '/projects/signie/videos/preview.mp4', previewPoster: '/projects/signie/videos/preview-poster.webp',
+    cover: '/projects/signie/images/signie_small_card_v1.png', homepageCover: '/projects/signie/images/signie-card-960.webp', navThumbnail: '/projects/signie/images/signie-nav-thumb.webp', preview: '/projects/signie/videos/preview.mp4', previewPoster: '/projects/signie/videos/preview-poster.webp',
     heroSlot: 'center', heroMobileOrder: 3,
   },
   {
@@ -36,7 +36,7 @@ export const projectCatalog: readonly ProjectCatalogEntry[] = [
     title: 'The Micro_Invasion', titleZh: 'The Micro_Invasion', category: 'Augmented Reality Experience', categoryZh: '增强现实体验',
     description: 'An AR experience revealing how microplastics enter the body through ordinary routines.', descriptionZh: '一个展示微塑料如何通过日常行为进入人体的 AR 体验。',
     role: 'Interaction design · AR development', roleZh: '交互设计 · AR 开发', focus: 'Body tracking · Segmentation · World mesh', focusZh: '身体追踪 · 分割 · 世界网格',
-    cover: '/projects/micro-invasion/images/cover-card.png', preview: '/projects/micro-invasion/videos/preview.mp4', previewPoster: '/projects/micro-invasion/videos/preview-poster.webp',
+    cover: '/projects/micro-invasion/images/cover-card.png', homepageCover: '/projects/micro-invasion/images/cover-card-960.webp', navThumbnail: '/projects/micro-invasion/images/cover-card-nav-thumb.webp', preview: '/projects/micro-invasion/videos/preview.mp4', previewPoster: '/projects/micro-invasion/videos/preview-poster.webp',
     heroSlot: 'right', heroMobileOrder: 4,
   },
   {

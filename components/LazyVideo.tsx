@@ -15,6 +15,8 @@ interface LazyVideoProps {
     style?: CSSProperties;
     onLoadedData?: () => void;
     onError?: () => void;
+    /** Distance outside the viewport at which the video source is attached. */
+    loadMargin?: string;
 }
 
 /**
@@ -22,7 +24,7 @@ interface LazyVideoProps {
  * Shows a lightweight poster thumbnail instantly; the video file is only
  * downloaded when the element scrolls near the viewport, then autoplays.
  */
-export default function LazyVideo({ src, alt, className, poster, style, onLoadedData, onError }: LazyVideoProps) {
+export default function LazyVideo({ src, alt, className, poster, style, onLoadedData, onError, loadMargin = '400px' }: LazyVideoProps) {
     const ref = useRef<HTMLVideoElement>(null);
     const [shouldLoad, setShouldLoad] = useState(false);
 
@@ -40,11 +42,11 @@ export default function LazyVideo({ src, alt, className, poster, style, onLoaded
                     io.disconnect();
                 }
             },
-            { rootMargin: '400px' }
+            { rootMargin: loadMargin }
         );
         io.observe(el);
         return () => io.disconnect();
-    }, []);
+    }, [loadMargin]);
 
     useEffect(() => {
         if (shouldLoad) {

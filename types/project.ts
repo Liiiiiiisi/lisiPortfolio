@@ -9,6 +9,8 @@ export interface ProjectCatalogEntry {
   titleZh: string;
   placement: ProjectPlacement;
   cover: string;
+  homepageCover?: string;
+  navThumbnail?: string;
   preview: string;
   previewPoster: string;
   category: string;
