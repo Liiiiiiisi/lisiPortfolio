@@ -1,59 +1,74 @@
 'use client';
 
 /**
- * ProjectsShowcase — scroll-driven, pinned-stage Projects gallery with
- * continuous, overlapping transitions. Rendered as its own homepage
- * section directly after Hero (never inside it). Target of the floating
- * nav's "Projects" item (#projects).
+ * ProjectsShowcase — gesture-scrubbed, snap-to-adjacent Projects gallery.
+ * Rendered as its own homepage section directly after Hero (never inside
+ * it). Target of the floating nav's "Projects" item (#projects).
  *
  * Interaction reference: 5a3b882879949.mp4 — a fixed stage where scrolling
  * hands one project off to the next, outgoing and incoming overlapping in
  * depth; a peripheral current/total axis tracks position. Adapted to this
  * portfolio's own language (Barlow Condensed display type, ink/surface/
- * line/accent tokens, spring vocabulary from lib/motion.ts) — no reference
- * branding, colours, or exact layout reused.
+ * line/accent tokens) — no reference branding, colours, or exact layout
+ * reused.
  *
- * ── Scroll model (scroll is the single source of truth) ──────────────
- * The <section> is `TOTAL * 100svh` tall; an inner `sticky top-0 h-[100svh]`
- * stage stays pinned. useScroll → scrollYProgress (0…1). We derive a
- * continuous position `posRaw = progress * (TOTAL-1)` where project i is
- * centred at pos = i, so each project owns a full viewport of scroll.
- * posRaw is smoothed through a gentle spring (springs.scrollSettle) into
- * `pos` — a soft settle for trackpad momentum that eases the *visual*
- * without ever blocking scroll. Everything (active index, poster, title,
- * info, side axis) reads `pos`, so they can never desync.
+ * ── Interaction model: gesture SCRUBS, release SNAPS ──────────────────
+ * activeIndex is the resting project. A physical wheel/touch gesture that
+ * crosses a small intent threshold freezes exactly one adjacent pair
+ * (`transitionPair = { from: activeIndex, to: activeIndex ± 1 }`) for the
+ * rest of that gesture — it can never re-target a different pair while the
+ * same physical gesture continues, so one gesture can only ever move one
+ * project, never two. Further gesture delta is mapped through a damped,
+ * non-linear curve into `progress` (0…1, a Framer MotionValue so every
+ * wheel tick only touches transforms, not React state) that scrubs the
+ * outgoing/incoming layers continuously — the next project visibly slides
+ * in as the user scrolls, exactly tracking gesture delta.
  *
- * Active index uses hysteresis: it only changes when |pos - active| passes
- * 0.5 + BUFFER, a dead-band that removes boundary flicker and makes it hard
- * to accidentally skip an adjacent project (notably 3 ⇄ 4).
+ * When the physical gesture ends (a quiet window after the last wheel
+ * event, or `touchend`), the interface never rests mid-transition: the
+ * remaining progress animates to completion with a duration that shrinks
+ * as less remains (a near-finished scrub settles almost instantly; a
+ * barely-started one gets a touch more time), then the pair is committed
+ * — activeIndex flips, progress resets to 0, and the system re-arms for
+ * the next gesture. Wheel-only: a longer, continuously-reset "momentum
+ * guard" absorbs trailing trackpad-momentum ticks from the same physical
+ * flick so they can never start a second adjacent transition.
+ *
+ * Keyboard and marker-click bypass scrubbing entirely — they animate
+ * directly from progress 0→1 over a fixed duration. A marker click can
+ * jump to any project (not just an adjacent one) but still only ever
+ * mounts the outgoing/incoming pair, so it never visibly scrubs through
+ * intermediate projects.
  *
  * ── Overlapping transitions (never transition through emptiness) ─────
- * Every project's poster/title/info layer stays mounted at once (only 4).
- * Each reads its signed distance `d = index - pos` and maps it to
- * transforms, so mid-transition the outgoing (d<0: recedes up + scales to
- * 0.88 + fades + subtle blur) and the incoming (d>0: rises from below +
- * scale 0.98→1 + restrained rotateX) are BOTH visible. Titles share one
- * `overflow-hidden` mask and translate by d so they overlap inside it.
- * There is no AnimatePresence swap and therefore no blank frame. Under
- * reduced motion every layer collapses to an opacity crossfade (still
- * overlapping, still ≥1 poster visible).
+ * Only the resting project (progress 0, no gesture) or the frozen
+ * outgoing/incoming pair (mid-gesture) are ever mounted — never more than
+ * two. Both share one opacity/position/scale curve driven by a signed
+ * "distance" derived from progress, so they always overlap: the outgoing
+ * layer fades/recedes from d=0 to d=∓1 while the incoming layer fades/
+ * arrives from d=±1 to d=0. No blur — overlap alone reads as motion, and
+ * both curves guarantee the frame is never blank.
+ *
+ * ── Document scroll ────────────────────────────────────────────────────
+ * The <section> is `TOTAL * 100svh` tall; an inner `sticky top-0 h-[100svh]`
+ * stage stays pinned. The instant a gesture arms, the real scroll position
+ * jumps straight to the destination project's anchor — invisible, because
+ * the sticky stage masks it — so there is never a second, visible scroll
+ * correction once the visual settle finishes. Free scrolling in/out of the
+ * section (boundary gestures at project 01/04) is left untouched so the
+ * user can exit to the neighbouring homepage section naturally.
  *
  * ── Two-level navigation ─────────────────────────────────────────────
- * Side-axis buttons only *select* which project the stage shows: they move
- * the real scroll position to that segment centre (goTo), keeping scroll
- * and visuals in lockstep — they never open a case study. Only the large
- * active poster (and its explicit CTA) links to the case-study route. The
- * two are structurally separate, so a side click can't trigger the poster.
+ * Side-axis buttons only *select* which project the stage shows (a direct,
+ * non-scrub transition) — they never open a case study. Only the large
+ * active poster (and its explicit CTA) links to the case-study route.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   animate,
   motion,
-  useMotionTemplate,
   useMotionValue,
-  useMotionValueEvent,
-  useScroll,
   useSpring,
   useTransform,
   type AnimationPlaybackControls,
@@ -65,10 +80,8 @@ import { projectHref } from '@/data/projectCatalog';
 import { useLanguage } from '@/context/LanguageContext';
 import { withBasePath } from '@/lib/paths';
 import {
-  durations,
   ease,
   fadeUp,
-  springs,
   useMotionVariants,
   usePrefersReducedMotion,
   viewportOnce,
@@ -78,12 +91,64 @@ import LazyVideo from '@/components/LazyVideo';
 import type { Project } from '@/types/project';
 
 const TOTAL = projects.length;
-/** Hysteresis dead-band added to the 0.5 boundary before the active index flips. */
-const SWITCH_BUFFER = 0.12;
-/** Scrolling idle for this long (ms) triggers the directional settle. */
-const SETTLE_IDLE_MS = 110;
-/** Already-close-enough band (in segment units) where no settle is needed. */
-const SETTLE_EPSILON = 0.02;
+
+/* ── Gesture-scrub + snap tuning ───────────────────────────────────────
+ * All timings/thresholds live here so the feel can be re-tuned without
+ * touching the interaction logic below. */
+/** Accumulated px before a wheel/touch gesture "arms" and starts scrubbing
+ *  a transition. Small enough to feel intentional-but-immediate, large
+ *  enough to swallow trackpad/mouse noise. */
+const INTENT_THRESHOLD_PX = 16;
+/** Excess px (beyond the intent threshold) that saturates the damped scrub
+ *  curve — tuned so a moderate deliberate scroll reaches ~70-85% and only
+ *  a strong flick approaches the cap. */
+const SCRUB_DISTANCE_PX = 190;
+/** Scrubbing alone never reaches 1 — the release settle always finishes
+ *  the last stretch, so there is always a visible "arrival" motion. */
+const SCRUB_PROGRESS_CAP = 0.96;
+/** Quiet window after the last wheel event before the physical drag phase
+ *  is considered over and the release-settle begins. */
+const WHEEL_END_QUIET_MS = 110;
+/** Additional, continuously-reset quiet window (measured from the very
+ *  last wheel event, armed or not) that must fully elapse before a new
+ *  gesture may arm — long enough to absorb a trackpad flick's decaying
+ *  momentum tail without letting it start a second transition. */
+const MOMENTUM_REARM_QUIET_MS = 220;
+const MIN_SETTLE_SECONDS = 0.11;
+const MAX_SETTLE_SECONDS = 0.34;
+/** Keyboard / marker-click transitions never scrub — one fixed, direct
+ *  animation from progress 0 to 1. */
+const DIRECT_SETTLE_SECONDS = 0.42;
+/** Reduced-motion users still get the full interaction, just condensed to
+ *  a quick opacity crossfade instead of a live-tracked scrub. */
+const REDUCED_SETTLE_SECONDS = 0.2;
+const ANCHOR_TOLERANCE = 2;
+
+type TransitionPair = { from: number; to: number; direction: 1 | -1 };
+type GesturePhase = 'idle' | 'armed' | 'settling';
+
+function normalizedWheelDelta(event: WheelEvent): number {
+  if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
+  if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) return event.deltaY * window.innerHeight;
+  return event.deltaY;
+}
+
+/** Damped, non-linear mapping from px beyond the intent threshold to scrub
+ *  progress — responsive immediately, easing toward the cap so even a very
+ *  large delta can't complete the transition (or skip past it) on its own. */
+function scrubProgressFor(excessPx: number): number {
+  if (excessPx <= 0) return 0;
+  const damped = 1 - Math.exp(-excessPx / SCRUB_DISTANCE_PX);
+  return Math.min(SCRUB_PROGRESS_CAP, damped);
+}
+
+/** Settle duration scales with what's left: nearly-finished gestures snap
+ *  almost instantly, barely-started ones get a touch more time so the
+ *  motion still reads as a completion rather than a cut. */
+function settleDurationFor(progress: number): number {
+  const remaining = Math.min(1, Math.max(0, 1 - progress));
+  return MIN_SETTLE_SECONDS + (MAX_SETTLE_SECONDS - MIN_SETTLE_SECONDS) * remaining;
+}
 
 const projectHierarchy: Record<string, {
   type: string;
@@ -196,71 +261,45 @@ function CursorCaseStudyCTA({ label }: { label: React.ReactNode }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Poster + title layer — one per project, all mounted simultaneously. */
+/* Poster + title layer. `d` is a signed distance MotionValue: 0 at rest, */
+/* travelling to ∓1 (outgoing) or from ±1 to 0 (incoming) as the frozen  */
+/* pair's progress runs 0→1. Never more than two of these are mounted.  */
 /* ------------------------------------------------------------------ */
 function ProjectLayer({
   project,
-  index,
-  pos,
+  d,
+  zIndex,
   isActive,
   reducedMotion,
   title,
   caseStudyLabel,
-  ctaLabel,
-  entryScale,
 }: {
   project: Project;
-  index: number;
-  pos: MotionValue<number>;
+  d: MotionValue<number>;
+  zIndex: number;
   isActive: boolean;
   reducedMotion: boolean;
   title: string;
   caseStudyLabel: string;
-  ctaLabel: string;
-  /** Optional extra scroll-linked scale (first project only): grows the
-   *  poster 0.85→1 as the section first arrives — the landing point of the
-   *  hero cards' shrink-and-fall handoff. */
-  entryScale?: MotionValue<number>;
 }) {
-  /** Signed distance from the active centre: 0 active, >0 incoming (below),
-   *  <0 outgoing (receded above). */
-  const d = useTransform(pos, (v) => index - v);
-
-  // Poster opacity — overlaps neighbours so the frame is never empty.
-  const posterOpacity = useTransform(
-    d,
-    [-1, -0.5, 0, 0.5, 1],
-    [0, 0.4, 1, 0.4, 0],
-  );
-
-  // Depth transforms (skipped visually under reduced motion).
-  const dScale = useTransform(d, [-1, 0, 1], [0.88, 1, 0.98]);
-  // Compose the distance-based scale with the optional entry grow-in.
-  const scale = useTransform<number, number>(
-    entryScale ? [dScale, entryScale] : [dScale],
-    (values: number[]) => values.reduce((a, b) => a * b, 1),
-  );
-  const translateY = useTransform(d, [-1, 0, 1], [-64, 0, 72]);
-  const rotateX = useTransform(d, [-1, 0, 1], [0, 0, 6]);
-  const blurPx = useTransform(d, [-1, -0.5, 0, 0.5, 1], [0, 2.5, 0, 2.5, 0]);
-  const posterFilter = useMotionTemplate`blur(${blurPx}px)`;
-  // Larger (nearer-to-1) scale reads in front; bias the incoming layer up.
-  const zIndex = useTransform(d, (v) => Math.round(100 - Math.abs(v) * 40 + (v > 0 ? 3 : 0)));
-
-  // Title travels through a shared mask: out the top, in from the bottom.
+  // Subtle, deliberately restrained ranges — this scrubs across a single
+  // gesture's worth of delta, not a whole-page scroll, so it reads as one
+  // continuous slide rather than a big scroll-linked sweep. No blur: the
+  // opacity/position/scale overlap alone is enough to communicate motion,
+  // and it guarantees the resting frame is always crisp.
+  const posterOpacity = useTransform(d, [-1, 0, 1], [0, 1, 0]);
+  const scale = useTransform(d, [-1, 0, 1], [0.99, 1, 0.985]);
+  const translateY = useTransform(d, [-1, 0, 1], [-28, 0, 36]);
   const titleY = useTransform(d, [-1, 0, 1], ['-115%', '0%', '115%']);
   const titleOpacity = useTransform(d, [-1, -0.6, 0, 0.6, 1], [0, 1, 1, 1, 0]);
 
   const lensStyle = useScrollLensStyle();
-
   const posterStyle = reducedMotion
     ? { opacity: posterOpacity, zIndex }
-    : { opacity: posterOpacity, scale, y: translateY, rotateX, filter: posterFilter, zIndex };
+    : { opacity: posterOpacity, scale, y: translateY, zIndex };
 
   const PosterInner = (
     <div className="group relative overflow-hidden rounded-2xl bg-surface shadow-[0_10px_18px_-8px_rgba(28,26,23,0.22),0_24px_48px_-16px_rgba(28,26,23,0.28)]">
-      {/* Lens sits on a wrapper so the image keeps its own hover transform
-          and the card's shadow is never warped. */}
       <div style={lensStyle}>
         {isActive && !reducedMotion ? (
           <LazyVideo
@@ -284,11 +323,10 @@ function ProjectLayer({
   return (
     <motion.div
       aria-hidden={!isActive}
-      style={{ ...posterStyle, transformPerspective: 1200 }}
+      style={posterStyle}
       className="absolute inset-0 flex items-center justify-center px-5 will-change-transform sm:px-8"
     >
       <div className="relative w-full max-w-[860px]">
-        {/* Only the active poster is an interactive case-study link. */}
         {isActive ? (
           <Link
             href={projectHref(project)}
@@ -303,7 +341,9 @@ function ProjectLayer({
           </div>
         )}
 
-        {/* Title mask — shared clipped region; each title translates by d. */}
+        {/* Title mask — both layers are identically positioned, so the
+            outgoing title travelling to -115% and the incoming title
+            travelling from 115%→0% read as one shared, overlapping mask. */}
         <div className={`absolute -bottom-2 left-0 right-0 overflow-hidden pb-[0.12em] sm:-bottom-9 ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}>
           <motion.h3
             style={reducedMotion ? { opacity: titleOpacity } : { opacity: titleOpacity, y: titleY }}
@@ -318,11 +358,10 @@ function ProjectLayer({
 }
 
 /* ------------------------------------------------------------------ */
-/* Info layer — calmer, small 6–8px movement, always overlapping.      */
+/* Info layer — calmer, small movement, same `d` convention as above.  */
 /* ------------------------------------------------------------------ */
 function InfoLayer({
-  index,
-  pos,
+  d,
   isActive,
   reducedMotion,
   identity,
@@ -331,8 +370,7 @@ function InfoLayer({
   caseStudyLabel,
   ctaLabel,
 }: {
-  index: number;
-  pos: MotionValue<number>;
+  d: MotionValue<number>;
   isActive: boolean;
   reducedMotion: boolean;
   identity: string;
@@ -341,7 +379,6 @@ function InfoLayer({
   caseStudyLabel: string;
   ctaLabel: string;
 }) {
-  const d = useTransform(pos, (v) => index - v);
   const opacity = useTransform(d, [-0.7, -0.4, 0, 0.4, 0.7], [0, 0.5, 1, 0.5, 0]);
   const y = useTransform(d, [-1, 0, 1], [7, 0, -7]);
 
@@ -379,36 +416,377 @@ export default function ProjectsShowcase() {
 
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [transitionPair, setTransitionPair] = useState<TransitionPair | null>(null);
+  const [entryReady, setEntryReady] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
+  // Refs mirror the state above so the single wheel/touch/keyboard effect
+  // below always reads the latest value without needing to be re-wired on
+  // every change (avoids stale closures without re-attaching listeners).
+  const activeIndexRef = useRef(0);
+  const transitionPairRef = useRef<TransitionPair | null>(null);
+  const progress = useMotionValue(0);
 
-  /* Section entry progress: 0 when the section's top reaches the viewport
-   * bottom → 1 when it reaches the top. Drives the first poster's grow-in,
-   * timed against the hero cards' shrink-and-fall so the handoff reads as
-   * the cards becoming the poster. */
-  const { scrollYProgress: entryProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'start start'],
-  });
-  const firstEntryScale = useTransform(entryProgress, [0.1, 0.95], [0.85, 1]);
+  const phaseRef = useRef<GesturePhase>('idle');
+  const directionRef = useRef<1 | -1>(1);
+  const guardActiveRef = useRef(false); // true from arm until the momentum guard clears
+  const wheelAccumRef = useRef(0);
+  const wheelEndTimerRef = useRef<number | null>(null);
+  const momentumGuardTimerRef = useRef<number | null>(null);
+  const settleAnimRef = useRef<AnimationPlaybackControls | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const lastScrollYRef = useRef(0);
 
-  // Continuous position (project i centred at i), smoothed for soft settle.
-  const posRaw = useTransform(scrollYProgress, [0, 1], [0, TOTAL - 1]);
-  const pos = useSpring(posRaw, springs.scrollSettle);
+  const anchorTop = useCallback((index: number) => {
+    const section = sectionRef.current;
+    if (!section || TOTAL <= 1) return window.scrollY;
+    const scrollDistance = Math.max(0, section.offsetHeight - window.innerHeight);
+    return section.offsetTop + (index / (TOTAL - 1)) * scrollDistance;
+  }, []);
 
-  // Active index with hysteresis — flips only past the 0.5 + buffer dead-band.
-  useMotionValueEvent(pos, 'change', (value) => {
-    setActiveIndex((current) => {
-      if (Math.abs(value - current) <= 0.5 + SWITCH_BUFFER) return current;
-      const next = Math.min(TOTAL - 1, Math.max(0, Math.round(value)));
-      return next === current ? current : next;
+  const setScrollTopInstant = useCallback((top: number) => {
+    window.scrollTo({ top, left: 0, behavior: 'instant' as ScrollBehavior });
+  }, []);
+
+  const stageOwnsScroll = useCallback(() => {
+    const section = sectionRef.current;
+    if (!section) return false;
+    const first = section.offsetTop;
+    const last = first + Math.max(0, section.offsetHeight - window.innerHeight);
+    return window.scrollY >= first - ANCHOR_TOLERANCE
+      && window.scrollY <= last + ANCHOR_TOLERANCE;
+  }, []);
+
+  /** Commits the frozen pair once its progress animation reaches 1:
+   *  activeIndex flips, progress resets, and the stage collapses back to a
+   *  single resting layer. Document scroll was already moved to this
+   *  target's anchor the instant the gesture armed, so nothing further
+   *  needs to move — there is no second, visible correction here. */
+  const commitPair = useCallback(() => {
+    const pair = transitionPairRef.current;
+    if (pair) {
+      activeIndexRef.current = pair.to;
+      setActiveIndex(pair.to);
+    }
+    transitionPairRef.current = null;
+    setTransitionPair(null);
+    progress.set(0);
+    phaseRef.current = 'idle';
+    // A just-completed gesture's leftover wheelAccumRef must not bleed into
+    // the next one — otherwise, once the momentum guard clears, the very
+    // next wheel tick (however small) re-triggers the OLD accumulated
+    // magnitude and re-arms instantly with no fresh intent threshold,
+    // chaining transitions the user never asked for.
+    wheelAccumRef.current = 0;
+  }, [progress]);
+
+  /** Animates the remaining progress to 1. Duration depends on how much is
+   *  left — never a fixed full-length transition restarted from zero. */
+  const beginSettle = useCallback((durationSeconds?: number) => {
+    phaseRef.current = 'settling';
+    settleAnimRef.current?.stop();
+    const from = progress.get();
+    const duration = durationSeconds ?? settleDurationFor(from);
+    settleAnimRef.current = animate(progress, 1, {
+      duration,
+      ease,
+      onComplete: commitPair,
     });
-  });
+  }, [commitPair, progress]);
 
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  /** Freezes exactly one adjacent pair for the rest of this physical
+   *  gesture and jumps the (invisible, sticky-masked) document anchor
+   *  straight to the destination — the visual itself is driven only by
+   *  `progress` from here on. */
+  const armAdjacentGesture = useCallback((direction: 1 | -1) => {
+    const from = activeIndexRef.current;
+    const to = from + direction;
+    const pair: TransitionPair = { from, to, direction };
+    transitionPairRef.current = pair;
+    setTransitionPair(pair);
+    directionRef.current = direction;
+    phaseRef.current = 'armed';
+    guardActiveRef.current = true;
+    progress.set(0);
+    setScrollTopInstant(anchorTop(to));
+    if (reducedMotion) beginSettle(REDUCED_SETTLE_SECONDS);
+  }, [anchorTop, beginSettle, progress, reducedMotion, setScrollTopInstant]);
+
+  /** Shared by keyboard and marker-click: a direct, non-scrubbed animation
+   *  to any target index (adjacent or not) — only the outgoing/incoming
+   *  pair is ever mounted, so distance never shows as passing through
+   *  intermediate projects. */
+  const directAnimateTo = useCallback((requestedIndex: number) => {
+    const to = Math.min(TOTAL - 1, Math.max(0, requestedIndex));
+    const from = activeIndexRef.current;
+    if (phaseRef.current !== 'idle') return;
+    if (to === from) {
+      setScrollTopInstant(anchorTop(from));
+      return;
+    }
+    const direction: 1 | -1 = to > from ? 1 : -1;
+    const pair: TransitionPair = { from, to, direction };
+    transitionPairRef.current = pair;
+    setTransitionPair(pair);
+    directionRef.current = direction;
+    phaseRef.current = 'settling';
+    progress.set(0);
+    setScrollTopInstant(anchorTop(to));
+    settleAnimRef.current?.stop();
+    settleAnimRef.current = animate(progress, 1, {
+      duration: reducedMotion ? REDUCED_SETTLE_SECONDS : DIRECT_SETTLE_SECONDS,
+      ease,
+      onComplete: commitPair,
+    });
+  }, [anchorTop, commitPair, progress, reducedMotion, setScrollTopInstant]);
+
+  // Initial mount: if the page is already scrolled into the section's
+  // range (deep link, scroll restoration), sync activeIndex + anchor once.
+  useEffect(() => {
+    lastScrollYRef.current = window.scrollY;
+    const section = sectionRef.current;
+    if (!section || TOTAL <= 1) return;
+    const first = section.offsetTop;
+    const distance = Math.max(0, section.offsetHeight - window.innerHeight);
+    const last = first + distance;
+    if (window.scrollY >= first && window.scrollY <= last && distance > 0) {
+      const initialIndex = Math.min(TOTAL - 1, Math.max(0, Math.round(((window.scrollY - first) / distance) * (TOTAL - 1))));
+      activeIndexRef.current = initialIndex;
+      setActiveIndex(initialIndex);
+      setScrollTopInstant(anchorTop(initialIndex));
+    }
+  }, [anchorTop, setScrollTopInstant]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (!("IntersectionObserver" in window)) {
+      setEntryReady(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setEntryReady(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.001 });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const armWheelTimers = () => {
+      // NOTE: does NOT set guardActiveRef here. Guard activation is the
+      // exclusive responsibility of armAdjacentGesture (a gesture actually
+      // armed) — this only (re)schedules the two quiet timers. Setting the
+      // guard unconditionally here used to fire on every pre-arm wheel tick
+      // (including sub-threshold ones), which meant the very first
+      // qualifying tick "guarded" the second tick before threshold was ever
+      // reached — wheelAccumRef then never grew past that first tick's
+      // delta, no gesture could ever arm, and every following wheel event
+      // fell into the guard-swallow branch below with preventDefault()
+      // still firing: a permanent, silent scroll deadlock.
+      if (wheelEndTimerRef.current !== null) window.clearTimeout(wheelEndTimerRef.current);
+      wheelEndTimerRef.current = window.setTimeout(onWheelEndQuiet, WHEEL_END_QUIET_MS);
+      if (momentumGuardTimerRef.current !== null) window.clearTimeout(momentumGuardTimerRef.current);
+      momentumGuardTimerRef.current = window.setTimeout(onMomentumGuardQuiet, MOMENTUM_REARM_QUIET_MS);
+    };
+
+    // Ends the physical drag phase of an armed gesture (begins the
+    // release-settle). A never-armed sub-threshold attempt just resets.
+    const onWheelEndQuiet = () => {
+      wheelEndTimerRef.current = null;
+      if (phaseRef.current === 'armed') {
+        beginSettle();
+      } else if (phaseRef.current === 'idle') {
+        wheelAccumRef.current = 0;
+      }
+    };
+
+    // Fires only after true silence for MOMENTUM_REARM_QUIET_MS — any
+    // wheel tick in between (including trailing trackpad momentum)
+    // re-arms this timer via armWheelTimers(), so a brand-new gesture can
+    // never start until the previous flick's momentum has fully decayed.
+    const onMomentumGuardQuiet = () => {
+      momentumGuardTimerRef.current = null;
+      guardActiveRef.current = false;
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      if (!stageOwnsScroll()) return;
+      const deltaY = normalizedWheelDelta(event);
+      if (Math.abs(deltaY) <= Math.abs(event.deltaX) || Math.abs(deltaY) < 0.5) return;
+
+      if (phaseRef.current !== 'idle') {
+        // Armed or settling: this is still the same physical gesture (or
+        // its momentum tail). Keep the guard alive; feed progress only
+        // while still in the live drag phase.
+        event.preventDefault();
+        armWheelTimers();
+        if (phaseRef.current !== 'armed') return; // settling: absorb, ignore
+        wheelAccumRef.current += deltaY;
+        const excess = directionRef.current * wheelAccumRef.current - INTENT_THRESHOLD_PX;
+        progress.set(Math.min(SCRUB_PROGRESS_CAP, Math.max(0, scrubProgressFor(excess))));
+        return;
+      }
+
+      if (guardActiveRef.current) {
+        // Trailing momentum from the previous gesture — swallow it so it
+        // can never start a new transition, but keep resetting the guard.
+        event.preventDefault();
+        armWheelTimers();
+        return;
+      }
+
+      // Fresh, unarmed accumulation phase.
+      const provisionalDirection: 1 | -1 = deltaY > 0 ? 1 : -1;
+      const currentIndex = activeIndexRef.current;
+      const leavesAtBoundary = (currentIndex === 0 && provisionalDirection < 0)
+        || (currentIndex === TOTAL - 1 && provisionalDirection > 0);
+      if (leavesAtBoundary) {
+        wheelAccumRef.current = 0;
+        return; // let the page scroll naturally out of the section
+      }
+
+      event.preventDefault();
+      if (wheelAccumRef.current !== 0 && Math.sign(wheelAccumRef.current) !== Math.sign(deltaY)) {
+        wheelAccumRef.current = deltaY;
+      } else {
+        wheelAccumRef.current += deltaY;
+      }
+      armWheelTimers();
+
+      if (Math.abs(wheelAccumRef.current) >= INTENT_THRESHOLD_PX) {
+        armAdjacentGesture(Math.sign(wheelAccumRef.current) as 1 | -1);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || !stageOwnsScroll()) return;
+      const target = event.target as HTMLElement | null;
+      if (target?.isContentEditable || target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) return;
+      const direction = event.key === 'ArrowDown' || event.key === 'PageDown'
+        ? 1
+        : event.key === 'ArrowUp' || event.key === 'PageUp'
+          ? -1
+          : 0;
+      if (!direction) return;
+      const currentIndex = activeIndexRef.current;
+      const leavesAtBoundary = (currentIndex === 0 && direction < 0)
+        || (currentIndex === TOTAL - 1 && direction > 0);
+      if (leavesAtBoundary) return; // let the default key-scroll exit the section
+      if (event.repeat || phaseRef.current !== 'idle') { event.preventDefault(); return; }
+      event.preventDefault();
+      directAnimateTo(currentIndex + direction);
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      if (event.touches.length !== 1 || !stageOwnsScroll()) {
+        touchStartYRef.current = null;
+        touchStartXRef.current = null;
+        return;
+      }
+      touchStartYRef.current = event.touches[0].clientY;
+      touchStartXRef.current = event.touches[0].clientX;
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      const startY = touchStartYRef.current;
+      const startX = touchStartXRef.current;
+      if (startY === null || startX === null || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      const deltaY = startY - touch.clientY; // positive: finger moved up (scroll-down intent)
+      const deltaX = startX - touch.clientX;
+      if (Math.abs(deltaY) <= Math.abs(deltaX)) return; // horizontal swipe — ignore
+
+      if (phaseRef.current === 'idle') {
+        if (guardActiveRef.current) { event.preventDefault(); return; }
+        const provisionalDirection: 1 | -1 = deltaY > 0 ? 1 : -1;
+        const currentIndex = activeIndexRef.current;
+        const leavesAtBoundary = (currentIndex === 0 && provisionalDirection < 0)
+          || (currentIndex === TOTAL - 1 && provisionalDirection > 0);
+        if (leavesAtBoundary) return; // let the page scroll naturally out of the section
+        if (Math.abs(deltaY) < INTENT_THRESHOLD_PX) { event.preventDefault(); return; }
+        event.preventDefault();
+        armAdjacentGesture(provisionalDirection);
+        return;
+      }
+
+      if (phaseRef.current === 'armed') {
+        event.preventDefault();
+        const excess = directionRef.current * deltaY - INTENT_THRESHOLD_PX;
+        progress.set(Math.min(SCRUB_PROGRESS_CAP, Math.max(0, scrubProgressFor(excess))));
+        return;
+      }
+
+      // settling: swallow further touchmove from the same gesture.
+      event.preventDefault();
+    };
+
+    const onTouchEnd = () => {
+      if (phaseRef.current === 'armed') beginSettle();
+      touchStartYRef.current = null;
+      touchStartXRef.current = null;
+    };
+
+    // Natural entry into the pinned stage from ordinary page scrolling
+    // (e.g. arriving from the section above/below) — snap straight to the
+    // boundary project and correct the anchor instantly.
+    const onScroll = () => {
+      const section = sectionRef.current;
+      if (!section || phaseRef.current !== 'idle') {
+        lastScrollYRef.current = window.scrollY;
+        return;
+      }
+      const previousY = lastScrollYRef.current;
+      const currentY = window.scrollY;
+      const first = section.offsetTop;
+      const last = first + Math.max(0, section.offsetHeight - window.innerHeight);
+      lastScrollYRef.current = currentY;
+
+      const enteredFromTop = previousY < first - ANCHOR_TOLERANCE
+        && currentY >= first - ANCHOR_TOLERANCE
+        && currentY <= last;
+      const enteredFromBottom = previousY > last + ANCHOR_TOLERANCE
+        && currentY <= last + ANCHOR_TOLERANCE
+        && currentY >= first;
+      if (!enteredFromTop && !enteredFromBottom) return;
+
+      const entryIndex = enteredFromTop ? 0 : TOTAL - 1;
+      activeIndexRef.current = entryIndex;
+      setActiveIndex(entryIndex);
+      setScrollTopInstant(enteredFromTop ? first : last);
+    };
+
+    const onScrollEnd = () => {
+      if (phaseRef.current === 'idle' && stageOwnsScroll()) {
+        const expectedTop = anchorTop(activeIndexRef.current);
+        if (Math.abs(window.scrollY - expectedTop) > ANCHOR_TOLERANCE) setScrollTopInstant(expectedTop);
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scrollend', onScrollEnd);
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scrollend', onScrollEnd);
+      if (wheelEndTimerRef.current !== null) window.clearTimeout(wheelEndTimerRef.current);
+      if (momentumGuardTimerRef.current !== null) window.clearTimeout(momentumGuardTimerRef.current);
+      settleAnimRef.current?.stop();
+    };
+  }, [anchorTop, armAdjacentGesture, beginSettle, directAnimateTo, progress, setScrollTopInstant, stageOwnsScroll]);
 
   const localize = useCallback(
     (key: 'work.viewCaseStudy' | 'work.showInShowcase', name: string) =>
@@ -426,97 +804,7 @@ export default function ProjectsShowcase() {
     return hierarchy ? (isZh ? hierarchy.metaZh : hierarchy.meta) : (isZh ? p.focusZh : p.focus);
   }, [isZh]);
 
-  /** Move the real scroll position so `index` becomes the centred project. */
-  const goTo = useCallback(
-    (index: number) => {
-      const section = sectionRef.current;
-      if (!section || TOTAL <= 1) return;
-      const clamped = Math.min(TOTAL - 1, Math.max(0, index));
-      const fraction = clamped / (TOTAL - 1);
-      const scrollDistance = section.offsetHeight - window.innerHeight;
-      const targetTop = section.offsetTop + fraction * scrollDistance;
-      window.scrollTo({ top: targetTop, behavior: reducedMotion ? 'auto' : 'smooth' });
-    },
-    [reducedMotion],
-  );
-
-  /* ── Directional settle-after-idle (soft snap, never a trap) ──────────
-   * Free scrolling is untouched. When scrolling has been idle for
-   * SETTLE_IDLE_MS and the position rests between two segment centres,
-   * we animate the window to the next centre in the last scroll
-   * direction — so it is impossible to REST mid-transition, but any new
-   * wheel / touch / key input cancels the glide instantly. */
-  const isSettling = useRef(false);
-  const settleAnim = useRef<AnimationPlaybackControls | null>(null);
-  const idleTimer = useRef<number | null>(null);
-  const lastDir = useRef(1);
-  const lastProgress = useRef(0);
-
-  const settle = useCallback(() => {
-    const section = sectionRef.current;
-    if (!section || TOTAL <= 1 || isSettling.current) return;
-    const p = scrollYProgress.get();
-    // Only while the pinned stage owns the viewport (not entering/leaving).
-    if (p <= 0.001 || p >= 0.999) return;
-    const posNow = p * (TOTAL - 1);
-    if (Math.abs(posNow - Math.round(posNow)) < SETTLE_EPSILON) return;
-    const target =
-      lastDir.current >= 0
-        ? Math.min(Math.ceil(posNow), TOTAL - 1)
-        : Math.max(Math.floor(posNow), 0);
-    const scrollDistance = section.offsetHeight - window.innerHeight;
-    const targetTop = section.offsetTop + (target / (TOTAL - 1)) * scrollDistance;
-    if (reducedMotion) {
-      window.scrollTo({ top: targetTop });
-      return;
-    }
-    isSettling.current = true;
-    settleAnim.current = animate(window.scrollY, targetTop, {
-      duration: durations.slow,
-      ease,
-      onUpdate: (v) => window.scrollTo(0, v),
-      onComplete: () => {
-        isSettling.current = false;
-      },
-      onStop: () => {
-        isSettling.current = false;
-      },
-    });
-  }, [reducedMotion, scrollYProgress]);
-
-  // Track direction + (re)arm the idle timer on every real scroll change.
-  useMotionValueEvent(scrollYProgress, 'change', (p) => {
-    const delta = p - lastProgress.current;
-    if (delta !== 0) lastDir.current = delta > 0 ? 1 : -1;
-    lastProgress.current = p;
-    if (isSettling.current) return; // our own glide — don't re-arm
-    if (idleTimer.current !== null) window.clearTimeout(idleTimer.current);
-    idleTimer.current = window.setTimeout(settle, SETTLE_IDLE_MS);
-  });
-
-  // Any user input cancels a pending or running settle immediately.
-  useEffect(() => {
-    const cancel = () => {
-      if (idleTimer.current !== null) {
-        window.clearTimeout(idleTimer.current);
-        idleTimer.current = null;
-      }
-      if (isSettling.current) settleAnim.current?.stop();
-    };
-    window.addEventListener('wheel', cancel, { passive: true });
-    window.addEventListener('touchstart', cancel, { passive: true });
-    window.addEventListener('keydown', cancel);
-    return () => {
-      window.removeEventListener('wheel', cancel);
-      window.removeEventListener('touchstart', cancel);
-      window.removeEventListener('keydown', cancel);
-      cancel();
-    };
-  }, []);
-
   const ctaLabel = t('work.caseStudy');
-  /* In-view reveal for the section chrome (eyebrow / meta / axis) —
-   * fadeUp normally, opacity-only under reduced motion. */
   const revealVariants = useMotionVariants(fadeUp);
 
   const markers = useMemo(
@@ -529,6 +817,24 @@ export default function ProjectsShowcase() {
       })),
     [titleOf],
   );
+
+  // Signed-distance MotionValues shared by the poster and info layers for
+  // each role, so both regions of the DOM stay perfectly in lockstep.
+  const direction = transitionPair?.direction ?? 1;
+  const outgoingD = useTransform(progress, (p) => -direction * p);
+  const incomingD = useTransform(progress, (p) => direction * (1 - p));
+  const restD = useMotionValue(0);
+
+  const activeProject = projects[activeIndex] ?? projects[0];
+  const progressWidth = TOTAL <= 1 ? '100%' : `${(activeIndex / (TOTAL - 1)) * 100}%`;
+
+  type Layer = { project: Project; d: MotionValue<number>; zIndex: number; isActive: boolean };
+  const layers: Layer[] = transitionPair
+    ? [
+        { project: projects[transitionPair.from], d: outgoingD, zIndex: 1, isActive: true },
+        { project: projects[transitionPair.to], d: incomingD, zIndex: 2, isActive: false },
+      ]
+    : [{ project: activeProject, d: restD, zIndex: 2, isActive: true }];
 
   return (
     <section
@@ -562,23 +868,28 @@ export default function ProjectsShowcase() {
           </p>
         </motion.div>
 
-        {/* Stage — all poster/title layers stacked, driven by scroll. */}
-        <div className="relative flex-1" style={{ perspective: 1200 }}>
-          {projects.map((p, i) => (
+        {/* Stage — at rest, one project; mid-gesture, exactly the frozen
+            outgoing/incoming pair. Never more than two, never fewer than
+            one, so the frame is never blank. */}
+        <motion.div
+          initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
+          animate={entryReady || reducedMotion ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.5, ease }}
+          className="relative flex-1"
+        >
+          {layers.map(({ project, d, zIndex, isActive }) => (
             <ProjectLayer
-              key={p.id}
-              project={p}
-              index={i}
-              pos={pos}
-              isActive={i === activeIndex}
+              key={project.id}
+              project={project}
+              d={d}
+              zIndex={zIndex}
+              isActive={isActive}
               reducedMotion={reducedMotion}
-              title={displayTypeOf(p)}
-              caseStudyLabel={localize('work.viewCaseStudy', titleOf(p))}
-              ctaLabel={ctaLabel}
-              entryScale={i === 0 && !reducedMotion ? firstEntryScale : undefined}
+              title={displayTypeOf(project)}
+              caseStudyLabel={localize('work.viewCaseStudy', titleOf(project))}
             />
           ))}
-        </div>
+        </motion.div>
 
         {/* Peripheral meta + current/total axis — reveals on first arrival. */}
         <motion.div
@@ -590,24 +901,24 @@ export default function ProjectsShowcase() {
         >
           {/* Info (layered crossfade, calmer) */}
           <div className="relative h-28 flex-1 sm:h-24">
-            {projects.map((p, i) => (
+            {layers.map(({ project, d, isActive }) => (
               <InfoLayer
-                key={p.id}
-                index={i}
-                pos={pos}
-                isActive={i === activeIndex}
+                key={project.id}
+                d={d}
+                isActive={isActive}
                 reducedMotion={reducedMotion}
-                identity={`${titleOf(p)} · ${pad(p.order)}`}
-                meta={metaOf(p)}
-                href={projectHref(p)}
-                caseStudyLabel={localize('work.viewCaseStudy', titleOf(p))}
+                identity={`${titleOf(project)} · ${pad(project.order)}`}
+                meta={metaOf(project)}
+                href={projectHref(project)}
+                caseStudyLabel={localize('work.viewCaseStudy', titleOf(project))}
                 ctaLabel={ctaLabel}
               />
             ))}
           </div>
 
-          {/* Side axis — selects the shown project (scrolls); never opens a
-              case study. Numbered markers with a hover/focus thumbnail. */}
+          {/* Side axis — selects the shown project via a direct (non-scrub)
+              transition; never opens a case study. Numbered markers with a
+              hover/focus thumbnail. */}
           <nav aria-label={t('work.title')} className="flex shrink-0 items-center gap-3">
             <div className="hidden flex-col gap-1 sm:flex">
               {markers.map(({ project, index, order, title }) => {
@@ -627,7 +938,7 @@ export default function ProjectsShowcase() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => goTo(index)}
+                      onClick={() => directAnimateTo(index)}
                       aria-label={localize('work.showInShowcase', title)}
                       aria-current={selected ? 'true' : undefined}
                       className={`flex h-6 items-center font-mono text-xs tabular-nums outline-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong ${
@@ -646,7 +957,8 @@ export default function ProjectsShowcase() {
             </span>
             <div className="relative h-px w-12 bg-line sm:w-16" aria-hidden="true">
               <motion.div
-                style={{ width: progressWidth }}
+                animate={{ width: progressWidth }}
+                transition={{ duration: reducedMotion ? REDUCED_SETTLE_SECONDS : DIRECT_SETTLE_SECONDS, ease }}
                 className="absolute inset-y-0 left-0 bg-accent"
               />
             </div>
