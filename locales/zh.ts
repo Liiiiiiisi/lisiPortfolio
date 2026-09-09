@@ -92,9 +92,25 @@ export const zh: Record<TranslationKey, string> = {
 
   'about.title': '关于',
   'about.body1':
-    '我是一名创意技术专家与交互设计师，工作范围涵盖 XR、AI 辅助界面与实时媒体。我习惯把想法从概念推进到可测试的原型：先设计交互，再亲自实现。',
+    '我是一名创意技术与交互设计师，工作涵盖数字产品、空间界面、实时媒体与 AI 辅助体验。',
   'about.body2':
-    '近期作品包括手部追踪学习工具、叙事 VR 与多模态 AI 工具，曾两次获得 XRDC 奖项。目前对 XR、创意工具与交互产品设计方向的职位与合作持开放态度。',
+    '我习惯从交互本身出发，把想法从概念推进到可测试的原型，并亲自参与设计、原型制作与实现。',
+  'about.body3':
+    '近期项目涵盖交互产品、混合现实学习工具、实时 3D 体验与 AI 辅助工作流。我尤其关注设计、技术与产品思维交汇的部分。',
+
+  // 关于页 — Practice（以工具/软件标识为主的技能展示区，仅替换 About 页面
+  // 原先纯文字的 resume.skills.featuresText 一行）。
+  // 定位：交互/产品优先，XR 只是众多能力之一 —— 不作为首要类别。
+  // 详见 data/practice.ts。
+  'about.practice.heading': '实践',
+  'about.practice.group.interaction.heading': '交互与产品',
+  'about.practice.group.interaction.capabilities':
+    'UI/UX · 交互设计 · 空间界面 · 手势系统 · 原型设计',
+  'about.practice.group.creativeTech.heading': '创意技术',
+  'about.practice.group.creativeTech.capabilities': 'TouchDesigner · 8th Wall',
+  'about.practice.group.realtime.heading': '实时与 3D',
+  'about.practice.group.realtime.capabilities': '动画 · 视觉特效 · Cinemachine',
+  'about.practice.group.ai.heading': 'AI 辅助工作流程',
 
   'contact.title': '联系',
   'contact.lead': '如有职位、合作或希望深入了解作品，欢迎通过邮件联系我。',

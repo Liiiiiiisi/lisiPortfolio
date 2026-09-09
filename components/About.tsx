@@ -5,6 +5,8 @@
  * real destination. Not a full biography by design.
  */
 import { useLanguage } from '@/context/LanguageContext';
+import { practiceGroups } from '@/data/practice';
+import PracticeLogo from '@/components/PracticeLogo';
 
 export default function About() {
   const { t } = useLanguage();
@@ -22,10 +24,6 @@ export default function About() {
         `${t('resume.edu1.degree')} — ${t('resume.edu1.result')}`,
         `${t('resume.edu2.degree')} — ${t('resume.edu2.result')}`,
       ],
-    },
-    {
-      label: t('resume.nav.skills'),
-      items: [t('resume.skills.featuresText')],
     },
   ];
 
@@ -46,6 +44,7 @@ export default function About() {
           <div className="space-y-4 lg:col-span-7 lg:col-start-6">
             <p className="text-base leading-relaxed text-ink">{t('about.body1')}</p>
             <p className="text-base leading-relaxed text-muted">{t('about.body2')}</p>
+            <p className="text-base leading-relaxed text-muted">{t('about.body3')}</p>
 
             <dl className="mt-12 space-y-8 border-t border-line pt-8">
               {details.map((detail) => (
@@ -58,6 +57,43 @@ export default function About() {
                   </dd>
                 </div>
               ))}
+
+              {/* Practice — hybrid logo/text tool list. Kept out of the
+                  generic `details` array above because, unlike Awards/
+                  Education, its content needs per-group logo rows plus a
+                  secondary capability line rather than a flat list of
+                  strings. Same dt/dd grid shape as every other entry in
+                  this dl, so it reads as one continuous list. */}
+              <div className="grid gap-3 sm:grid-cols-4 sm:gap-6">
+                <dt className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+                  {t('about.practice.heading')}
+                </dt>
+                <dd className="space-y-5 sm:col-span-3">
+                  {practiceGroups.map((group) => (
+                    <div key={group.id} className="space-y-2">
+                      <p className="text-[0.7rem] font-mono uppercase tracking-[0.12em] text-ink">
+                        {t(group.headingKey)}
+                      </p>
+                      {group.logos.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {group.logos.map((logo) => (
+                            <span
+                              key={logo.id}
+                              className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm leading-none text-ink"
+                            >
+                              <PracticeLogo id={logo.id} className="h-[18px] w-[18px] shrink-0 text-muted" />
+                              {logo.name}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {group.capabilitiesKey && (
+                        <p className="text-sm leading-relaxed text-muted">{t(group.capabilitiesKey)}</p>
+                      )}
+                    </div>
+                  ))}
+                </dd>
+              </div>
             </dl>
 
             <div className="flex flex-wrap gap-5 border-t border-line pt-8 text-sm font-medium">

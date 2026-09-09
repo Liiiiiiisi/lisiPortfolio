@@ -98,9 +98,25 @@ export const en = {
 
   'about.title': 'About',
   'about.body1':
-    'I am a creative technologist and interactive designer working across XR, AI-assisted interfaces and real-time media. I move ideas from concept to testable build — designing the interaction first, then prototyping and developing it myself.',
+    'I am a creative technologist and interaction designer working across digital products, spatial interfaces, real-time media and AI-assisted experiences.',
   'about.body2':
-    'Recent work spans hand-tracked learning tools, narrative VR and multimodal AI utilities, recognised with two XRDC awards. I am open to roles and collaborations in XR, creative tooling and interactive product design.',
+    'I move ideas from concept to testable build — shaping the interaction first, then prototyping and developing the experience hands-on.',
+  'about.body3':
+    "Recent work spans interactive products, mixed-reality learning tools, real-time 3D experiences and AI-assisted workflows. I\u2019m interested in the space where design, technology and product thinking meet.",
+
+  // About — Practice (tool/logo-led skills section, replaces the old
+  // plain-text resume.skills.featuresText line on the About page only).
+  // Positioning: interaction/product first, XR is one capability among
+  // several — never the lead category. See data/practice.ts.
+  'about.practice.heading': 'Practice',
+  'about.practice.group.interaction.heading': 'Interaction & Product',
+  'about.practice.group.interaction.capabilities':
+    'UI/UX · Interaction Design · Spatial UI · Gesture Systems · Prototyping',
+  'about.practice.group.creativeTech.heading': 'Creative Technology',
+  'about.practice.group.creativeTech.capabilities': 'TouchDesigner · 8th Wall',
+  'about.practice.group.realtime.heading': 'Real-time & 3D',
+  'about.practice.group.realtime.capabilities': 'Animation · VFX · Cinemachine',
+  'about.practice.group.ai.heading': 'AI-assisted Workflows',
 
   'contact.title': 'Contact',
   'contact.lead':

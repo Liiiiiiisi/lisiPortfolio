@@ -22,7 +22,7 @@ import { withBasePath } from '@/lib/paths';
 import { durations, ease, usePrefersReducedMotion } from '@/lib/motion';
 import { useScrollLensStyle } from '@/components/ScrollLens';
 import type { TranslationKey } from '@/locales/en';
-import type { LabItem, LabMedia, LabTileAspect } from '@/types/lab';
+import type { LabItem, LabMedia, LabMediaDiagram, LabTileAspect } from '@/types/lab';
 
 const ASPECT_CLASS: Record<LabTileAspect, string> = {
   ultra: 'aspect-[21/9]',
@@ -89,6 +89,13 @@ function Media({
 }) {
   const alt = (isZh ? media.altZh : media.alt) ?? '';
   const lensStyle = useScrollLensStyle();
+  const fitClass = media.fit === 'contain' ? 'object-contain' : 'object-cover';
+  const positionClass =
+    media.objectPosition === 'top'
+      ? 'object-top'
+      : media.objectPosition === 'bottom'
+        ? 'object-bottom'
+        : 'object-center';
   return (
     <div
       style={lensStyle}
@@ -97,7 +104,7 @@ function Media({
       {media.src && media.kind === 'video' ? (
         reducedMotion && media.poster ? (
           // eslint-disable-next-line @next/next/no-img-element -- static export, unoptimized images
-          <img src={withBasePath(media.poster)} alt={alt} className="h-full w-full object-cover" />
+          <img src={withBasePath(media.poster)} alt={alt} className={`h-full w-full ${fitClass} ${positionClass}`} />
         ) : (
           <InViewVideo src={media.src} poster={media.poster} reducedMotion={reducedMotion} />
         )
@@ -108,10 +115,83 @@ function Media({
           alt={alt}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover"
+          className={`h-full w-full ${fitClass} ${positionClass}`}
         />
       ) : null /* neutral surface block until media lands */}
     </div>
+  );
+}
+
+/** One row of a `LabMediaDiagram` flow: labelled steps joined by thin
+ *  arrows. Purely typographic — no boxes, no dashboard chrome. */
+function DiagramFlow({ steps, isZh }: { steps: { label: string; labelZh: string }[]; isZh: boolean }) {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-x-5 sm:gap-y-4">
+      {steps.map((step, i) => (
+        <Fragment key={i}>
+          <span className="rounded-full border border-line px-3.5 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-ink sm:px-5 sm:py-2 sm:text-[0.82rem]">
+            {isZh ? step.labelZh : step.label}
+          </span>
+          {i < steps.length - 1 && (
+            <span aria-hidden="true" className="text-muted/60 sm:text-base">
+              →
+            </span>
+          )}
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+/** Generic, reusable editorial schematic block — renders a `LabMediaDiagram`
+ *  as plain typographic content (flow chips, optional parallel flow, term
+ *  definitions, optional example line). No Lab-specific text is hardcoded
+ *  here; everything comes from `diagram`, owned by data/lab.ts. */
+function DiagramBlock({
+  diagram,
+  reducedMotion,
+  isZh,
+}: {
+  diagram: LabMediaDiagram;
+  reducedMotion: boolean;
+  isZh: boolean;
+}) {
+  return (
+    <Reveal
+      reducedMotion={reducedMotion}
+      className="mx-auto flex max-w-2xl flex-col items-center gap-10 sm:max-w-3xl lg:px-[6%]"
+    >
+      <div className="flex flex-col items-center gap-6">
+        <DiagramFlow steps={diagram.flow} isZh={isZh} />
+        {diagram.secondaryFlow && <DiagramFlow steps={diagram.secondaryFlow} isZh={isZh} />}
+      </div>
+      {diagram.labels && (
+        <dl className="grid w-full grid-cols-1 gap-x-10 gap-y-5 text-left sm:grid-cols-2">
+          {diagram.labels.map((l, i) => (
+            <div key={i}>
+              <dt className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-ink">
+                {isZh ? l.termZh : l.term}
+              </dt>
+              <dd className="mt-1 text-sm leading-relaxed text-muted">{isZh ? l.bodyZh : l.body}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {diagram.supportingLines && (
+        <div className="flex flex-col items-center gap-1.5 text-center">
+          {diagram.supportingLines.map((line, i) => (
+            <p key={i} className="text-sm leading-relaxed text-muted">
+              {isZh ? line.textZh : line.text}
+            </p>
+          ))}
+        </div>
+      )}
+      {diagram.example && (
+        <p className="text-center font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted">
+          {isZh ? diagram.exampleZh : diagram.example}
+        </p>
+      )}
+    </Reveal>
   );
 }
 
@@ -152,16 +232,29 @@ export default function LabStudyContent({
   const reducedMotion = usePrefersReducedMotion();
 
   const title = isZh ? item.titleZh : item.title;
+  const introLead = isZh ? item.introLeadZh : item.introLead;
   const intro = isZh ? item.introZh : item.intro;
   const tools = (isZh ? item.toolsZh : item.tools) ?? item.tools;
   const discipline = t(`lab.discipline.${item.discipline}` as TranslationKey);
 
-  /* Pair consecutive 'half' blocks; everything else stands alone. */
+  /* Pair consecutive 'half' blocks; everything else stands alone. A media
+   * item carrying its own `story` always stands alone (never pairs), since
+   * it renders as its own media+text row instead of a plain tile. */
   const blocks: LabMedia[][] = [];
   for (let i = 0; i < item.media.length; i += 1) {
     const media = item.media[i];
     const previous = blocks[blocks.length - 1];
-    if (media.layout === 'half' && previous?.length === 1 && previous[0].layout === 'half') {
+    const canPair =
+      media.layout === 'half' &&
+      !media.story &&
+      !media.note &&
+      !media.diagram &&
+      previous?.length === 1 &&
+      previous[0].layout === 'half' &&
+      !previous[0].story &&
+      !previous[0].note &&
+      !previous[0].diagram;
+    if (canPair) {
       previous.push(media);
     } else {
       blocks.push([media]);
@@ -181,9 +274,20 @@ export default function LabStudyContent({
           {title}
         </h1>
 
-        <p className="mx-auto mt-6 max-w-lg text-balance text-base leading-relaxed text-muted sm:text-lg">
-          {intro}
-        </p>
+        {introLead ? (
+          <>
+            <p className="mx-auto mt-6 max-w-2xl text-balance text-lg font-medium leading-snug text-ink sm:text-xl">
+              {introLead}
+            </p>
+            <p className="mx-auto mt-3 max-w-2xl text-balance text-sm leading-relaxed text-muted sm:text-base">
+              {intro}
+            </p>
+          </>
+        ) : (
+          <p className="mx-auto mt-6 max-w-lg text-balance text-base leading-relaxed text-muted sm:text-lg">
+            {intro}
+          </p>
+        )}
 
         {/* Minimal metadata — two quiet mono lines, no box system. */}
         <div className="mt-6 space-y-1 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted/80">
@@ -217,15 +321,74 @@ export default function LabStudyContent({
                 reducedMotion={reducedMotion}
                 className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
               >
-                {group.map((media, j) => (
-                  <Fragment key={`${key}-${j}`}>
-                    <Media media={media} reducedMotion={reducedMotion} isZh={isZh} />
-                  </Fragment>
-                ))}
+                {group.map((media, j) => {
+                  const caption = isZh ? media.captionZh : media.caption;
+                  return (
+                    <Fragment key={`${key}-${j}`}>
+                      <div>
+                        <Media media={media} reducedMotion={reducedMotion} isZh={isZh} />
+                        {caption && (
+                          <p className="mt-3 text-center font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted">
+                            {caption}
+                          </p>
+                        )}
+                      </div>
+                    </Fragment>
+                  );
+                })}
               </Reveal>
             );
           }
           const media = group[0];
+          if (media.diagram) {
+            return <DiagramBlock key={key} diagram={media.diagram} reducedMotion={reducedMotion} isZh={isZh} />;
+          }
+          if (media.note) {
+            const heading = isZh ? media.note.headingZh : media.note.heading;
+            const body = isZh ? media.note.bodyZh : media.note.body;
+            const rhythmClass = [
+              media.note.tightenAbove ? '-mt-4 sm:-mt-6' : '',
+              media.note.roomyBelow ? 'mb-6 sm:mb-10' : '',
+            ]
+              .filter(Boolean)
+              .join(' ');
+            return (
+              <Reveal
+                key={key}
+                reducedMotion={reducedMotion}
+                className={`mx-auto max-w-lg text-center lg:px-[10%] ${rhythmClass}`}
+              >
+                {heading && (
+                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink">{heading}</p>
+                )}
+                <p className={`text-sm leading-relaxed text-muted ${heading ? 'mt-3' : ''}`}>{body}</p>
+              </Reveal>
+            );
+          }
+          if (media.story) {
+            const heading = isZh ? media.story.headingZh : media.story.heading;
+            const body = isZh ? media.story.bodyZh : media.story.body;
+            const columnsClass = media.story.wideImage
+              ? 'sm:grid-cols-[7fr_3fr]'
+              : 'sm:grid-cols-2';
+            return (
+              <Reveal
+                key={key}
+                reducedMotion={reducedMotion}
+                className={`grid grid-cols-1 gap-6 sm:items-center sm:gap-10 lg:px-[10%] ${columnsClass}`}
+              >
+                <Media media={media} reducedMotion={reducedMotion} isZh={isZh} />
+                <div className="text-left">
+                  <p className="font-mono text-[0.66rem] uppercase tracking-[0.14em] text-ink">
+                    {heading}
+                  </p>
+                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
+                    {body}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          }
           return (
             <Reveal
               key={key}
