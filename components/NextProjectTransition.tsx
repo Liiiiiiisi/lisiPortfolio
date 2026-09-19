@@ -40,7 +40,7 @@ import { getCaseStudy } from '@/data/caseStudies';
 import { withBasePath } from '@/lib/paths';
 import { usePrefersReducedMotion } from '@/lib/motion';
 import { useScrollLensStyle } from '@/components/ScrollLens';
-import { prepareCaseStudyLanding } from '@/components/CaseStudyStartAnchor';
+import { isCaseStudyLandingLocked, prepareCaseStudyLanding } from '@/components/CaseStudyStartAnchor';
 import { preloadCaseHandoff, showCaseHandoff } from '@/lib/caseTransitionHandoff';
 import type { SequenceEntry } from '@/data/projectSequence';
 
@@ -84,6 +84,17 @@ export default function NextProjectTransition({
   const preloadStartedRef = useRef(false);
   const commit = useCallback(() => {
     if (navigatedRef.current) return;
+    // Guards against the one real race in this design: the page that was
+    // just landed on inherits the outgoing page's scroll position (the
+    // handoff uses `router.push(href, { scroll: false })` so the incoming
+    // Hero can take over without a jump-to-top flash), and the landing
+    // anchor's own corrective `scrollTo` calls can transiently report a
+    // high scroll-progress reading on THIS section before that correction
+    // finishes. Refusing to commit while a landing lock is held means a
+    // fresh page can never auto-advance itself before the visitor has
+    // actually scrolled it — so one continued gesture can never chain into
+    // a second, skipped-project transition.
+    if (isCaseStudyLandingLocked()) return;
     navigatedRef.current = true;
     showCaseHandoff(next);
     prepareCaseStudyLanding();
@@ -91,6 +102,7 @@ export default function NextProjectTransition({
   }, [router, next]);
 
   useMotionValueEvent(scrollYProgress, 'change', (p) => {
+    if (isCaseStudyLandingLocked()) return;
     if (p >= 0.55 && !preloadStartedRef.current) {
       preloadStartedRef.current = true;
       preloadCaseHandoff(next);

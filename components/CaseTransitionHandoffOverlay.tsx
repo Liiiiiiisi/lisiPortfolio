@@ -26,26 +26,51 @@ export default function CaseTransitionHandoffOverlay() {
   const payloadRef = useRef<CaseHandoffPayload | null>(null);
 
   useEffect(() => {
+    let fallbackTimer: number | undefined;
+    let dismissTimer: number | undefined;
+    const clearTimers = () => {
+      window.clearTimeout(fallbackTimer);
+      window.clearTimeout(dismissTimer);
+      fallbackTimer = undefined;
+      dismissTimer = undefined;
+    };
+    /** Only the transition that scheduled this dismiss may perform it. A
+     *  timer left over from a superseded transition must never tear down a
+     *  newer one that has already taken its place. */
+    const dismiss = (id: string) => {
+      if (payloadRef.current?.id !== id) return;
+      clearTimers();
+      payloadRef.current = null;
+      setPayload(null);
+      clearCaseHandoffPreload();
+      completeCaseStudyLanding();
+    };
     const show = (event: Event) => {
       const detail = (event as CustomEvent<CaseHandoffPayload>).detail;
+      // A new transition supersedes the previous one outright — including
+      // any fade-out dismiss still pending from it.
+      clearTimers();
       payloadRef.current = detail;
       setHeroReady(false);
       setPayload(detail);
+      // Safety net only: the real fix is the incoming Hero always firing
+      // CASE_HERO_READY (success or error). This just guarantees the
+      // overlay — and the dock beneath it — can never get stuck if that
+      // signal is somehow lost.
+      fallbackTimer = window.setTimeout(() => dismiss(detail.id), 4000);
     };
     const ready = (event: Event) => {
       const heroSrc = (event as CustomEvent<string>).detail;
-      if (!payloadRef.current || payloadRef.current.heroSrc !== heroSrc) return;
+      const active = payloadRef.current;
+      if (!active || active.heroSrc !== heroSrc) return;
+      clearTimers();
       setHeroReady(true);
-      window.setTimeout(() => {
-        payloadRef.current = null;
-        setPayload(null);
-        clearCaseHandoffPreload();
-        completeCaseStudyLanding();
-      }, 180);
+      dismissTimer = window.setTimeout(() => dismiss(active.id), 180);
     };
     window.addEventListener(CASE_HANDOFF_SHOW, show);
     window.addEventListener(CASE_HERO_READY, ready);
     return () => {
+      clearTimers();
       window.removeEventListener(CASE_HANDOFF_SHOW, show);
       window.removeEventListener(CASE_HERO_READY, ready);
     };
@@ -60,7 +85,7 @@ export default function CaseTransitionHandoffOverlay() {
           animate={{ opacity: heroReady ? 0 : 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.18, ease }}
-          className="fixed inset-0 z-[100] overflow-hidden bg-bg"
+          className="fixed inset-0 z-[90] overflow-hidden bg-bg"
           aria-hidden="true"
         >
           <div className="mx-auto flex h-full w-full max-w-site flex-col px-5 pt-14 sm:px-8 sm:pt-20">

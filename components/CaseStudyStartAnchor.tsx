@@ -29,8 +29,19 @@ function releaseLandingLock() {
   window.history.scrollRestoration = previousScrollRestoration;
 }
 
+/** Back/forward must never stay stuck behind a leftover landing lock —
+ *  release immediately rather than waiting out the settle timer. Bound
+ *  once, module-lifetime, same singleton pattern as the lock itself. */
+let popstateReleaseBound = false;
+function ensurePopstateReleasesLock() {
+  if (popstateReleaseBound || typeof window === 'undefined') return;
+  popstateReleaseBound = true;
+  window.addEventListener('popstate', releaseLandingLock);
+}
+
 function beginLandingLock() {
   if (typeof window === 'undefined') return;
+  ensurePopstateReleasesLock();
   if (!locked) {
     locked = true;
     landingStartedAt = performance.now();
@@ -49,6 +60,15 @@ function beginLandingLock() {
   }
   window.clearTimeout(releaseTimer);
   releaseTimer = window.setTimeout(releaseLandingLock, 700);
+}
+
+/** Whether a case-study landing/transition lock is currently held. Lets
+ *  the scroll-triggered Next Project transition ignore scroll-progress
+ *  readings that are only artifacts of the landing correction (residual
+ *  scroll position carried over by `router.push(href, { scroll: false })`,
+ *  or its own corrective `scrollTo` calls) instead of real user intent. */
+export function isCaseStudyLandingLocked(): boolean {
+  return locked;
 }
 
 /** Release after the incoming Hero has visibly replaced the handoff layer. */
